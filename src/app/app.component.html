@@ -4,6 +4,6 @@
   </div>
 
   <div class="col-md-10">
-    <part-table [parts]="parts"></part-table>
+    <part-table *ngIf="parts.length >0" [parts]="parts"></part-table>
   </div>
 </div>

@@ -13,6 +13,7 @@ import {GraphQlApiService} from "./service/graphql-api.service";
 import {HttpClientModule} from "@angular/common/http";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatListModule} from "@angular/material/list";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,10 @@ import {MatListModule} from "@angular/material/list";
     MatInputModule,
     MatTabsModule,
     MatPaginatorModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
+    MatTabsModule,
+    MatSortModule,
   ],
   providers: [
     {provide: RestApiService},

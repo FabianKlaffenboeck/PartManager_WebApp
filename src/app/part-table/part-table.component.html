@@ -1,33 +1,33 @@
 <div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="parts">
+  <mat-table #table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Id</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="quantity">
-      <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="partType">
-      <mat-header-cell *matHeaderCellDef> PartType </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> PartType</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.partType.type}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="manufacturer">
-      <mat-header-cell *matHeaderCellDef> Manufacturer </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Manufacturer</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.manufacturer.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="tray">
-      <mat-header-cell *matHeaderCellDef> Tray </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Tray</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.tray.label}} </mat-cell>
     </ng-container>
 
