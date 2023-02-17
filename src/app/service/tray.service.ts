@@ -9,13 +9,13 @@ import {
 } from "./data-provider.service";
 import {RestApiService} from "./rest-api.service";
 import {GraphQlApiService} from "./graphql-api.service";
-import {ManufacturerModel} from "../models/Manufacturer.model";
+import {TrayModel} from "../models/Tray.model";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class ManufacturerService implements DataProviderService<ManufacturerModel>, DataTransformationService<ManufacturerModel>, FormOptionsProvider {
+export class TrayService implements DataProviderService<TrayModel>, DataTransformationService<TrayModel>, FormOptionsProvider {
 
   private restApi
 
@@ -23,7 +23,7 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
     private api: RestApiService,
     private graphQl: GraphQlApiService,
   ) {
-    this.restApi = this.api.for<ManufacturerModel>("manufacturer")
+    this.restApi = this.api.for<TrayModel>("tray")
   }
 
   /**
@@ -32,7 +32,7 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
    */
   public getFormSelectOptions(filterParameters: { [key: string]: any; } = {}): Observable<FormSelectOption[]> {
     return new Observable<FormSelectOption[]>(subscriber => {
-      this.get(filterParameters, ["id", "manufacturerType"]).subscribe(records => {
+      this.get(filterParameters, ["id", "trayType"]).subscribe(records => {
         subscriber.next(this.parseSelectOptions(records))
         subscriber.complete()
       })
@@ -40,15 +40,15 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
   }
 
   /**
-   * Returns the manufacturer with the given id, depending on the value of
+   * Returns the tray with the given id, depending on the value of
    * fields. If fields is null, the REST api is getting called, else
    * the GraphQL api service is used
    *
    * @param id
    * @param fields
    */
-  public getById(id: number, fields?: String[]): Observable<ManufacturerModel[]> {
-    return new Observable<ManufacturerModel[]>(subscriber => {
+  public getById(id: number, fields?: String[]): Observable<TrayModel[]> {
+    return new Observable<TrayModel[]>(subscriber => {
       if (fields) {
         this.getByIdGraphQL(fields, id, subscriber)
       } else {
@@ -58,14 +58,14 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
   }
 
   /**
-   * returns all manufacturer depending on the value of fields. If fields is
+   * returns all tray depending on the value of fields. If fields is
    * null, the REST api is getting called, else the GraphQL api service
    * is used.
    * @param parameters
    * @param fields
    */
-  public get(parameters?: { [key: string]: any; }, fields?: String[]): Observable<ManufacturerModel[]> {
-    return new Observable<ManufacturerModel[]>(
+  public get(parameters?: { [key: string]: any; }, fields?: String[]): Observable<TrayModel[]> {
+    return new Observable<TrayModel[]>(
       subscriber => {
         if (fields) {
           this.getGraphQL(fields, parameters, subscriber);
@@ -77,7 +77,7 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
   }
 
   /**
-   * Deletes the manufacturer with the given id
+   * Deletes the tray with the given id
    * @param recordId
    */
   public delete(recordId: number): Observable<any> {
@@ -92,14 +92,14 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
   }
 
   /**
-   * Saves the given manufacturer into the database
+   * Saves the given tray into the database
    * @param record
    */
-  public save(record: ManufacturerModel): Observable<ManufacturerModel> {
-    return new Observable<ManufacturerModel>(subscriber => {
+  public save(record: TrayModel): Observable<TrayModel> {
+    return new Observable<TrayModel>(subscriber => {
       this.restApi.save(record, savedRecord => {
         try {
-          subscriber.next(new ManufacturerModel(savedRecord))
+          subscriber.next(new TrayModel(savedRecord))
           subscriber.complete()
         } catch (e) {
           basicAPIErrorHandler(subscriber, e)
@@ -110,16 +110,16 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
     })
   }
 
-  private getByIdGraphQL(fields: String[], id: number, subscriber: Subscriber<ManufacturerModel[]>) {
-    let query = `query manufacturerById($id: Int!){manufacturerById(id: $id) {${fields.join(',')}}}`
+  private getByIdGraphQL(fields: String[], id: number, subscriber: Subscriber<TrayModel[]>) {
+    let query = `query trayById($id: Int!){trayById(id: $id) {${fields.join(',')}}}`
     this.graphQl.request(query, {id: id}).subscribe(value => {
-      this.parseResponse(value.data.manufacturerById, subscriber)
+      this.parseResponse(value.data.trayById, subscriber)
     }, error => {
       basicAPIErrorHandler(subscriber, error)
     })
   }
 
-  private getByIdRest(subscriber: Subscriber<ManufacturerModel[]>, id: number) {
+  private getByIdRest(subscriber: Subscriber<TrayModel[]>, id: number) {
     this.restApi.getById(id, record => {
       try {
         this.parseResponse([record], subscriber);
@@ -131,16 +131,16 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
     })
   }
 
-  private getGraphQL(fields: String[], parameters: { [p: string]: any } | undefined, subscriber: Subscriber<ManufacturerModel[]>) {
-    let query = `query manufacturers{manufacturers{${fields.join(',')}}}`
+  private getGraphQL(fields: String[], parameters: { [p: string]: any } | undefined, subscriber: Subscriber<TrayModel[]>) {
+    let query = `query trays{trays{${fields.join(',')}}}`
     this.graphQl.request(query, parameters).subscribe(value => {
-      this.parseResponse(value.data.manufacturers, subscriber);
+      this.parseResponse(value.data.trays, subscriber);
     }, error => {
       basicAPIErrorHandler(subscriber, error)
     })
   }
 
-  private getREST(subscriber: Subscriber<ManufacturerModel[]>, parameters?: { [p: string]: any }) {
+  private getREST(subscriber: Subscriber<TrayModel[]>, parameters?: { [p: string]: any }) {
     this.restApi.get(records => {
       try {
         this.parseResponse(records, subscriber);
@@ -152,21 +152,21 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
     }, parameters)
   }
 
-  private parseResponse(records: ManufacturerModel[], subscriber: Subscriber<ManufacturerModel[]>) {
-    let parsedCustomers: ManufacturerModel[] = []
-    records.forEach((manufacturer: ManufacturerModel) => {
-      parsedCustomers.push(new ManufacturerModel(manufacturer))
+  private parseResponse(records: TrayModel[], subscriber: Subscriber<TrayModel[]>) {
+    let parsedCustomers: TrayModel[] = []
+    records.forEach((tray: TrayModel) => {
+      parsedCustomers.push(new TrayModel(tray))
     })
     subscriber.next(parsedCustomers)
     subscriber.complete()
   }
 
-  private parseSelectOptions(records: ManufacturerModel[]): FormSelectOption[] {
+  private parseSelectOptions(records: TrayModel[]): FormSelectOption[] {
     let options: FormSelectOption[] = []
     records.forEach(value => {
       options.push({
         value: value.id,
-        label: value.name || ""
+        label: value.label || ""
       })
     })
     return options
