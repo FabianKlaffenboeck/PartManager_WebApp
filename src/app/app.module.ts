@@ -11,6 +11,8 @@ import {PartTableComponent} from './part-table/part-table.component';
 import {RestApiService} from "./service/rest-api.service";
 import {GraphQlApiService} from "./service/graphql-api.service";
 import {HttpClientModule} from "@angular/common/http";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserAnimationsModule,
     MatTableModule,
     MatInputModule,
-    MatTabsModule
+    MatTabsModule,
+    MatPaginatorModule,
+    MatListModule
   ],
   providers: [
     {provide: RestApiService},
