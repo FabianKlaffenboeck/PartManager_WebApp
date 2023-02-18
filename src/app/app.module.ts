@@ -14,6 +14,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatListModule} from "@angular/material/list";
 import {MatSortModule} from "@angular/material/sort";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import {MatSortModule} from "@angular/material/sort";
     MatTableModule,
     MatTabsModule,
     MatSortModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSnackBarModule
   ],
   providers: [
     {provide: RestApiService},

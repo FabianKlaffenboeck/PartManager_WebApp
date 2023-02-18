@@ -76,5 +76,4 @@ export class AppComponent implements OnInit {
     this.partsEvent.next(selectedParts)
   }
 
-
 }
