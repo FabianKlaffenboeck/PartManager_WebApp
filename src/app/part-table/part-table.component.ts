@@ -36,24 +36,40 @@ export class PartTableComponent implements OnInit {
   }
 
   add() {
-    //TODO
+    this.dialog.open(PartDialogComponent, {
+      data: {
+        mode: "add"
+      }
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.partService.save(result).subscribe(saved => {
+
+          this.dataSource.data.push(saved)
+          this.dataSource = new MatTableDataSource(this.dataSource.data)
+
+          this.notificationService.success(saved.name)
+        }, error => {
+          this.notificationService.error()
+        })
+      }
+    });
   }
 
   edit(element: PartModel) {
-    let dialogRef = this.dialog.open(PartDialogComponent, {
+    this.dialog.open(PartDialogComponent, {
       data: {
         part: element,
         mode: "edit"
       }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
+    }).afterClosed().subscribe(result => {
       if (result) {
         this.partService.save(result).subscribe(saved => {
 
           let index = this.dataSource.data.findIndex(it => it.id == saved.id)
           this.dataSource.data[index] = saved
+
           this.dataSource = new MatTableDataSource(this.dataSource.data)
+
 
           this.notificationService.success(saved.name)
         }, error => {

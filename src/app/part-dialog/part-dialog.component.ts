@@ -70,14 +70,19 @@ export class PartDialogComponent {
   }
 
   onSaveClick(): void {
-    const part: PartModel = {
-      id: this.data.part.id,
+    let part: PartModel = {
+      id: undefined,
       name: this.nameControl.value || undefined,
       quantity: this.quantityControl.value || undefined,
       partType: this.partTypes.find(it => it.id == this.partTypeControl.value) || undefined,
       manufacturer: this.manufacturers.find(it => it.id == this.manufacturerControl.value) || undefined,
       tray: this.trays.find(it => it.id == this.trayControl.value) || undefined,
     };
+
+    if (this.data.mode == "edit") {
+      part.id = this.data.part.id
+    }
+
     this.dialogRef.close(part);
   }
 }
