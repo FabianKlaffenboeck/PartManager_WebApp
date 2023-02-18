@@ -1,16 +1,16 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {PartModel} from "../models/Part.model";
+import {PartModel} from "../../models/Part.model";
 import {FormControl, Validators} from "@angular/forms";
-import {PartTypeModel} from "../models/PartType.model";
-import {ManufacturerModel} from "../models/Manufacturer.model";
-import {TrayModel} from "../models/Tray.model";
-import {PartTypeService} from "../service/partType.service";
-import {TrayService} from "../service/tray.service";
-import {ManufacturerService} from "../service/manufacturer.service";
+import {PartTypeModel} from "../../models/PartType.model";
+import {ManufacturerModel} from "../../models/Manufacturer.model";
+import {TrayModel} from "../../models/Tray.model";
+import {PartTypeService} from "../../service/partType.service";
+import {TrayService} from "../../service/tray.service";
+import {ManufacturerService} from "../../service/manufacturer.service";
 
-export interface PartDialogData {
-  part: PartModel;
+export interface DialogModelData {
+  model: any;
   mode: string;
 }
 
@@ -25,7 +25,7 @@ export class PartDialogComponent {
   trays: TrayModel[] = []
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: PartDialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DialogModelData,
     public dialogRef: MatDialogRef<PartDialogComponent>,
     public partTypeService: PartTypeService,
     public manufacturerService: ManufacturerService,
@@ -37,11 +37,11 @@ export class PartDialogComponent {
     trayService.get().subscribe(it => this.trays = it)
 
     if (data.mode == "edit") {
-      this.nameControl.setValue(data.part.name || null)
-      this.quantityControl.setValue(data.part.quantity || null)
-      this.partTypeControl.setValue(data.part.partType?.id || null)
-      this.manufacturerControl.setValue(data.part.manufacturer?.id || null)
-      this.trayControl.setValue(data.part.tray?.id || null)
+      this.nameControl.setValue(data.model.name || null)
+      this.quantityControl.setValue(data.model.quantity || null)
+      this.partTypeControl.setValue(data.model.partType?.id || null)
+      this.manufacturerControl.setValue(data.model.manufacturer?.id || null)
+      this.trayControl.setValue(data.model.tray?.id || null)
     }
   }
 
@@ -80,7 +80,7 @@ export class PartDialogComponent {
     };
 
     if (this.data.mode == "edit") {
-      part.id = this.data.part.id
+      part.id = this.data.model.id
     }
 
     this.dialogRef.close(part);

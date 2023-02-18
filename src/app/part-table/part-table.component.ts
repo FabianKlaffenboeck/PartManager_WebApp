@@ -4,7 +4,7 @@ import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {PartService} from "../service/part.service";
 import {NotificationService} from "../service/notification.service";
-import {PartDialogComponent} from "../part-dialog/part-dialog.component";
+import {PartDialogComponent} from "../dialogues/part-dialog/part-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({

@@ -1,5 +1,8 @@
 <mat-tab-group>
   <mat-tab label="Manufacturer">
+    <button mat-button (click)="addManufacturer()">
+      <mat-icon>add</mat-icon>
+    </button>
     <mat-selection-list #manufacturerSelector (selectionChange)="getManufacturersSelected($event.source)">
       <mat-list-option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">
         {{manufacturer.name}}
@@ -8,6 +11,9 @@
   </mat-tab>
 
   <mat-tab label="PartType">
+    <button mat-button (click)="addPartType()">
+      <mat-icon>add</mat-icon>
+    </button>
     <mat-selection-list #partTypeSelector (selectionChange)="getPartTypesSelected($event.source)">
       <mat-list-option *ngFor="let partType of partTypes" [value]="partType">
         {{partType.type}}

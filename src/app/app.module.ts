@@ -17,17 +17,21 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {PartDialogComponent} from './part-dialog/part-dialog.component';
+import {PartDialogComponent} from './dialogues/part-dialog/part-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
+import {ManufacturerDialogComponent} from "./dialogues/manufacturer-dialog/manufacturer-dialog.component";
+import {PartTypeDialogComponent} from "./dialogues/partType-dialog/partType-dialog.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     PropertySelectorComponent,
     PartTableComponent,
-    PartDialogComponent
+    PartDialogComponent,
+    ManufacturerDialogComponent,
+    PartTypeDialogComponent
   ],
   imports: [
     HttpClientModule,
