@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, ViewChild} from '@angular/core';
 import {PartModel} from "../models/Part.model";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
@@ -9,19 +9,18 @@ import {MatTableDataSource} from "@angular/material/table";
   styleUrls: ['./part-table.component.scss']
 })
 
-export class PartTableComponent implements OnInit, AfterViewInit {
-  @Input() parts: PartModel[] = []
+export class PartTableComponent implements OnInit {
+  @Input() parts: EventEmitter<PartModel[]> = new EventEmitter()
 
   @ViewChild(MatSort) sort: MatSort = new MatSort()
 
   displayedColumns = ['id', 'name', 'quantity', 'partType', 'manufacturer', 'tray'];
-  dataSource = new MatTableDataSource(this.parts);
+  dataSource = new MatTableDataSource<PartModel>();
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.parts);
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+    this.parts.subscribe(it => {
+      this.dataSource = new MatTableDataSource(it);
+      this.dataSource.sort = this.sort;
+    })
   }
 }

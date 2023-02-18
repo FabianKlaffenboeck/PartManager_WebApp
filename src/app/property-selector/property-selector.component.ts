@@ -11,18 +11,17 @@ import {MatSelectionList} from "@angular/material/list";
 export class PropertySelectorComponent {
   @Input() manufacturers: ManufacturerModel[] | undefined
   @Input() partTypes: PartTypeModel[] | undefined
+
   @Output() selectedManufacturers: EventEmitter<ManufacturerModel[]> = new EventEmitter();
   @Output() selectedPartTypes: EventEmitter<PartTypeModel[]> = new EventEmitter();
 
-  ManufacturerSelected(options: MatSelectionList) {
+  getManufacturersSelected(options: MatSelectionList) {
     let selected = options.options.filter(o => o.selected).map(o => o.value);
-    console.log(selected);
     this.selectedManufacturers.next(selected)
   }
 
-  PartTypesSelected(options: MatSelectionList) {
+  getPartTypesSelected(options: MatSelectionList) {
     let selected = options.options.filter(o => o.selected).map(o => o.value);
-    console.log(selected);
     this.selectedPartTypes.next(selected)
   }
 }
