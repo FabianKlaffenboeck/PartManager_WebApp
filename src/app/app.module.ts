@@ -17,12 +17,17 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {PartDialogComponent} from './part-dialog/part-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
     AppComponent,
     PropertySelectorComponent,
-    PartTableComponent
+    PartTableComponent,
+    PartDialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -38,7 +43,11 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatSortModule,
     MatIconModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [
     {provide: RestApiService},
