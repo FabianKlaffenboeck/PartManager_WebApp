@@ -40,8 +40,7 @@ export class PartTableComponent implements OnInit {
   }
 
   edit(element: PartModel) {
-    console.log(element);
-    const dialogRef = this.dialog.open(PartDialogComponent, {
+    let dialogRef = this.dialog.open(PartDialogComponent, {
       data: {
         part: element,
         mode: "edit"
@@ -49,14 +48,24 @@ export class PartTableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result)
+      if (result) {
+        this.partService.save(result).subscribe(saved => {
+
+          let index = this.dataSource.data.findIndex(it => it.id == saved.id)
+          this.dataSource.data[index] = saved
+          this.dataSource = new MatTableDataSource(this.dataSource.data)
+
+          this.notificationService.success(saved.name)
+        }, error => {
+          this.notificationService.error()
+        })
+      }
     });
   }
 
   delete(element: PartModel) {
     if (element.id) {
-      this.partService.delete(element.id).subscribe(success => {
+      this.partService.delete(element.id).subscribe(() => {
         this.notificationService.success(element.name)
         this.dataSource = new MatTableDataSource(this.dataSource.data.filter(it => it.id != element.id));
       }, error => {
