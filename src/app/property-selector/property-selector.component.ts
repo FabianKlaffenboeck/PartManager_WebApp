@@ -15,8 +15,6 @@ import {PartTypeDialogComponent} from "../dialogues/partType-dialog/partType-dia
   styleUrls: ['./property-selector.component.scss']
 })
 
-//TODO Add add button to selector lists
-
 export class PropertySelectorComponent {
   @Input() manufacturers: ManufacturerModel[] | undefined
   @Input() partTypes: PartTypeModel[] | undefined
