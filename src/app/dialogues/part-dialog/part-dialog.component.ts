@@ -32,6 +32,8 @@ export class PartDialogComponent {
     public trayService: TrayService,
   ) {
 
+    console.log(data.model)
+
     partTypeService.get().subscribe(it => this.partTypes = it)
     manufacturerService.get().subscribe(it => this.manufacturers = it)
     trayService.get().subscribe(it => this.trays = it)

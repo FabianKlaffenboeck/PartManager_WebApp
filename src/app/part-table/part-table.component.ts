@@ -62,7 +62,7 @@ export class PartTableComponent implements OnInit {
   edit(element: PartModel) {
     this.dialog.open(PartDialogComponent, {
       data: {
-        part: element,
+        model: element,
         mode: "edit"
       }
     }).afterClosed().subscribe(result => {
@@ -71,9 +71,7 @@ export class PartTableComponent implements OnInit {
 
           let index = this.dataSource.data.findIndex(it => it.id == saved.id)
           this.dataSource.data[index] = saved
-
           this.dataSource = new MatTableDataSource(this.dataSource.data)
-
 
           this.notificationService.success(saved.name)
         }, error => {
