@@ -13,6 +13,10 @@ import {MatDialog} from "@angular/material/dialog";
   styleUrls: ['./part-table.component.scss']
 })
 
+// TODO add a part value such as Ohm for a specific part
+// TODO add part descriptions
+// TODO add part filter
+
 export class PartTableComponent implements OnInit {
   @Input() parts: EventEmitter<PartModel[]> = new EventEmitter()
 

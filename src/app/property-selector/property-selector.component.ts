@@ -8,6 +8,9 @@ import {MatSelectionList} from "@angular/material/list";
   templateUrl: './property-selector.component.html',
   styleUrls: ['./property-selector.component.scss']
 })
+
+//TODO Add add button to selector lists
+
 export class PropertySelectorComponent {
   @Input() manufacturers: ManufacturerModel[] | undefined
   @Input() partTypes: PartTypeModel[] | undefined
