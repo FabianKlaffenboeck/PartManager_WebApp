@@ -16,7 +16,7 @@ export class PartTypeDialogComponent {
   ) {
 
     if (data.mode == "edit") {
-      this.typeControl.setValue(data.model.type || null)
+      this.typeControl.setValue(data.model.name || null)
     }
   }
 
@@ -31,7 +31,7 @@ export class PartTypeDialogComponent {
   onSaveClick(): void {
     let partType: PartTypeModel = {
       id: undefined,
-      type: this.typeControl.value || undefined,
+      name: this.typeControl.value || undefined,
     };
 
     if (this.data.mode == "edit") {

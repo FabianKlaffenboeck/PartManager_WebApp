@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
     if (event.length != 0) {
       selectedParts = []
       event.forEach(selected => {
-        this.parts.filter(it => it.partType?.type === selected.type).map(item => selectedParts.push(item))
+        this.parts.filter(it => it.partType?.name === selected.name).map(item => selectedParts.push(item))
       })
     }
     this.partsEvent.next(selectedParts)

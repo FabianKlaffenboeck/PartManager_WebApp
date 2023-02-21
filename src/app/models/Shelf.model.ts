@@ -6,7 +6,6 @@ export class ShelfModel implements Record {
   name: string | undefined
   trays: TrayModel[] | undefined
 
-
   constructor(options: {
     id?: number | undefined
     name?: string | undefined

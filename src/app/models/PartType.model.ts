@@ -2,15 +2,14 @@ import {Record} from '../service/rest-api.service';
 
 export class PartTypeModel implements Record {
   id: number | undefined
-  type: string | undefined
-
+  name: string | undefined
 
   constructor(options: {
     id?: number | undefined
-    type?: string | undefined
+    name?: string | undefined
 
   } = {}) {
     this.id = options.id
-    this.type = options.type
+    this.name = options.name
   }
 }

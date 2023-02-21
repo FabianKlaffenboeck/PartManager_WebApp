@@ -1,10 +1,7 @@
 <mat-dialog-content>
-
         <mat-form-field>
-          <input matInput [formControl]="typeControl" placeholder="Type">
-          <mat-hint *ngIf="typeControl.hasError('required')" class="mat-error">Name is required</mat-hint>
+          <input matInput [formControl]="typeControl" placeholder="name">
         </mat-form-field>
-
 </mat-dialog-content>
 
 <mat-dialog-actions>

@@ -4,7 +4,6 @@ export class ManufacturerModel implements Record {
   id: number | undefined
   name: string | undefined
 
-
   constructor(options: {
     id?: number | undefined
     name?: string | undefined

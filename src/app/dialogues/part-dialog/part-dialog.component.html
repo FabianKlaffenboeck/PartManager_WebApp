@@ -1,17 +1,14 @@
 <mat-dialog-content>
   <table>
-
     <tr>
       <td>
         <mat-form-field>
-          <input matInput [formControl]="nameControl" placeholder="Name">
-          <mat-hint *ngIf="nameControl.hasError('required')" class="mat-error">Name is required</mat-hint>
+          <input matInput [formControl]="nameControl" placeholder="name">
         </mat-form-field>
       </td>
       <td>
         <mat-form-field>
-          <input matInput [formControl]="quantityControl" placeholder="Quantity" type="number">
-          <mat-hint *ngIf="quantityControl.hasError('required')" class="mat-error">Quantity is required</mat-hint>
+          <input matInput [formControl]="quantityControl" placeholder="quantity" type="number">
         </mat-form-field>
       </td>
     </tr>
@@ -19,38 +16,42 @@
     <tr>
       <td>
         <mat-form-field>
-          <mat-label>Part Type</mat-label>
-          <mat-select [formControl]="partTypeControl" placeholder="Select Part Type">
-            <mat-option *ngFor="let partType of partTypes" [value]="partType.id">{{ partType.type }}</mat-option>
+          <mat-label>partType</mat-label>
+          <mat-select [formControl]="partTypeControl" placeholder="partType">
+            <mat-option *ngFor="let partType of partTypes" [value]="partType.id">{{ partType.name }}</mat-option>
           </mat-select>
-          <mat-hint *ngIf="partTypeControl.hasError('required')" class="mat-error">Part Type is required</mat-hint>
         </mat-form-field>
       </td>
+
       <td>
         <mat-form-field>
-          <mat-label>Manufacturer</mat-label>
-          <mat-select [formControl]="manufacturerControl" placeholder="Select Manufacturer">
+          <mat-label>manufacturer</mat-label>
+          <mat-select [formControl]="manufacturerControl" placeholder="manufacturer">
             <mat-option *ngFor="let manufacturer of manufacturers"
                         [value]="manufacturer.id">{{ manufacturer.name }}</mat-option>
           </mat-select>
-          <mat-hint *ngIf="manufacturerControl.hasError('required')" class="mat-error">Manufacturer is required
-          </mat-hint>
         </mat-form-field>
       </td>
+    </tr>
 
     <tr>
       <td>
         <mat-form-field>
-          <mat-label>Tray</mat-label>
-          <mat-select [formControl]="trayControl" placeholder="Select Tray">
-            <mat-option *ngFor="let tray of trays" [value]="tray.id">{{ tray.label }}</mat-option>
+          <mat-label>tray</mat-label>
+          <mat-select [formControl]="trayControl" placeholder="tray">
+            <mat-option *ngFor="let tray of trays" [value]="tray.id">{{ tray.name }}</mat-option>
           </mat-select>
-          <mat-hint *ngIf="trayControl.hasError('required')" class="mat-error">Tray is required</mat-hint>
         </mat-form-field>
       </td>
-      <td></td>
+      <td>
+        <mat-form-field>
+          <mat-label>measurementUnit</mat-label>
+          <mat-select [formControl]="measurementUnitControl" placeholder="measurementUnit">
+            <mat-option *ngFor="let unit of measurementUnits" [value]="unit">{{ unit }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
     </tr>
-
   </table>
 </mat-dialog-content>
 

@@ -166,7 +166,7 @@ export class PartTypeService implements DataProviderService<PartTypeModel>, Data
     records.forEach(value => {
       options.push({
         value: value.id,
-        label: value.type || ""
+        label: value.name || ""
       })
     })
     return options

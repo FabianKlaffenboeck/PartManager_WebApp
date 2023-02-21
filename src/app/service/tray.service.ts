@@ -166,7 +166,7 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
     records.forEach(value => {
       options.push({
         value: value.id,
-        label: value.label || ""
+        label: value.name || ""
       })
     })
     return options

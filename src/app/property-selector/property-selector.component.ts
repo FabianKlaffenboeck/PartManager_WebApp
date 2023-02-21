@@ -66,7 +66,7 @@ export class PropertySelectorComponent {
       if (result) {
         this.partTypeService.save(result).subscribe(saved => {
           this.partTypes?.push(saved)
-          this.notificationService.success(saved.type)
+          this.notificationService.success(saved.name)
         }, error => {
           this.notificationService.error()
         })

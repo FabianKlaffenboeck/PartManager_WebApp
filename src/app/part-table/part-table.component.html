@@ -2,33 +2,33 @@
   <mat-table #table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Id</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> id</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> name</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="quantity">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> quantity</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="partType">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> PartType</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.partType.type}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> partType.name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.partType.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="manufacturer">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Manufacturer</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> manufacturer.name</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.manufacturer.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="tray">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Tray</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.tray.label}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> tray.name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.tray.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">

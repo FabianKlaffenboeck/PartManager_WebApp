@@ -8,6 +8,7 @@ import {TrayModel} from "../../models/Tray.model";
 import {PartTypeService} from "../../service/partType.service";
 import {TrayService} from "../../service/tray.service";
 import {ManufacturerService} from "../../service/manufacturer.service";
+import {measurementUnitService} from "../../service/measurementUnit.service";
 
 export interface DialogModelData {
   model: any;
@@ -23,6 +24,7 @@ export class PartDialogComponent {
   partTypes: PartTypeModel[] = []
   manufacturers: ManufacturerModel[] = []
   trays: TrayModel[] = []
+  measurementUnits: string[] = []
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogModelData,
@@ -30,6 +32,7 @@ export class PartDialogComponent {
     public partTypeService: PartTypeService,
     public manufacturerService: ManufacturerService,
     public trayService: TrayService,
+    public measurementUnitService: measurementUnitService,
   ) {
 
     console.log(data.model)
@@ -37,10 +40,13 @@ export class PartDialogComponent {
     partTypeService.get().subscribe(it => this.partTypes = it)
     manufacturerService.get().subscribe(it => this.manufacturers = it)
     trayService.get().subscribe(it => this.trays = it)
+    measurementUnitService.get().subscribe(it => this.measurementUnits = it)
 
     if (data.mode == "edit") {
       this.nameControl.setValue(data.model.name || null)
       this.quantityControl.setValue(data.model.quantity || null)
+      this.measurementUnitControl.setValue(data.model.measurementUnit || null)
+      this.valueControl.setValue(data.model.value || null)
       this.partTypeControl.setValue(data.model.partType?.id || null)
       this.manufacturerControl.setValue(data.model.manufacturer?.id || null)
       this.trayControl.setValue(data.model.tray?.id || null)
@@ -53,6 +59,14 @@ export class PartDialogComponent {
 
   quantityControl = new FormControl(0, [
     Validators.required,
+  ]);
+
+  measurementUnitControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  valueControl = new FormControl(0, [
+    Validators.required
   ]);
 
   partTypeControl = new FormControl(0, [
@@ -76,6 +90,8 @@ export class PartDialogComponent {
       id: undefined,
       name: this.nameControl.value || undefined,
       quantity: this.quantityControl.value || undefined,
+      measurementUnit: this.measurementUnitControl.value || null,
+      value: this.valueControl.value || null,
       partType: this.partTypes.find(it => it.id == this.partTypeControl.value) || undefined,
       manufacturer: this.manufacturers.find(it => it.id == this.manufacturerControl.value) || undefined,
       tray: this.trays.find(it => it.id == this.trayControl.value) || undefined,
