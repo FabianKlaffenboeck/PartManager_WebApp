@@ -52,13 +52,24 @@
         </mat-form-field>
       </td>
     </tr>
+
+    <tr>
+      <td>
+        <mat-form-field>
+          <input matInput [formControl]="valueControl" placeholder="value" type="number">
+        </mat-form-field>
+      </td>
+      <td>
+
+      </td>
+    </tr>
   </table>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
   <button mat-button color="primary"
-          [disabled]="nameControl.invalid || quantityControl.invalid || partTypeControl.invalid || manufacturerControl.invalid || trayControl.invalid"
+          [disabled]="false"
           (click)="onSaveClick()">Save
   </button>
 </mat-dialog-actions>

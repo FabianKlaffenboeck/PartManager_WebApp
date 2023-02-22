@@ -22,7 +22,7 @@ export class PartTableComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort = new MatSort()
 
-  displayedColumns = ['id', 'name', 'quantity', 'partType', 'manufacturer', 'tray', 'actions'];
+  displayedColumns = ['id', 'name', 'quantity', 'partType', 'manufacturer', 'tray', 'value', 'actions'];
   dataSource = new MatTableDataSource<PartModel>();
 
   constructor(
@@ -92,4 +92,10 @@ export class PartTableComponent implements OnInit {
     }
   }
 
+  unitFormator(element: PartModel) {
+    if (!element.value) {
+      return "-"
+    }
+    return element.value + " " + element.measurementUnit
+  }
 }

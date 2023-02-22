@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FormControl, Validators} from "@angular/forms";
+import {FormControl} from "@angular/forms";
 import {ManufacturerModel} from "../../models/Manufacturer.model";
 import {DialogModelData} from "../part-dialog/part-dialog.component";
 
@@ -20,9 +20,7 @@ export class ManufacturerDialogComponent {
     }
   }
 
-  nameControl = new FormControl('', [
-    Validators.required,
-  ]);
+  nameControl = new FormControl('', []);
 
   onCancelClick(): void {
     this.dialogRef.close();
