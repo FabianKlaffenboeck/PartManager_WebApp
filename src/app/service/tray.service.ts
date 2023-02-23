@@ -8,7 +8,6 @@ import {
   FormSelectOption
 } from "./data-provider.service";
 import {RestApiService} from "./rest-api.service";
-import {GraphQlApiService} from "./graphql-api.service";
 import {TrayModel} from "../models/Tray.model";
 
 
@@ -21,7 +20,6 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
 
   constructor(
     private api: RestApiService,
-    private graphQl: GraphQlApiService,
   ) {
     this.restApi = this.api.for<TrayModel>("tray")
   }
@@ -32,7 +30,7 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
    */
   public getFormSelectOptions(filterParameters: { [key: string]: any; } = {}): Observable<FormSelectOption[]> {
     return new Observable<FormSelectOption[]>(subscriber => {
-      this.get(filterParameters, ["id", "trayType"]).subscribe(records => {
+      this.get(filterParameters).subscribe(records => {
         subscriber.next(this.parseSelectOptions(records))
         subscriber.complete()
       })
@@ -47,13 +45,9 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
    * @param id
    * @param fields
    */
-  public getById(id: number, fields?: String[]): Observable<TrayModel[]> {
+  public getById(id: number): Observable<TrayModel[]> {
     return new Observable<TrayModel[]>(subscriber => {
-      if (fields) {
-        this.getByIdGraphQL(fields, id, subscriber)
-      } else {
         this.getByIdRest(subscriber, id)
-      }
     })
   }
 
@@ -64,14 +58,10 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
    * @param parameters
    * @param fields
    */
-  public get(parameters?: { [key: string]: any; }, fields?: String[]): Observable<TrayModel[]> {
+  public get(parameters?: { [key: string]: any; }): Observable<TrayModel[]> {
     return new Observable<TrayModel[]>(
       subscriber => {
-        if (fields) {
-          this.getGraphQL(fields, parameters, subscriber);
-        } else {
           this.getREST(subscriber, parameters);
-        }
       }
     )
   }
@@ -110,15 +100,6 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
     })
   }
 
-  private getByIdGraphQL(fields: String[], id: number, subscriber: Subscriber<TrayModel[]>) {
-    let query = `query trayById($id: Int!){trayById(id: $id) {${fields.join(',')}}}`
-    this.graphQl.request(query, {id: id}).subscribe(value => {
-      this.parseResponse(value.data.trayById, subscriber)
-    }, error => {
-      basicAPIErrorHandler(subscriber, error)
-    })
-  }
-
   private getByIdRest(subscriber: Subscriber<TrayModel[]>, id: number) {
     this.restApi.getById(id, record => {
       try {
@@ -126,15 +107,6 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
       } catch (e) {
         basicAPIErrorHandler(subscriber, e)
       }
-    }, error => {
-      basicAPIErrorHandler(subscriber, error)
-    })
-  }
-
-  private getGraphQL(fields: String[], parameters: { [p: string]: any } | undefined, subscriber: Subscriber<TrayModel[]>) {
-    let query = `query trays{trays{${fields.join(',')}}}`
-    this.graphQl.request(query, parameters).subscribe(value => {
-      this.parseResponse(value.data.trays, subscriber);
     }, error => {
       basicAPIErrorHandler(subscriber, error)
     })

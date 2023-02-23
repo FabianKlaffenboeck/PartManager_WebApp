@@ -8,7 +8,6 @@ import {
   FormSelectOption
 } from "./data-provider.service";
 import {RestApiService} from "./rest-api.service";
-import {GraphQlApiService} from "./graphql-api.service";
 import {ManufacturerModel} from "../models/Manufacturer.model";
 
 
@@ -21,7 +20,6 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
 
   constructor(
     private api: RestApiService,
-    private graphQl: GraphQlApiService,
   ) {
     this.restApi = this.api.for<ManufacturerModel>("manufacturer")
   }
@@ -32,7 +30,7 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
    */
   public getFormSelectOptions(filterParameters: { [key: string]: any; } = {}): Observable<FormSelectOption[]> {
     return new Observable<FormSelectOption[]>(subscriber => {
-      this.get(filterParameters, ["id", "manufacturerType"]).subscribe(records => {
+      this.get(filterParameters).subscribe(records => {
         subscriber.next(this.parseSelectOptions(records))
         subscriber.complete()
       })
@@ -47,13 +45,9 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
    * @param id
    * @param fields
    */
-  public getById(id: number, fields?: String[]): Observable<ManufacturerModel[]> {
+  public getById(id: number,): Observable<ManufacturerModel[]> {
     return new Observable<ManufacturerModel[]>(subscriber => {
-      if (fields) {
-        this.getByIdGraphQL(fields, id, subscriber)
-      } else {
         this.getByIdRest(subscriber, id)
-      }
     })
   }
 
@@ -64,14 +58,10 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
    * @param parameters
    * @param fields
    */
-  public get(parameters?: { [key: string]: any; }, fields?: String[]): Observable<ManufacturerModel[]> {
+  public get(parameters?: { [key: string]: any; }): Observable<ManufacturerModel[]> {
     return new Observable<ManufacturerModel[]>(
       subscriber => {
-        if (fields) {
-          this.getGraphQL(fields, parameters, subscriber);
-        } else {
           this.getREST(subscriber, parameters);
-        }
       }
     )
   }
@@ -110,14 +100,6 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
     })
   }
 
-  private getByIdGraphQL(fields: String[], id: number, subscriber: Subscriber<ManufacturerModel[]>) {
-    let query = `query manufacturerById($id: Int!){manufacturerById(id: $id) {${fields.join(',')}}}`
-    this.graphQl.request(query, {id: id}).subscribe(value => {
-      this.parseResponse(value.data.manufacturerById, subscriber)
-    }, error => {
-      basicAPIErrorHandler(subscriber, error)
-    })
-  }
 
   private getByIdRest(subscriber: Subscriber<ManufacturerModel[]>, id: number) {
     this.restApi.getById(id, record => {
@@ -126,15 +108,6 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
       } catch (e) {
         basicAPIErrorHandler(subscriber, e)
       }
-    }, error => {
-      basicAPIErrorHandler(subscriber, error)
-    })
-  }
-
-  private getGraphQL(fields: String[], parameters: { [p: string]: any } | undefined, subscriber: Subscriber<ManufacturerModel[]>) {
-    let query = `query manufacturers{manufacturers{${fields.join(',')}}}`
-    this.graphQl.request(query, parameters).subscribe(value => {
-      this.parseResponse(value.data.manufacturers, subscriber);
     }, error => {
       basicAPIErrorHandler(subscriber, error)
     })

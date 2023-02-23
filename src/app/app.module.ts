@@ -9,7 +9,6 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {PropertySelectorComponent} from './property-selector/property-selector.component';
 import {PartTableComponent} from './part-table/part-table.component';
 import {RestApiService} from "./service/rest-api.service";
-import {GraphQlApiService} from "./service/graphql-api.service";
 import {HttpClientModule} from "@angular/common/http";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatListModule} from "@angular/material/list";
@@ -55,7 +54,6 @@ import {PartTypeDialogComponent} from "./dialogues/partType-dialog/partType-dial
   ],
   providers: [
     {provide: RestApiService},
-    {provide: GraphQlApiService},
   ],
   bootstrap: [AppComponent]
 })

@@ -8,7 +8,6 @@ import {
   FormSelectOption
 } from "./data-provider.service";
 import {RestApiService} from "./rest-api.service";
-import {GraphQlApiService} from "./graphql-api.service";
 import {PartTypeModel} from "../models/PartType.model";
 
 
@@ -21,7 +20,6 @@ export class PartTypeService implements DataProviderService<PartTypeModel>, Data
 
   constructor(
     private api: RestApiService,
-    private graphQl: GraphQlApiService,
   ) {
     this.restApi = this.api.for<PartTypeModel>("partType")
   }
@@ -32,7 +30,7 @@ export class PartTypeService implements DataProviderService<PartTypeModel>, Data
    */
   public getFormSelectOptions(filterParameters: { [key: string]: any; } = {}): Observable<FormSelectOption[]> {
     return new Observable<FormSelectOption[]>(subscriber => {
-      this.get(filterParameters, ["id", "partType"]).subscribe(records => {
+      this.get(filterParameters).subscribe(records => {
         subscriber.next(this.parseSelectOptions(records))
         subscriber.complete()
       })
@@ -47,13 +45,9 @@ export class PartTypeService implements DataProviderService<PartTypeModel>, Data
    * @param id
    * @param fields
    */
-  public getById(id: number, fields?: String[]): Observable<PartTypeModel[]> {
+  public getById(id: number): Observable<PartTypeModel[]> {
     return new Observable<PartTypeModel[]>(subscriber => {
-      if (fields) {
-        this.getByIdGraphQL(fields, id, subscriber)
-      } else {
         this.getByIdRest(subscriber, id)
-      }
     })
   }
 
@@ -64,14 +58,10 @@ export class PartTypeService implements DataProviderService<PartTypeModel>, Data
    * @param parameters
    * @param fields
    */
-  public get(parameters?: { [key: string]: any; }, fields?: String[]): Observable<PartTypeModel[]> {
+  public get(parameters?: { [key: string]: any; }): Observable<PartTypeModel[]> {
     return new Observable<PartTypeModel[]>(
       subscriber => {
-        if (fields) {
-          this.getGraphQL(fields, parameters, subscriber);
-        } else {
           this.getREST(subscriber, parameters);
-        }
       }
     )
   }
@@ -110,15 +100,6 @@ export class PartTypeService implements DataProviderService<PartTypeModel>, Data
     })
   }
 
-  private getByIdGraphQL(fields: String[], id: number, subscriber: Subscriber<PartTypeModel[]>) {
-    let query = `query partTypeById($id: Int!){partTypeById(id: $id) {${fields.join(',')}}}`
-    this.graphQl.request(query, {id: id}).subscribe(value => {
-      this.parseResponse(value.data.partTypeById, subscriber)
-    }, error => {
-      basicAPIErrorHandler(subscriber, error)
-    })
-  }
-
   private getByIdRest(subscriber: Subscriber<PartTypeModel[]>, id: number) {
     this.restApi.getById(id, record => {
       try {
@@ -126,15 +107,6 @@ export class PartTypeService implements DataProviderService<PartTypeModel>, Data
       } catch (e) {
         basicAPIErrorHandler(subscriber, e)
       }
-    }, error => {
-      basicAPIErrorHandler(subscriber, error)
-    })
-  }
-
-  private getGraphQL(fields: String[], parameters: { [p: string]: any } | undefined, subscriber: Subscriber<PartTypeModel[]>) {
-    let query = `query partTypes{partTypes{${fields.join(',')}}}`
-    this.graphQl.request(query, parameters).subscribe(value => {
-      this.parseResponse(value.data.partTypes, subscriber);
     }, error => {
       basicAPIErrorHandler(subscriber, error)
     })
