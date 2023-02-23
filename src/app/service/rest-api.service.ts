@@ -1,5 +1,6 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Injectable} from "@angular/core";
+import {environment} from "../../environments/environment";
 
 
 /**
@@ -15,7 +16,7 @@ export class RestApiService {
   }
 
 
-  private restApiServerUrl = "http://localhost:8080"
+  private restApiServerUrl = environment.apiUrl
 
   private static _apiClientInstances: { [key: string]: RestApiClient<any> } = {}
 
