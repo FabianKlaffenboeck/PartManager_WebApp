@@ -9,6 +9,7 @@ import {PartTypeService} from "../../service/partType.service";
 import {TrayService} from "../../service/tray.service";
 import {ManufacturerService} from "../../service/manufacturer.service";
 import {measurementUnitService} from "../../service/measurementUnit.service";
+import {FootprintService} from "../../service/footprint.service";
 
 export interface DialogModelData {
   model: any;
@@ -25,6 +26,7 @@ export class PartDialogComponent {
   manufacturers: ManufacturerModel[] = []
   trays: TrayModel[] = []
   measurementUnits: string[] = []
+  footprints: string[] = []
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogModelData,
@@ -33,6 +35,7 @@ export class PartDialogComponent {
     public manufacturerService: ManufacturerService,
     public trayService: TrayService,
     public measurementUnitService: measurementUnitService,
+    public footprintService: FootprintService,
   ) {
 
     console.log(data.model)
@@ -41,6 +44,7 @@ export class PartDialogComponent {
     manufacturerService.get().subscribe(it => this.manufacturers = it)
     trayService.get().subscribe(it => this.trays = it)
     measurementUnitService.get().subscribe(it => this.measurementUnits = it)
+    footprintService.get().subscribe(it => this.footprints = it)
 
     if (data.mode == "edit") {
       this.nameControl.setValue(data.model.name || null)
