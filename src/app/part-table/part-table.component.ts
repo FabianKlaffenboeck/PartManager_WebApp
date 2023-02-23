@@ -22,7 +22,7 @@ export class PartTableComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort = new MatSort()
 
-  displayedColumns = ['id', 'name', 'quantity', 'partType', 'manufacturer', 'tray', 'value', 'actions'];
+  displayedColumns = ['id', 'name', 'quantity', 'partType', 'manufacturer', 'tray', 'value','footprint', 'actions'];
   dataSource = new MatTableDataSource<PartModel>();
 
   constructor(

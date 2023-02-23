@@ -7,14 +7,14 @@ import {RestApiService} from "./rest-api.service";
 @Injectable({
   providedIn: 'root'
 })
-export class measurementUnitService {
+export class FootprintService {
 
   private restApi
 
   constructor(
     private api: RestApiService,
   ) {
-    this.restApi = this.api.for<string>("measurementUnit")
+    this.restApi = this.api.for<string>("footprint")
   }
 
   /**

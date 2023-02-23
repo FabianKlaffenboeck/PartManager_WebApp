@@ -47,6 +47,7 @@ export class PartDialogComponent {
       this.quantityControl.setValue(data.model.quantity || null)
       this.measurementUnitControl.setValue(data.model.measurementUnit || null)
       this.valueControl.setValue(data.model.value || null)
+      this.footprintControl.setValue(data.model.footprint || null)
       this.partTypeControl.setValue(data.model.partType?.id || null)
       this.manufacturerControl.setValue(data.model.manufacturer?.id || null)
       this.trayControl.setValue(data.model.tray?.id || null)
@@ -56,7 +57,8 @@ export class PartDialogComponent {
   nameControl = new FormControl('', []);
   quantityControl = new FormControl(0, []);
   measurementUnitControl = new FormControl('', []);
-  valueControl = new FormControl(0, [ ]);
+  valueControl = new FormControl(0, []);
+  footprintControl = new FormControl('', []);
   partTypeControl = new FormControl(0, []);
   manufacturerControl = new FormControl(0, []);
   trayControl = new FormControl(0, []);
@@ -72,6 +74,7 @@ export class PartDialogComponent {
       quantity: this.quantityControl.value || undefined,
       measurementUnit: this.measurementUnitControl.value || null,
       value: this.valueControl.value || null,
+      footprint: this.footprintControl.value || null,
       partType: this.partTypes.find(it => it.id == this.partTypeControl.value) || undefined,
       manufacturer: this.manufacturers.find(it => it.id == this.manufacturerControl.value) || undefined,
       tray: this.trays.find(it => it.id == this.trayControl.value) || undefined,

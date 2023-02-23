@@ -5,6 +5,7 @@ import {ManufacturerModel} from "./models/Manufacturer.model";
 import {PartModel} from "./models/Part.model";
 import {PartTypeModel} from "./models/PartType.model";
 import {PartService} from "./service/part.service";
+import {FootprintService} from "./service/footprint.service";
 
 @Component({
   selector: 'app-root',
@@ -23,10 +24,14 @@ export class AppComponent implements OnInit {
     public manufacturerService: ManufacturerService,
     public partTypeService: PartTypeService,
     public partService: PartService,
+    public footprintService: FootprintService,
   ) {
   }
 
   ngOnInit() {
+
+    this.footprintService.get().subscribe(it => console.log(it))
+
     this.manufacturerService.get().subscribe(it => {
       this.manufacturers = it
     })

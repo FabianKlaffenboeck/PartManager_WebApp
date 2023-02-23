@@ -9,6 +9,7 @@ export class PartModel implements Record {
   quantity: number | undefined
   measurementUnit: string | null
   value: number | null
+  footprint: string | null
   partType: PartTypeModel | undefined
   manufacturer: ManufacturerModel | undefined
   tray: TrayModel | undefined
@@ -19,6 +20,7 @@ export class PartModel implements Record {
     quantity?: number | undefined
     measurementUnit?: string | null
     value?: number | null
+    footprint?: string | null
     partType?: PartTypeModel | undefined
     manufacturer?: ManufacturerModel | undefined
     tray?: TrayModel | undefined
@@ -29,6 +31,7 @@ export class PartModel implements Record {
     this.quantity = options.quantity
     this.measurementUnit = options.measurementUnit || null
     this.value = options.value || null
+    this.footprint = options.footprint || null
     this.partType = options.partType
     this.manufacturer = options.manufacturer
     this.tray = options.tray
