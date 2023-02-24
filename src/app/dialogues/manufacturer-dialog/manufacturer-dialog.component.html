@@ -7,7 +7,7 @@
 <mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
   <button mat-button color="primary"
-          [disabled]="false"
+          [disabled]="nameControl.invalid"
           (click)="onSaveClick()">Save
   </button>
 </mat-dialog-actions>

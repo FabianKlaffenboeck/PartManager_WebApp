@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PartModel} from "../../models/Part.model";
-import {FormControl} from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
 import {PartTypeModel} from "../../models/PartType.model";
 import {ManufacturerModel} from "../../models/Manufacturer.model";
 import {TrayModel} from "../../models/Tray.model";
@@ -58,14 +58,14 @@ export class PartDialogComponent {
     }
   }
 
-  nameControl = new FormControl('', []);
-  quantityControl = new FormControl(0, []);
+  nameControl = new FormControl('', [Validators.required]);
+  quantityControl = new FormControl(null, [Validators.required]);
   measurementUnitControl = new FormControl('', []);
-  valueControl = new FormControl(0, []);
+  valueControl = new FormControl(null, []);
   footprintControl = new FormControl('', []);
-  partTypeControl = new FormControl(0, []);
-  manufacturerControl = new FormControl(0, []);
-  trayControl = new FormControl(0, []);
+  partTypeControl = new FormControl(0, [Validators.required]);
+  manufacturerControl = new FormControl(0, [Validators.required]);
+  trayControl = new FormControl(0, [Validators.required]);
 
   onCancelClick(): void {
     this.dialogRef.close();

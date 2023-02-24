@@ -1,5 +1,6 @@
 <mat-dialog-content>
   <table>
+
     <tr>
       <td>
         <mat-form-field>
@@ -22,7 +23,6 @@
           </mat-select>
         </mat-form-field>
       </td>
-
       <td>
         <mat-form-field>
           <mat-label>manufacturer</mat-label>
@@ -68,13 +68,21 @@
         </mat-form-field>
       </td>
     </tr>
+
   </table>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
   <button mat-button color="primary"
-          [disabled]="false"
+          [disabled]="nameControl.invalid ||
+                      quantityControl.invalid ||
+                      measurementUnitControl.invalid ||
+                      valueControl.invalid ||
+                      footprintControl.invalid ||
+                      partTypeControl.invalid ||
+                      manufacturerControl.invalid ||
+                      trayControl.invalid"
           (click)="onSaveClick()">Save
   </button>
 </mat-dialog-actions>
