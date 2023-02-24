@@ -5,24 +5,18 @@ import {DialogModelData} from "../part-dialog/part-dialog.component";
 import {PartTypeModel} from "../../models/PartType.model";
 
 @Component({
-  selector: 'app-part-dialog',
-  templateUrl: './partType-dialog.component.html',
+  selector: 'app-part-dialog', templateUrl: './partType-dialog.component.html',
 })
 
 export class PartTypeDialogComponent {
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogModelData,
-    public dialogRef: MatDialogRef<PartTypeDialogComponent>
-  ) {
+  typeControl = new FormControl('', [Validators.required]);
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogModelData, public dialogRef: MatDialogRef<PartTypeDialogComponent>) {
 
     if (data.mode == "edit") {
       this.typeControl.setValue(data.model.name || null)
     }
   }
-
-  typeControl = new FormControl('', [
-    Validators.required
-  ]);
 
   onCancelClick(): void {
     this.dialogRef.close();
@@ -30,8 +24,7 @@ export class PartTypeDialogComponent {
 
   onSaveClick(): void {
     let partType: PartTypeModel = {
-      id: undefined,
-      name: this.typeControl.value || undefined,
+      id: undefined, name: this.typeControl.value || undefined,
     };
 
     if (this.data.mode == "edit") {

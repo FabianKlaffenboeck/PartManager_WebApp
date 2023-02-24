@@ -1,0 +1,13 @@
+<mat-dialog-content>
+        <mat-form-field>
+          <input matInput [formControl]="typeControl" placeholder="name">
+        </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button color="primary"
+          [disabled]="typeControl.invalid"
+          (click)="onSaveClick()">Save
+  </button>
+</mat-dialog-actions>

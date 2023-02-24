@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {PartModel} from "../../models/Part.model";
 import {FormControl, Validators} from "@angular/forms";
 import {PartTypeModel} from "../../models/PartType.model";
@@ -10,6 +10,7 @@ import {TrayService} from "../../service/tray.service";
 import {ManufacturerService} from "../../service/manufacturer.service";
 import {measurementUnitService} from "../../service/measurementUnit.service";
 import {FootprintService} from "../../service/footprint.service";
+import {TrayDialogComponent} from "../tray-dialog/tray-dialog.component";
 
 export interface DialogModelData {
   model: any;
@@ -17,8 +18,7 @@ export interface DialogModelData {
 }
 
 @Component({
-  selector: 'app-part-dialog',
-  templateUrl: './part-dialog.component.html',
+  selector: 'app-part-dialog', templateUrl: './part-dialog.component.html',
 })
 
 export class PartDialogComponent {
@@ -28,17 +28,23 @@ export class PartDialogComponent {
   measurementUnits: string[] = []
   footprints: string[] = []
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogModelData,
-    public dialogRef: MatDialogRef<PartDialogComponent>,
-    public partTypeService: PartTypeService,
-    public manufacturerService: ManufacturerService,
-    public trayService: TrayService,
-    public measurementUnitService: measurementUnitService,
-    public footprintService: FootprintService,
-  ) {
+  nameControl = new FormControl('', [Validators.required]);
+  quantityControl = new FormControl(null, [Validators.required]);
+  measurementUnitControl = new FormControl('', []);
+  valueControl = new FormControl(null, []);
+  footprintControl = new FormControl('', []);
+  partTypeControl = new FormControl(0, [Validators.required]);
+  manufacturerControl = new FormControl(0, [Validators.required]);
+  trayControl = new FormControl(0, [Validators.required]);
 
-    console.log(data.model)
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogModelData,
+              public dialogRef: MatDialogRef<PartDialogComponent>,
+              public partTypeService: PartTypeService,
+              public manufacturerService: ManufacturerService,
+              public trayService: TrayService,
+              public measurementUnitService: measurementUnitService,
+              public footprintService: FootprintService,
+              public dialog: MatDialog) {
 
     partTypeService.get().subscribe(it => this.partTypes = it)
     manufacturerService.get().subscribe(it => this.manufacturers = it)
@@ -58,14 +64,16 @@ export class PartDialogComponent {
     }
   }
 
-  nameControl = new FormControl('', [Validators.required]);
-  quantityControl = new FormControl(null, [Validators.required]);
-  measurementUnitControl = new FormControl('', []);
-  valueControl = new FormControl(null, []);
-  footprintControl = new FormControl('', []);
-  partTypeControl = new FormControl(0, [Validators.required]);
-  manufacturerControl = new FormControl(0, [Validators.required]);
-  trayControl = new FormControl(0, [Validators.required]);
+  addTray() {
+    this.dialog.open(TrayDialogComponent, {
+      data: {
+        mode: "add"
+      }
+    }).afterClosed().subscribe(it => this.trayService.save(it).subscribe(it2 => {
+      this.trays.push(it2)
+      this.trayControl.setValue(it2.id || 0)
+    }))
+  }
 
   onCancelClick(): void {
     this.dialogRef.close();

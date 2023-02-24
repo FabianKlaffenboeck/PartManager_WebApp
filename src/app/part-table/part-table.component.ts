@@ -8,9 +8,7 @@ import {PartDialogComponent} from "../dialogues/part-dialog/part-dialog.componen
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({
-  selector: 'part-table',
-  templateUrl: './part-table.component.html',
-  styleUrls: ['./part-table.component.scss']
+  selector: 'part-table', templateUrl: './part-table.component.html', styleUrls: ['./part-table.component.scss']
 })
 
 // TODO add a part value such as Ohm for a specific part
@@ -22,13 +20,12 @@ export class PartTableComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort = new MatSort()
 
-  displayedColumns = ['id', 'name', 'quantity', 'partType', 'manufacturer', 'tray', 'value','footprint', 'actions'];
+  displayedColumns = ['id', 'name', 'quantity', 'partType', 'manufacturer', 'tray', 'value', 'footprint', 'actions'];
   dataSource = new MatTableDataSource<PartModel>();
 
-  constructor(
-    public partService: PartService,
-    public notificationService: NotificationService,
-    public dialog: MatDialog
+  constructor(public partService: PartService,
+              public notificationService: NotificationService,
+              public dialog: MatDialog
   ) {
   }
 
@@ -62,8 +59,7 @@ export class PartTableComponent implements OnInit {
   edit(element: PartModel) {
     this.dialog.open(PartDialogComponent, {
       data: {
-        model: element,
-        mode: "edit"
+        model: element, mode: "edit"
       }
     }).afterClosed().subscribe(result => {
       if (result) {

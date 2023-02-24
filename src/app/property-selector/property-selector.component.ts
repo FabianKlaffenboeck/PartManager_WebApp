@@ -22,11 +22,10 @@ export class PropertySelectorComponent {
   @Output() selectedManufacturers: EventEmitter<ManufacturerModel[]> = new EventEmitter();
   @Output() selectedPartTypes: EventEmitter<PartTypeModel[]> = new EventEmitter();
 
-  constructor(
-    public dialog: MatDialog,
-    public manufacturerService: ManufacturerService,
-    public partTypeService: PartTypeService,
-    public notificationService: NotificationService
+  constructor(public dialog: MatDialog,
+              public manufacturerService: ManufacturerService,
+              public partTypeService: PartTypeService,
+              public notificationService: NotificationService
   ) {
   }
 
