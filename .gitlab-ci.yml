@@ -22,7 +22,7 @@ install_dependencies:
       - node_modules
 
 lint:
-  image: node:12-alpine
+  image: node:18.14-alpine
   stage: test
   script:
     - npm link @angular/cli@15.1.6
