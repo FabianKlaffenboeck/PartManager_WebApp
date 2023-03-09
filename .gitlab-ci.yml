@@ -73,5 +73,6 @@ push-docker-registry:
 #    - master
   script:
     - docker build -t $CI_REGISTRY/partmanager/webapp .
-    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
     - docker push $CI_REGISTRY/partmanager/webapp
