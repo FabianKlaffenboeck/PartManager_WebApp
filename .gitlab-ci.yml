@@ -12,8 +12,8 @@ install_dependencies:
   stage: dependencies
   script:
     - npm install
-  only:
-    - master
+#  only:
+#    - master
   cache:
     key:
       files:
@@ -69,8 +69,8 @@ build_image:
 push-docker-registry:
   image: docker:latest
   stage: publish
-  only:
-    - master
+#  only:
+#    - master
   script:
     - docker build -t $CI_REGISTRY/partmanager/webapp .
     - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
