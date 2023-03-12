@@ -1,6 +1,6 @@
 stages:
   - build
-  - package
+  - deploy
 
 build:
   image: node:latest
@@ -17,9 +17,9 @@ build:
     paths:
       - node_modules/
 
-docker-build:
+deploy:
   image: docker:stable
-  stage: package
+  stage: deploy
   only:
     - master
   services:
