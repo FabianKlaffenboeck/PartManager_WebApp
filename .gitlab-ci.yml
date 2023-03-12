@@ -1,7 +1,6 @@
 stages:
   - build
   - package
-  - deploy
 
 variables:
   IMAGE_NAME: $CI_REGISTRY/partmanager/webapp
@@ -24,9 +23,11 @@ build:
 docker-build:
   image: docker:stable
   stage: package
+  only:
+    - master
   services:
     - docker:dind
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t $CI_REGISTRY/partmanager/webapp/image:latest .
-    - docker push $CI_REGISTRY/partmanager/webapp/image:latest
+    - docker build -t $CI_REGISTRY/partmanager/webapp:latest .
+    - docker push $CI_REGISTRY/partmanager/webapp:latest
