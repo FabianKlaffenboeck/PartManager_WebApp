@@ -3,6 +3,8 @@ stages:
   - package
   - deploy
 
+variables:
+  IMAGE_NAME: $CI_REGISTRY/partmanager/webapp
 
 build:
   stage: build
@@ -29,4 +31,5 @@ docker-build:
       --password-stdin $CI_REGISTRY
   script:
     - docker build -t creg01.klaffenboeck.eu/partmanager/webapp .
+    - docker tag partmanager_webapp $IMMAGE_NAME_$CI_COMMIT_REF_NAME
     - docker push creg01.klaffenboeck.eu/partmanager/webapp
