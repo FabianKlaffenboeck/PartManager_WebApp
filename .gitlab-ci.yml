@@ -1,0 +1,33 @@
+stages:
+  - build
+  - package
+
+variables:
+  IMAGE_NAME: $CI_REGISTRY/partmanager/webapp
+
+build:
+  stage: build
+  image: node:latest
+  script:
+    - npm install -g @angular/cli@15.1.6
+    - npm install
+    - ng build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 2 hours
+  cache:
+    paths:
+      - node_modules/
+
+docker-build:
+  image: docker:stable
+  stage: package
+  only:
+    - master
+  services:
+    - docker:dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/partmanager/webapp:latest .
+    - docker push $CI_REGISTRY/partmanager/webapp:latest
