@@ -2,9 +2,6 @@ stages:
   - build
   - package
 
-variables:
-  IMAGE_NAME: $CI_REGISTRY/partmanager/webapp
-
 build:
   stage: build
   image: node:latest
