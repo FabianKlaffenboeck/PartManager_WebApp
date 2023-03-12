@@ -3,8 +3,10 @@ stages:
   - package
 
 build:
-  stage: build
-  image: node:latest
+  image:
+    - node:latest
+  stage:
+    - build
   script:
     - npm install -g @angular/cli@15.1.6
     - npm install
@@ -18,8 +20,10 @@ build:
       - node_modules/
 
 docker-build:
-  image: docker:stable
-  stage: package
+  image:
+    - docker:stable
+  stage:
+    - package
   only:
     - master
   services:
