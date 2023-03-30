@@ -38,30 +38,39 @@ export class ShelfService implements DataProviderService<ShelfModel>, DataTransf
   }
 
   /**
-   * Returns the shelf with the given id, depending on the value of
-   * fields. If fields is null, the REST api is getting called, else
-   * the GraphQL api service is used
-   *
+   * Returns the shelf with the given id
    * @param id
-   * @param fields
    */
   public getById(id: number): Observable<ShelfModel[]> {
     return new Observable<ShelfModel[]>(subscriber => {
-        this.getByIdRest(subscriber, id)
+      this.restApi.getById(id, record => {
+        try {
+          this.parseResponse([record], subscriber);
+        } catch (e) {
+          basicAPIErrorHandler(subscriber, e)
+        }
+      }, error => {
+        basicAPIErrorHandler(subscriber, error)
+      })
     })
   }
 
   /**
-   * returns all shelf depending on the value of fields. If fields is
-   * null, the REST api is getting called, else the GraphQL api service
-   * is used.
+   * returns all shelfs
    * @param parameters
-   * @param fields
    */
   public get(parameters?: { [key: string]: any; }): Observable<ShelfModel[]> {
     return new Observable<ShelfModel[]>(
       subscriber => {
-          this.getREST(subscriber, parameters);
+        this.restApi.get(records => {
+          try {
+            this.parseResponse(records, subscriber);
+          } catch (e) {
+            basicAPIErrorHandler(subscriber, e)
+          }
+        }, error => {
+          basicAPIErrorHandler(subscriber, error)
+        }, parameters)
       }
     )
   }
@@ -98,30 +107,6 @@ export class ShelfService implements DataProviderService<ShelfModel>, DataTransf
         basicAPIErrorHandler(subscriber, error)
       })
     })
-  }
-
-  private getByIdRest(subscriber: Subscriber<ShelfModel[]>, id: number) {
-    this.restApi.getById(id, record => {
-      try {
-        this.parseResponse([record], subscriber);
-      } catch (e) {
-        basicAPIErrorHandler(subscriber, e)
-      }
-    }, error => {
-      basicAPIErrorHandler(subscriber, error)
-    })
-  }
-
-  private getREST(subscriber: Subscriber<ShelfModel[]>, parameters?: { [p: string]: any }) {
-    this.restApi.get(records => {
-      try {
-        this.parseResponse(records, subscriber);
-      } catch (e) {
-        basicAPIErrorHandler(subscriber, e)
-      }
-    }, error => {
-      basicAPIErrorHandler(subscriber, error)
-    }, parameters)
   }
 
   private parseResponse(records: ShelfModel[], subscriber: Subscriber<ShelfModel[]>) {

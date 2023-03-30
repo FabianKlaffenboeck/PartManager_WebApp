@@ -5,11 +5,11 @@ import {FormControl, Validators} from "@angular/forms";
 import {PartTypeModel} from "../../models/PartType.model";
 import {ManufacturerModel} from "../../models/Manufacturer.model";
 import {TrayModel} from "../../models/Tray.model";
-import {PartTypeService} from "../../service/partType.service";
-import {TrayService} from "../../service/tray.service";
-import {ManufacturerService} from "../../service/manufacturer.service";
-import {measurementUnitService} from "../../service/measurementUnit.service";
-import {FootprintService} from "../../service/footprint.service";
+import {PartTypeService} from "../../service/PartType.service";
+import {TrayService} from "../../service/Tray.service";
+import {ManufacturerService} from "../../service/Manufacturer.service";
+import {measurementUnitService} from "../../service/enums/MeasurementUnit.service";
+import {FootprintService} from "../../service/enums/Footprint.service";
 import {TrayDialogComponent} from "../tray-dialog/tray-dialog.component";
 
 export interface DialogModelData {

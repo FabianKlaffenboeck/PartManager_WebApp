@@ -3,10 +3,10 @@ import {ManufacturerModel} from "../models/Manufacturer.model";
 import {PartTypeModel} from "../models/PartType.model";
 import {MatSelectionList} from "@angular/material/list";
 import {MatDialog} from "@angular/material/dialog";
-import {ManufacturerService} from "../service/manufacturer.service";
+import {ManufacturerService} from "../service/Manufacturer.service";
 import {NotificationService} from "../service/notification.service";
 import {ManufacturerDialogComponent} from "../dialogues/manufacturer-dialog/manufacturer-dialog.component";
-import {PartTypeService} from "../service/partType.service";
+import {PartTypeService} from "../service/PartType.service";
 import {PartTypeDialogComponent} from "../dialogues/partType-dialog/partType-dialog.component";
 
 @Component({

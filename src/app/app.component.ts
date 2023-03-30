@@ -1,11 +1,11 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
-import {ManufacturerService} from "./service/manufacturer.service";
-import {PartTypeService} from "./service/partType.service";
+import {ManufacturerService} from "./service/Manufacturer.service";
+import {PartTypeService} from "./service/PartType.service";
 import {ManufacturerModel} from "./models/Manufacturer.model";
 import {PartModel} from "./models/Part.model";
 import {PartTypeModel} from "./models/PartType.model";
-import {PartService} from "./service/part.service";
-import {FootprintService} from "./service/footprint.service";
+import {PartService} from "./service/Part.service";
+import {FootprintService} from "./service/enums/Footprint.service";
 
 @Component({
   selector: 'app-root',

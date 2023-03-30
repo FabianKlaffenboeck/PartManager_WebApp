@@ -1,30 +1,26 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {basicAPIErrorHandler} from "./data-provider.service";
-import {RestApiService} from "./rest-api.service";
+import {basicAPIErrorHandler} from "../data-provider.service";
+import {RestApiService} from "../rest-api.service";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class FootprintService {
+export class measurementUnitService {
 
   private restApi
 
   constructor(
     private api: RestApiService,
   ) {
-    this.restApi = this.api.for<string>("footprint")
+    this.restApi = this.api.for<string>("measurementUnit")
   }
 
   /**
-   * returns all partType depending on the value of fields. If fields is
-   * null, the REST api is getting called, else the GraphQL api service
-   * is used.
-   * @param parameters
-   * @param fields
+   * returns all partTypes
    */
-  public get(parameters?: { [key: string]: any; }): Observable<string[]> {
+  public get(): Observable<string[]> {
     return new Observable<string[]>(
       subscriber => {
 
@@ -36,8 +32,7 @@ export class FootprintService {
           }
         }, error => {
           basicAPIErrorHandler(subscriber, error)
-        }, parameters)
-
+        })
       }
     )
   }
