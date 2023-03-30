@@ -38,30 +38,31 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
   }
 
   /**
-   * Returns the tray with the given id, depending on the value of
-   * fields. If fields is null, the REST api is getting called, else
-   * the GraphQL api service is used
-   *
+   * Returns the tray with the given id
    * @param id
-   * @param fields
    */
   public getById(id: number): Observable<TrayModel[]> {
     return new Observable<TrayModel[]>(subscriber => {
-        this.getByIdRest(subscriber, id)
+      this.restApi.getById(id, record => {
+        try {
+          this.parseResponse([record], subscriber);
+        } catch (e) {
+          basicAPIErrorHandler(subscriber, e)
+        }
+      }, error => {
+        basicAPIErrorHandler(subscriber, error)
+      })
     })
   }
 
   /**
-   * returns all tray depending on the value of fields. If fields is
-   * null, the REST api is getting called, else the GraphQL api service
-   * is used.
+   * returns all trays
    * @param parameters
-   * @param fields
    */
   public get(parameters?: { [key: string]: any; }): Observable<TrayModel[]> {
     return new Observable<TrayModel[]>(
       subscriber => {
-          this.getREST(subscriber, parameters);
+        this.getREST(subscriber, parameters);
       }
     )
   }
@@ -97,18 +98,6 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
       }, error => {
         basicAPIErrorHandler(subscriber, error)
       })
-    })
-  }
-
-  private getByIdRest(subscriber: Subscriber<TrayModel[]>, id: number) {
-    this.restApi.getById(id, record => {
-      try {
-        this.parseResponse([record], subscriber);
-      } catch (e) {
-        basicAPIErrorHandler(subscriber, e)
-      }
-    }, error => {
-      basicAPIErrorHandler(subscriber, error)
     })
   }
 

@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, ViewChild} from '@angular/core';
 import {PartModel} from "../models/Part.model";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
-import {PartService} from "../service/part.service";
+import {PartService} from "../service/Part.service";
 import {NotificationService} from "../service/notification.service";
 import {PartDialogComponent} from "../dialogues/part-dialog/part-dialog.component";
 import {MatDialog} from "@angular/material/dialog";

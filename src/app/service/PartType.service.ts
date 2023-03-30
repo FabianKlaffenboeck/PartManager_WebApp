@@ -38,30 +38,39 @@ export class PartTypeService implements DataProviderService<PartTypeModel>, Data
   }
 
   /**
-   * Returns the partType with the given id, depending on the value of
-   * fields. If fields is null, the REST api is getting called, else
-   * the GraphQL api service is used
-   *
+   * Returns the partType with the given id
    * @param id
-   * @param fields
    */
   public getById(id: number): Observable<PartTypeModel[]> {
     return new Observable<PartTypeModel[]>(subscriber => {
-        this.getByIdRest(subscriber, id)
+      this.restApi.getById(id, record => {
+        try {
+          this.parseResponse([record], subscriber);
+        } catch (e) {
+          basicAPIErrorHandler(subscriber, e)
+        }
+      }, error => {
+        basicAPIErrorHandler(subscriber, error)
+      })
     })
   }
 
   /**
-   * returns all partType depending on the value of fields. If fields is
-   * null, the REST api is getting called, else the GraphQL api service
-   * is used.
+   * returns all partTypes
    * @param parameters
-   * @param fields
    */
   public get(parameters?: { [key: string]: any; }): Observable<PartTypeModel[]> {
     return new Observable<PartTypeModel[]>(
       subscriber => {
-          this.getREST(subscriber, parameters);
+        this.restApi.get(records => {
+          try {
+            this.parseResponse(records, subscriber);
+          } catch (e) {
+            basicAPIErrorHandler(subscriber, e)
+          }
+        }, error => {
+          basicAPIErrorHandler(subscriber, error)
+        }, parameters)
       }
     )
   }
@@ -98,30 +107,6 @@ export class PartTypeService implements DataProviderService<PartTypeModel>, Data
         basicAPIErrorHandler(subscriber, error)
       })
     })
-  }
-
-  private getByIdRest(subscriber: Subscriber<PartTypeModel[]>, id: number) {
-    this.restApi.getById(id, record => {
-      try {
-        this.parseResponse([record], subscriber);
-      } catch (e) {
-        basicAPIErrorHandler(subscriber, e)
-      }
-    }, error => {
-      basicAPIErrorHandler(subscriber, error)
-    })
-  }
-
-  private getREST(subscriber: Subscriber<PartTypeModel[]>, parameters?: { [p: string]: any }) {
-    this.restApi.get(records => {
-      try {
-        this.parseResponse(records, subscriber);
-      } catch (e) {
-        basicAPIErrorHandler(subscriber, e)
-      }
-    }, error => {
-      basicAPIErrorHandler(subscriber, error)
-    }, parameters)
   }
 
   private parseResponse(records: PartTypeModel[], subscriber: Subscriber<PartTypeModel[]>) {
