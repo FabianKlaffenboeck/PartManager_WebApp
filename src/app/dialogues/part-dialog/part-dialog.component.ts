@@ -5,12 +5,11 @@ import {FormControl, Validators} from "@angular/forms";
 import {PartTypeModel} from "../../models/PartType.model";
 import {ManufacturerModel} from "../../models/Manufacturer.model";
 import {TrayModel} from "../../models/Tray.model";
-import {PartTypeService} from "../../service/PartType.service";
-import {TrayService} from "../../service/Tray.service";
-import {ManufacturerService} from "../../service/Manufacturer.service";
+import {PartTypeService} from "../../service/data/PartType.service";
+import {TrayService} from "../../service/data/Tray.service";
+import {ManufacturerService} from "../../service/data/Manufacturer.service";
 import {measurementUnitService} from "../../service/enums/MeasurementUnit.service";
 import {FootprintService} from "../../service/enums/Footprint.service";
-import {TrayDialogComponent} from "../tray-dialog/tray-dialog.component";
 
 export interface DialogModelData {
   model: any;
@@ -62,17 +61,6 @@ export class PartDialogComponent {
       this.manufacturerControl.setValue(data.model.manufacturer?.id || null)
       this.trayControl.setValue(data.model.tray?.id || null)
     }
-  }
-
-  addTray() {
-    this.dialog.open(TrayDialogComponent, {
-      data: {
-        mode: "add"
-      }
-    }).afterClosed().subscribe(it => this.trayService.save(it).subscribe(it2 => {
-      this.trays.push(it2)
-      this.trayControl.setValue(it2.id || 0)
-    }))
   }
 
   onCancelClick(): void {

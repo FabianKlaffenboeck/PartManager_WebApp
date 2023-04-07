@@ -1,11 +1,11 @@
 import {Observable, Subscriber} from "rxjs";
 
 /**
- * Asynchronous Access to Arrays of the specified tyoe
+ * Asynchronous Access to Arrays of the specified type
  */
 export interface DataProviderService<T> {
   // getById(id: number | string, fields?: String[]): Observable<T[]>
-  get(parameters?: { [key: string]: any; }, fields?: String[]): Observable<T[]>
+  get(parameters?: { [key: string]: any; }): Observable<T[]>
 }
 
 /**

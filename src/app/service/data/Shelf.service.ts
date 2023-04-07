@@ -6,22 +6,22 @@ import {
   DataTransformationService,
   FormOptionsProvider,
   FormSelectOption
-} from "./data-provider.service";
-import {RestApiService} from "./rest-api.service";
-import {ManufacturerModel} from "../models/Manufacturer.model";
+} from "../data-provider.service";
+import {RestApiService} from "../rest-api.service";
+import {ShelfModel} from "../../models/Shelf.model";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class ManufacturerService implements DataProviderService<ManufacturerModel>, DataTransformationService<ManufacturerModel>, FormOptionsProvider {
+export class ShelfService implements DataProviderService<ShelfModel>, DataTransformationService<ShelfModel>, FormOptionsProvider {
 
   private restApi
 
   constructor(
     private api: RestApiService,
   ) {
-    this.restApi = this.api.for<ManufacturerModel>("manufacturer")
+    this.restApi = this.api.for<ShelfModel>("shelf")
   }
 
   /**
@@ -38,12 +38,11 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
   }
 
   /**
-   * Returns the manufacturer with the given id,
-   *
+   * Returns the shelf with the given id
    * @param id
    */
-  public getById(id: number,): Observable<ManufacturerModel[]> {
-    return new Observable<ManufacturerModel[]>(subscriber => {
+  public getById(id: number): Observable<ShelfModel[]> {
+    return new Observable<ShelfModel[]>(subscriber => {
       this.restApi.getById(id, record => {
         try {
           this.parseResponse([record], subscriber);
@@ -57,11 +56,11 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
   }
 
   /**
-   * returns all manufacturers
+   * returns all shelfs
    * @param parameters
    */
-  public get(parameters?: { [key: string]: any; }): Observable<ManufacturerModel[]> {
-    return new Observable<ManufacturerModel[]>(
+  public get(parameters?: { [key: string]: any; }): Observable<ShelfModel[]> {
+    return new Observable<ShelfModel[]>(
       subscriber => {
         this.restApi.get(records => {
           try {
@@ -77,7 +76,7 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
   }
 
   /**
-   * Deletes the manufacturer with the given id
+   * Deletes the shelf with the given id
    * @param recordId
    */
   public delete(recordId: number): Observable<any> {
@@ -92,14 +91,14 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
   }
 
   /**
-   * Saves the given manufacturer into the database
+   * Saves the given shelf into the database
    * @param record
    */
-  public save(record: ManufacturerModel): Observable<ManufacturerModel> {
-    return new Observable<ManufacturerModel>(subscriber => {
+  public save(record: ShelfModel): Observable<ShelfModel> {
+    return new Observable<ShelfModel>(subscriber => {
       this.restApi.save(record, savedRecord => {
         try {
-          subscriber.next(new ManufacturerModel(savedRecord))
+          subscriber.next(new ShelfModel(savedRecord))
           subscriber.complete()
         } catch (e) {
           basicAPIErrorHandler(subscriber, e)
@@ -110,16 +109,16 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
     })
   }
 
-  private parseResponse(records: ManufacturerModel[], subscriber: Subscriber<ManufacturerModel[]>) {
-    let parsedCustomers: ManufacturerModel[] = []
-    records.forEach((manufacturer: ManufacturerModel) => {
-      parsedCustomers.push(new ManufacturerModel(manufacturer))
+  private parseResponse(records: ShelfModel[], subscriber: Subscriber<ShelfModel[]>) {
+    let parsedCustomers: ShelfModel[] = []
+    records.forEach((shelf: ShelfModel) => {
+      parsedCustomers.push(new ShelfModel(shelf))
     })
     subscriber.next(parsedCustomers)
     subscriber.complete()
   }
 
-  private parseSelectOptions(records: ManufacturerModel[]): FormSelectOption[] {
+  private parseSelectOptions(records: ShelfModel[]): FormSelectOption[] {
     let options: FormSelectOption[] = []
     records.forEach(value => {
       options.push({

@@ -18,8 +18,8 @@ export class NotificationService {
     });
   }
 
-  success(message: string | undefined) {
-    return this._snackBar.open("deleting \"" + message + "2\" was successful!", undefined, {
+  success(methode: string | undefined, message: string | undefined) {
+    return this._snackBar.open(methode + " " + message + " was successful!", undefined, {
       panelClass: ['snackbar-success'],
       duration: 2000
     });

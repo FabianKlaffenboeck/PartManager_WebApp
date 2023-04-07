@@ -1,13 +1,12 @@
 <div class="row">
   <div class="col-md-2">
-    <property-selector [manufacturers]="manufacturers"
-                       [partTypes]="partTypes"
-                       (selectedManufacturers)="updateSelectedManufacturers($event)"
-                       (selectedPartTypes)="updateSelectedPartTypes($event)">
+    <property-selector (selectedManufacturers)="selectedManufacturers= $event"
+                       (selectedPartTypes)="selectedPartTypes= $event">
     </property-selector>
   </div>
 
   <div class="col-md-10">
-    <part-table [parts]="partsEvent"></part-table>
+    <part-table [selectedManufacturers]="selectedManufacturers"
+                [selectedPartTypes]="selectedPartTypes"></part-table>
   </div>
 </div>

@@ -1,11 +1,6 @@
 <div class="example-container mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource" matSort>
 
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> id</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
-    </ng-container>
-
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> name</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
@@ -17,28 +12,28 @@
     </ng-container>
 
     <ng-container matColumnDef="partType">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> partType.name</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> part type</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.partType.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="manufacturer">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> manufacturer.name</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> manufacturer</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.manufacturer.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="tray">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> tray.name</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.tray.name}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> storage location</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{formatStorageLocation(element.tray.id)}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="value">
       <mat-header-cell *matHeaderCellDef mat-sort-header> value</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{unitFormator(element)}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{unitFormatter(element)}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="footprint">
       <mat-header-cell *matHeaderCellDef mat-sort-header> footprint</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.footprint}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{formatter(element.footprint)}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">

@@ -6,22 +6,22 @@ import {
   DataTransformationService,
   FormOptionsProvider,
   FormSelectOption
-} from "./data-provider.service";
-import {RestApiService} from "./rest-api.service";
-import {PartTypeModel} from "../models/PartType.model";
+} from "../data-provider.service";
+import {RestApiService} from "../rest-api.service";
+import {ManufacturerModel} from "../../models/Manufacturer.model";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class PartTypeService implements DataProviderService<PartTypeModel>, DataTransformationService<PartTypeModel>, FormOptionsProvider {
+export class ManufacturerService implements DataProviderService<ManufacturerModel>, DataTransformationService<ManufacturerModel>, FormOptionsProvider {
 
   private restApi
 
   constructor(
     private api: RestApiService,
   ) {
-    this.restApi = this.api.for<PartTypeModel>("partType")
+    this.restApi = this.api.for<ManufacturerModel>("manufacturer")
   }
 
   /**
@@ -38,11 +38,12 @@ export class PartTypeService implements DataProviderService<PartTypeModel>, Data
   }
 
   /**
-   * Returns the partType with the given id
+   * Returns the manufacturer with the given id,
+   *
    * @param id
    */
-  public getById(id: number): Observable<PartTypeModel[]> {
-    return new Observable<PartTypeModel[]>(subscriber => {
+  public getById(id: number,): Observable<ManufacturerModel[]> {
+    return new Observable<ManufacturerModel[]>(subscriber => {
       this.restApi.getById(id, record => {
         try {
           this.parseResponse([record], subscriber);
@@ -56,11 +57,11 @@ export class PartTypeService implements DataProviderService<PartTypeModel>, Data
   }
 
   /**
-   * returns all partTypes
+   * returns all manufacturers
    * @param parameters
    */
-  public get(parameters?: { [key: string]: any; }): Observable<PartTypeModel[]> {
-    return new Observable<PartTypeModel[]>(
+  public get(parameters?: { [key: string]: any; }): Observable<ManufacturerModel[]> {
+    return new Observable<ManufacturerModel[]>(
       subscriber => {
         this.restApi.get(records => {
           try {
@@ -76,7 +77,7 @@ export class PartTypeService implements DataProviderService<PartTypeModel>, Data
   }
 
   /**
-   * Deletes the partType with the given id
+   * Deletes the manufacturer with the given id
    * @param recordId
    */
   public delete(recordId: number): Observable<any> {
@@ -91,14 +92,14 @@ export class PartTypeService implements DataProviderService<PartTypeModel>, Data
   }
 
   /**
-   * Saves the given partType into the database
+   * Saves the given manufacturer into the database
    * @param record
    */
-  public save(record: PartTypeModel): Observable<PartTypeModel> {
-    return new Observable<PartTypeModel>(subscriber => {
+  public save(record: ManufacturerModel): Observable<ManufacturerModel> {
+    return new Observable<ManufacturerModel>(subscriber => {
       this.restApi.save(record, savedRecord => {
         try {
-          subscriber.next(new PartTypeModel(savedRecord))
+          subscriber.next(new ManufacturerModel(savedRecord))
           subscriber.complete()
         } catch (e) {
           basicAPIErrorHandler(subscriber, e)
@@ -109,16 +110,16 @@ export class PartTypeService implements DataProviderService<PartTypeModel>, Data
     })
   }
 
-  private parseResponse(records: PartTypeModel[], subscriber: Subscriber<PartTypeModel[]>) {
-    let parsedCustomers: PartTypeModel[] = []
-    records.forEach((partType: PartTypeModel) => {
-      parsedCustomers.push(new PartTypeModel(partType))
+  private parseResponse(records: ManufacturerModel[], subscriber: Subscriber<ManufacturerModel[]>) {
+    let parsedCustomers: ManufacturerModel[] = []
+    records.forEach((manufacturer: ManufacturerModel) => {
+      parsedCustomers.push(new ManufacturerModel(manufacturer))
     })
     subscriber.next(parsedCustomers)
     subscriber.complete()
   }
 
-  private parseSelectOptions(records: PartTypeModel[]): FormSelectOption[] {
+  private parseSelectOptions(records: ManufacturerModel[]): FormSelectOption[] {
     let options: FormSelectOption[] = []
     records.forEach(value => {
       options.push({
