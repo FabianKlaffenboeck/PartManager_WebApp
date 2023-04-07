@@ -17,8 +17,8 @@
     <tr>
       <td>
         <mat-form-field>
-          <mat-label>partType</mat-label>
-          <mat-select [formControl]="partTypeControl" placeholder="partType">
+          <mat-label>part type</mat-label>
+          <mat-select [formControl]="partTypeControl" placeholder="part type">
             <mat-option *ngFor="let partType of partTypes" [value]="partType.id">{{ partType.name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -39,14 +39,14 @@
         <mat-form-field>
           <mat-label>tray</mat-label>
           <mat-select [formControl]="trayControl" placeholder="tray">
-            <mat-option *ngFor="let tray of trays" [value]="tray.id">{{ tray.name }}</mat-option>
+            <mat-option *ngFor="let tray of trays" [value]="tray.id">{{ formatStorageLocation(tray) }}</mat-option>
           </mat-select>
         </mat-form-field>
       </td>
       <td>
         <mat-form-field>
-          <mat-label>measurementUnit</mat-label>
-          <mat-select [formControl]="measurementUnitControl" placeholder="measurementUnit">
+          <mat-label>measuring unit</mat-label>
+          <mat-select [formControl]="measurementUnitControl" placeholder="measuring unit">
             <mat-option *ngFor="let unit of measurementUnits" [value]="unit">{{ unit }}</mat-option>
           </mat-select>
         </mat-form-field>

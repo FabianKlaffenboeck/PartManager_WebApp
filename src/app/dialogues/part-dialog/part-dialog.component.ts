@@ -10,6 +10,8 @@ import {TrayService} from "../../service/data/Tray.service";
 import {ManufacturerService} from "../../service/data/Manufacturer.service";
 import {measurementUnitService} from "../../service/enums/MeasurementUnit.service";
 import {FootprintService} from "../../service/enums/Footprint.service";
+import {ShelfModel} from "../../models/Shelf.model";
+import {ShelfService} from "../../service/data/Shelf.service";
 
 export interface DialogModelData {
   model: any;
@@ -26,6 +28,7 @@ export class PartDialogComponent {
   trays: TrayModel[] = []
   measurementUnits: string[] = []
   footprints: string[] = []
+  shelfs: ShelfModel[] = []
 
   nameControl = new FormControl('', [Validators.required]);
   quantityControl = new FormControl(null, [Validators.required]);
@@ -42,6 +45,7 @@ export class PartDialogComponent {
               public manufacturerService: ManufacturerService,
               public trayService: TrayService,
               public measurementUnitService: measurementUnitService,
+              public shelfService: ShelfService,
               public footprintService: FootprintService,
               public dialog: MatDialog) {
 
@@ -50,6 +54,9 @@ export class PartDialogComponent {
     trayService.get().subscribe(it => this.trays = it)
     measurementUnitService.get().subscribe(it => this.measurementUnits = it)
     footprintService.get().subscribe(it => this.footprints = it)
+    this.shelfService.get().subscribe(it => {
+      this.shelfs = it
+    })
 
     if (data.mode == "edit") {
       this.nameControl.setValue(data.model.name || null)
@@ -85,5 +92,14 @@ export class PartDialogComponent {
     }
 
     this.dialogRef.close(part);
+  }
+
+  formatStorageLocation(tray: TrayModel) {
+    let trayName = tray?.name || ""
+    let shelfName = ""
+
+    shelfName = this.shelfs.find(shelf => shelf.trays && shelf.trays.some(it => it.id === tray?.id))?.name || ""
+
+    return shelfName + "-" + trayName
   }
 }

@@ -33,18 +33,18 @@ export class ShelfDialogComponent {
 
     let trays: TrayModel[] = []
 
-    trays.push(new TrayModel({name: "LolTest1"}))
-    trays.push(new TrayModel({name: "LolTest2"}))
-    trays.push(new TrayModel({name: "LolTest3"}))
-    trays.push(new TrayModel({name: "LolTest4"}))
-    trays.push(new TrayModel({name: "LolTest5"}))
-    trays.push(new TrayModel({name: "LolTest6"}))
-    trays.push(new TrayModel({name: "LolTest7"}))
-    trays.push(new TrayModel({name: "LolTest8"}))
-    trays.push(new TrayModel({name: "LolTest9"}))
-    trays.push(new TrayModel({name: "LolTest10"}))
-    trays.push(new TrayModel({name: "LolTest11"}))
-    trays.push(new TrayModel({name: "LolTest12"}))
+    trays.push(new TrayModel({name: "00"}))
+    trays.push(new TrayModel({name: "01"}))
+    trays.push(new TrayModel({name: "02"}))
+    trays.push(new TrayModel({name: "03"}))
+    trays.push(new TrayModel({name: "04"}))
+    trays.push(new TrayModel({name: "05"}))
+    trays.push(new TrayModel({name: "06"}))
+    trays.push(new TrayModel({name: "07"}))
+    trays.push(new TrayModel({name: "08"}))
+    trays.push(new TrayModel({name: "09"}))
+    trays.push(new TrayModel({name: "10"}))
+    trays.push(new TrayModel({name: "11"}))
 
     let shelfModel: ShelfModel = {
       id: undefined,
