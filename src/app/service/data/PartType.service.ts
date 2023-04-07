@@ -6,22 +6,22 @@ import {
   DataTransformationService,
   FormOptionsProvider,
   FormSelectOption
-} from "./data-provider.service";
-import {RestApiService} from "./rest-api.service";
-import {ShelfModel} from "../models/Shelf.model";
+} from "../data-provider.service";
+import {RestApiService} from "../rest-api.service";
+import {PartTypeModel} from "../../models/PartType.model";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class ShelfService implements DataProviderService<ShelfModel>, DataTransformationService<ShelfModel>, FormOptionsProvider {
+export class PartTypeService implements DataProviderService<PartTypeModel>, DataTransformationService<PartTypeModel>, FormOptionsProvider {
 
   private restApi
 
   constructor(
     private api: RestApiService,
   ) {
-    this.restApi = this.api.for<ShelfModel>("shelf")
+    this.restApi = this.api.for<PartTypeModel>("partType")
   }
 
   /**
@@ -38,11 +38,11 @@ export class ShelfService implements DataProviderService<ShelfModel>, DataTransf
   }
 
   /**
-   * Returns the shelf with the given id
+   * Returns the partType with the given id
    * @param id
    */
-  public getById(id: number): Observable<ShelfModel[]> {
-    return new Observable<ShelfModel[]>(subscriber => {
+  public getById(id: number): Observable<PartTypeModel[]> {
+    return new Observable<PartTypeModel[]>(subscriber => {
       this.restApi.getById(id, record => {
         try {
           this.parseResponse([record], subscriber);
@@ -56,11 +56,11 @@ export class ShelfService implements DataProviderService<ShelfModel>, DataTransf
   }
 
   /**
-   * returns all shelfs
+   * returns all partTypes
    * @param parameters
    */
-  public get(parameters?: { [key: string]: any; }): Observable<ShelfModel[]> {
-    return new Observable<ShelfModel[]>(
+  public get(parameters?: { [key: string]: any; }): Observable<PartTypeModel[]> {
+    return new Observable<PartTypeModel[]>(
       subscriber => {
         this.restApi.get(records => {
           try {
@@ -76,7 +76,7 @@ export class ShelfService implements DataProviderService<ShelfModel>, DataTransf
   }
 
   /**
-   * Deletes the shelf with the given id
+   * Deletes the partType with the given id
    * @param recordId
    */
   public delete(recordId: number): Observable<any> {
@@ -91,14 +91,14 @@ export class ShelfService implements DataProviderService<ShelfModel>, DataTransf
   }
 
   /**
-   * Saves the given shelf into the database
+   * Saves the given partType into the database
    * @param record
    */
-  public save(record: ShelfModel): Observable<ShelfModel> {
-    return new Observable<ShelfModel>(subscriber => {
+  public save(record: PartTypeModel): Observable<PartTypeModel> {
+    return new Observable<PartTypeModel>(subscriber => {
       this.restApi.save(record, savedRecord => {
         try {
-          subscriber.next(new ShelfModel(savedRecord))
+          subscriber.next(new PartTypeModel(savedRecord))
           subscriber.complete()
         } catch (e) {
           basicAPIErrorHandler(subscriber, e)
@@ -109,16 +109,16 @@ export class ShelfService implements DataProviderService<ShelfModel>, DataTransf
     })
   }
 
-  private parseResponse(records: ShelfModel[], subscriber: Subscriber<ShelfModel[]>) {
-    let parsedCustomers: ShelfModel[] = []
-    records.forEach((shelf: ShelfModel) => {
-      parsedCustomers.push(new ShelfModel(shelf))
+  private parseResponse(records: PartTypeModel[], subscriber: Subscriber<PartTypeModel[]>) {
+    let parsedCustomers: PartTypeModel[] = []
+    records.forEach((partType: PartTypeModel) => {
+      parsedCustomers.push(new PartTypeModel(partType))
     })
     subscriber.next(parsedCustomers)
     subscriber.complete()
   }
 
-  private parseSelectOptions(records: ShelfModel[]): FormSelectOption[] {
+  private parseSelectOptions(records: PartTypeModel[]): FormSelectOption[] {
     let options: FormSelectOption[] = []
     records.forEach(value => {
       options.push({

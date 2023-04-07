@@ -10,7 +10,7 @@
     </mat-selection-list>
   </mat-tab>
 
-  <mat-tab label="partType">
+  <mat-tab label="part type">
     <button mat-button (click)="addPartType()">
       <mat-icon>add</mat-icon>
     </button>
@@ -20,6 +20,23 @@
       </mat-list-option>
     </mat-selection-list>
   </mat-tab>
+
+  <mat-tab label="storage location">
+    <button mat-button (click)="addShelf()">
+      <mat-icon>add</mat-icon>
+    </button>
+    <mat-selection-list (selectionChange)="getShelfsSelected($event.source)">
+      <div *ngFor="let shelf of shelfs">
+        <mat-list-option [value]="shelfs">
+          {{shelf.name}}
+        </mat-list-option>
+        <mat-list-item *ngFor="let tray of shelf.trays">
+          {{tray.name}}
+        </mat-list-item>
+      </div>
+    </mat-selection-list>
+  </mat-tab>
+
 </mat-tab-group>
 
 <p>

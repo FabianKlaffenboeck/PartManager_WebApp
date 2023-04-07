@@ -6,22 +6,22 @@ import {
   DataTransformationService,
   FormOptionsProvider,
   FormSelectOption
-} from "./data-provider.service";
-import {RestApiService} from "./rest-api.service";
-import {TrayModel} from "../models/Tray.model";
+} from "../data-provider.service";
+import {RestApiService} from "../rest-api.service";
+import {PartModel} from "../../models/Part.model";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class TrayService implements DataProviderService<TrayModel>, DataTransformationService<TrayModel>, FormOptionsProvider {
+export class PartService implements DataProviderService<PartModel>, DataTransformationService<PartModel>, FormOptionsProvider {
 
   private restApi
 
   constructor(
     private api: RestApiService,
   ) {
-    this.restApi = this.api.for<TrayModel>("tray")
+    this.restApi = this.api.for<PartModel>("part")
   }
 
   /**
@@ -38,11 +38,11 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
   }
 
   /**
-   * Returns the tray with the given id
+   * Returns the part with the given id
    * @param id
    */
-  public getById(id: number): Observable<TrayModel[]> {
-    return new Observable<TrayModel[]>(subscriber => {
+  public getById(id: number): Observable<PartModel[]> {
+    return new Observable<PartModel[]>(subscriber => {
       this.restApi.getById(id, record => {
         try {
           this.parseResponse([record], subscriber);
@@ -56,19 +56,27 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
   }
 
   /**
-   * returns all trays
+   * returns all parts
    * @param parameters
    */
-  public get(parameters?: { [key: string]: any; }): Observable<TrayModel[]> {
-    return new Observable<TrayModel[]>(
+  public get(parameters?: { [key: string]: any; }): Observable<PartModel[]> {
+    return new Observable<PartModel[]>(
       subscriber => {
-        this.getREST(subscriber, parameters);
+        this.restApi.get(records => {
+          try {
+            this.parseResponse(records, subscriber);
+          } catch (e) {
+            basicAPIErrorHandler(subscriber, e)
+          }
+        }, error => {
+          basicAPIErrorHandler(subscriber, error)
+        }, parameters)
       }
     )
   }
 
   /**
-   * Deletes the tray with the given id
+   * Deletes the part with the given id
    * @param recordId
    */
   public delete(recordId: number): Observable<any> {
@@ -83,14 +91,14 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
   }
 
   /**
-   * Saves the given tray into the database
+   * Saves the given part into the database
    * @param record
    */
-  public save(record: TrayModel): Observable<TrayModel> {
-    return new Observable<TrayModel>(subscriber => {
+  public save(record: PartModel): Observable<PartModel> {
+    return new Observable<PartModel>(subscriber => {
       this.restApi.save(record, savedRecord => {
         try {
-          subscriber.next(new TrayModel(savedRecord))
+          subscriber.next(new PartModel(savedRecord))
           subscriber.complete()
         } catch (e) {
           basicAPIErrorHandler(subscriber, e)
@@ -101,28 +109,16 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
     })
   }
 
-  private getREST(subscriber: Subscriber<TrayModel[]>, parameters?: { [p: string]: any }) {
-    this.restApi.get(records => {
-      try {
-        this.parseResponse(records, subscriber);
-      } catch (e) {
-        basicAPIErrorHandler(subscriber, e)
-      }
-    }, error => {
-      basicAPIErrorHandler(subscriber, error)
-    }, parameters)
-  }
-
-  private parseResponse(records: TrayModel[], subscriber: Subscriber<TrayModel[]>) {
-    let parsedCustomers: TrayModel[] = []
-    records.forEach((tray: TrayModel) => {
-      parsedCustomers.push(new TrayModel(tray))
+  private parseResponse(records: PartModel[], subscriber: Subscriber<PartModel[]>) {
+    let parsedCustomers: PartModel[] = []
+    records.forEach((part: PartModel) => {
+      parsedCustomers.push(new PartModel(part))
     })
     subscriber.next(parsedCustomers)
     subscriber.complete()
   }
 
-  private parseSelectOptions(records: TrayModel[]): FormSelectOption[] {
+  private parseSelectOptions(records: PartModel[]): FormSelectOption[] {
     let options: FormSelectOption[] = []
     records.forEach(value => {
       options.push({
