@@ -126,9 +126,11 @@ export class PartTableComponent implements OnInit {
 
   formatStorageLocation(element: PartModel) {
     let trayName = element.tray?.name || ""
-    return this.shelfs.find(shelf => {
-      return shelf.trays?.find(it => it.id == element.id)
-    })?.name +"-"+ trayName
+    let shelfName = ""
+
+    shelfName = this.shelfs.find(shelf => shelf.trays && shelf.trays.some(tray => tray.id === element.tray?.id))?.name || ""
+
+    return shelfName + "-" + trayName
   }
 
   filterSelectedManufacturers(value: ManufacturerModel[]) {

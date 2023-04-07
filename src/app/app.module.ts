@@ -22,7 +22,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {ManufacturerDialogComponent} from "./dialogues/manufacturer-dialog/manufacturer-dialog.component";
 import {PartTypeDialogComponent} from "./dialogues/partType-dialog/partType-dialog.component";
-import {TrayDialogComponent} from "./dialogues/tray-dialog/tray-dialog.component";
+import {ShelfDialogComponent} from "./dialogues/tray-dialog/shelf-dialog.component";
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import {TrayDialogComponent} from "./dialogues/tray-dialog/tray-dialog.component
     PartDialogComponent,
     ManufacturerDialogComponent,
     PartTypeDialogComponent,
-    TrayDialogComponent
+    ShelfDialogComponent
   ],
   imports: [
     HttpClientModule,
