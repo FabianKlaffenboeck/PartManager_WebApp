@@ -23,7 +23,7 @@
 
     <ng-container matColumnDef="tray">
       <mat-header-cell *matHeaderCellDef mat-sort-header> storage location</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{formatStorageLocation(element.tray.id)}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{formatStorageLocation(element)}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="value">

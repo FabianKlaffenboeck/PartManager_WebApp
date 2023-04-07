@@ -124,8 +124,11 @@ export class PartTableComponent implements OnInit {
     return text
   }
 
-  formatStorageLocation(id: number) {
-    return id
+  formatStorageLocation(element: PartModel) {
+    let trayName = element.tray?.name || ""
+    return this.shelfs.find(shelf => {
+      return shelf.trays?.find(it => it.id == element.id)
+    })?.name +"-"+ trayName
   }
 
   filterSelectedManufacturers(value: ManufacturerModel[]) {
