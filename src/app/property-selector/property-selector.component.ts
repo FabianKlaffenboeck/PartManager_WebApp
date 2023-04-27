@@ -10,7 +10,7 @@ import {PartTypeService} from "../service/data/PartType.service";
 import {PartTypeDialogComponent} from "../dialogues/partType-dialog/partType-dialog.component";
 import {ShelfService} from "../service/data/Shelf.service";
 import {ShelfModel} from "../models/Shelf.model";
-import {ShelfDialogComponent} from "../dialogues/tray-dialog/shelf-dialog.component";
+import {ShelfDialogComponent} from "../dialogues/shelf-dialog/shelf-dialog.component";
 
 @Component({
   selector: 'property-selector',
