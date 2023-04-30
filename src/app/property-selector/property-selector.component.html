@@ -25,18 +25,17 @@
     <button mat-button (click)="addShelf()">
       <mat-icon>add</mat-icon>
     </button>
-    <mat-selection-list (selectionChange)="getShelfsSelected($event.source)">
-      <div *ngFor="let shelf of shelfs">
-        <mat-list-option [value]="shelfs">
-          {{shelf.name}}
-        </mat-list-option>
-        <mat-list-item *ngFor="let tray of shelf.trays">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let shelf of shelfs">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{shelf.name}}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list *ngFor="let tray of shelf.trays">
           {{tray.name}}
-        </mat-list-item>
-      </div>
-    </mat-selection-list>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-accordion>
   </mat-tab>
-
 </mat-tab-group>
 
 <p>

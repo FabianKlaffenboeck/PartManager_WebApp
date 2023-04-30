@@ -54,9 +54,7 @@ export class PartDialogComponent {
     trayService.get().subscribe(it => this.trays = it)
     measurementUnitService.get().subscribe(it => this.measurementUnits = it)
     footprintService.get().subscribe(it => this.footprints = it)
-    this.shelfService.get().subscribe(it => {
-      this.shelfs = it
-    })
+    this.shelfService.get().subscribe(it => this.shelfs = it)
 
     if (data.mode == "edit") {
       this.nameControl.setValue(data.model.name || null)

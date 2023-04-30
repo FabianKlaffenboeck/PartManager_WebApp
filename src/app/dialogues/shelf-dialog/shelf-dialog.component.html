@@ -1,7 +1,18 @@
 <mat-dialog-content>
+  <table>
+    <tr>
+      <td>
         <mat-form-field>
           <input matInput [formControl]="typeControl" placeholder="name">
         </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <input matInput [formControl]="trayCount" placeholder="tray count">
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
 </mat-dialog-content>
 
 <mat-dialog-actions>

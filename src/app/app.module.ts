@@ -23,6 +23,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {ManufacturerDialogComponent} from "./dialogues/manufacturer-dialog/manufacturer-dialog.component";
 import {PartTypeDialogComponent} from "./dialogues/partType-dialog/partType-dialog.component";
 import {ShelfDialogComponent} from "./dialogues/shelf-dialog/shelf-dialog.component";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
   declarations: [
@@ -34,26 +35,27 @@ import {ShelfDialogComponent} from "./dialogues/shelf-dialog/shelf-dialog.compon
     PartTypeDialogComponent,
     ShelfDialogComponent
   ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatInputModule,
-    MatTabsModule,
-    MatPaginatorModule,
-    MatListModule,
-    MatTableModule,
-    MatTabsModule,
-    MatSortModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatDialogModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSelectModule
-  ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatInputModule,
+        MatTabsModule,
+        MatPaginatorModule,
+        MatListModule,
+        MatTableModule,
+        MatTabsModule,
+        MatSortModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSnackBarModule,
+        MatDialogModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatExpansionModule
+    ],
   providers: [
     {provide: RestApiService},
   ],
