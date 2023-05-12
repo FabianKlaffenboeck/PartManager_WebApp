@@ -39,7 +39,7 @@
         <mat-form-field>
           <mat-label>tray</mat-label>
           <mat-select [formControl]="trayControl" placeholder="tray">
-            <mat-option *ngFor="let tray of trays" [value]="tray.id">{{ formatStorageLocation(tray) }}</mat-option>
+            <mat-option *ngFor="let tray of getTrays()" [value]="tray.id">{{ formatStorageLocation(tray) }}</mat-option>
           </mat-select>
         </mat-form-field>
       </td>

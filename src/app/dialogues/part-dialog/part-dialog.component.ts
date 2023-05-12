@@ -12,6 +12,7 @@ import {measurementUnitService} from "../../service/enums/MeasurementUnit.servic
 import {FootprintService} from "../../service/enums/Footprint.service";
 import {ShelfModel} from "../../models/Shelf.model";
 import {ShelfService} from "../../service/data/Shelf.service";
+import {PartService} from "../../service/data/Part.service";
 
 export interface DialogModelData {
   model: any;
@@ -29,6 +30,7 @@ export class PartDialogComponent {
   measurementUnits: string[] = []
   footprints: string[] = []
   shelfs: ShelfModel[] = []
+  parts: PartModel[] = []
 
   nameControl = new FormControl('', [Validators.required]);
   quantityControl = new FormControl(null, [Validators.required]);
@@ -47,6 +49,7 @@ export class PartDialogComponent {
               public measurementUnitService: measurementUnitService,
               public shelfService: ShelfService,
               public footprintService: FootprintService,
+              public partService: PartService,
               public dialog: MatDialog) {
 
     partTypeService.get().subscribe(it => this.partTypes = it)
@@ -54,7 +57,8 @@ export class PartDialogComponent {
     trayService.get().subscribe(it => this.trays = it)
     measurementUnitService.get().subscribe(it => this.measurementUnits = it)
     footprintService.get().subscribe(it => this.footprints = it)
-    this.shelfService.get().subscribe(it => this.shelfs = it)
+    shelfService.get().subscribe(it => this.shelfs = it)
+    partService.get().subscribe(it => this.parts = it)
 
     if (data.mode == "edit") {
       this.nameControl.setValue(data.model.name || null)
@@ -99,5 +103,23 @@ export class PartDialogComponent {
     shelfName = this.shelfs.find(shelf => shelf.trays && shelf.trays.some(it => it.id === tray?.id))?.name || ""
 
     return shelfName + "-" + trayName
+  }
+
+  getTrays() {
+    if (this.data.mode == "edit") {
+      return this.trays
+    }
+
+    let tmpTrays: TrayModel[] = []
+
+    tmpTrays = this.trays.filter(tray => {
+
+      return this.parts.find(part =>{
+        return part.tray?.id == tray.id
+      }) == undefined
+
+    })
+
+    return tmpTrays
   }
 }
