@@ -22,7 +22,6 @@ export class PropertySelectorComponent implements OnInit {
 
   @Output() selectedManufacturers: EventEmitter<ManufacturerModel[]> = new EventEmitter();
   @Output() selectedPartTypes: EventEmitter<PartTypeModel[]> = new EventEmitter();
-  @Output() selectedShelfs: EventEmitter<PartTypeModel[]> = new EventEmitter();
 
   manufacturers: ManufacturerModel[] = []
   partTypes: PartTypeModel[] = []
@@ -56,11 +55,6 @@ export class PropertySelectorComponent implements OnInit {
   getPartTypesSelected(options: MatSelectionList) {
     let selected = options.options.filter(o => o.selected).map(o => o.value);
     this.selectedPartTypes.next(selected)
-  }
-
-  getShelfsSelected(options: MatSelectionList) {
-    let selected = options.options.filter(o => o.selected).map(o => o.value);
-    this.selectedShelfs.next(selected)
   }
 
   addManufacturer() {
