@@ -1,27 +1,50 @@
-<mat-tab-group>
-  <mat-tab label="manufacturer">
+<mat-accordion>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        manufacturer
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
     <button mat-button (click)="addManufacturer()">
       <mat-icon>add</mat-icon>
     </button>
-    <mat-selection-list #manufacturerSelector (selectionChange)="getManufacturersSelected($event.source)">
+    <mat-selection-list (selectionChange)="getManufacturersSelected($event.source)">
       <mat-list-option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">
         {{manufacturer.name}}
       </mat-list-option>
     </mat-selection-list>
-  </mat-tab>
+  </mat-expansion-panel>
 
-  <mat-tab label="part type">
+  <!---->
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        part type
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
     <button mat-button (click)="addPartType()">
       <mat-icon>add</mat-icon>
     </button>
-    <mat-selection-list #partTypeSelector (selectionChange)="getPartTypesSelected($event.source)">
+    <mat-selection-list (selectionChange)="getPartTypesSelected($event.source)">
       <mat-list-option *ngFor="let partType of partTypes" [value]="partType">
         {{partType.name}}
       </mat-list-option>
     </mat-selection-list>
-  </mat-tab>
+  </mat-expansion-panel>
 
-  <mat-tab label="storage location">
+  <!---->
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        storage location
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
     <button mat-button (click)="addShelf()">
       <mat-icon>add</mat-icon>
     </button>
@@ -35,12 +58,8 @@
         </mat-nav-list>
       </mat-expansion-panel>
     </mat-accordion>
-  </mat-tab>
-</mat-tab-group>
+  </mat-expansion-panel>
 
-<p>
-  Manufacturers selected: {{manufacturerSelector.selectedOptions.selected.length}}
-</p>
-<p>
-  PartTypes selected: {{partTypeSelector.selectedOptions.selected.length}}
-</p>
+</mat-accordion>
+
+
