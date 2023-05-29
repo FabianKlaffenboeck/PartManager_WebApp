@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {PartModel} from "../models/Part.model";
 import {MatTableDataSource} from "@angular/material/table";
 import {PartService} from "../service/data/Part.service";
@@ -14,7 +14,7 @@ import {PartTypeModel} from "../models/PartType.model";
   selector: 'part-table', templateUrl: './part-table.component.html', styleUrls: ['./part-table.component.scss']
 })
 
-export class PartTableComponent implements OnInit {
+export class PartTableComponent implements OnInit{
 
   displayedColumns = ['name', 'quantity', 'partType', 'manufacturer', 'tray', 'value', 'footprint', 'actions'];
   dataSource = new MatTableDataSource<PartModel>();
@@ -48,10 +48,7 @@ export class PartTableComponent implements OnInit {
       this.parts = it
       this.dataSource = new MatTableDataSource(this.parts)
     })
-
-    this.shelfService.get().subscribe(it => {
-      this.shelfs = it
-    })
+    this.shelfService.get().subscribe(it => this.shelfs = it)
   }
 
   add() {
@@ -135,6 +132,6 @@ export class PartTableComponent implements OnInit {
       })
     }
 
-    this.dataSource = new MatTableDataSource(tmp)
+    this.dataSource.data = tmp
   }
 }
