@@ -20,12 +20,12 @@ import {ShelfDialogComponent} from "../dialogues/shelf-dialog/shelf-dialog.compo
 
 export class PropertySelectorComponent implements OnInit {
 
-  @Output() selectedManufacturers: EventEmitter<ManufacturerModel[]> = new EventEmitter();
-  @Output() selectedPartTypes: EventEmitter<PartTypeModel[]> = new EventEmitter();
-
   manufacturers: ManufacturerModel[] = []
   partTypes: PartTypeModel[] = []
   shelfs: ShelfModel[] = []
+
+  @Output() selectedManufacturers: EventEmitter<ManufacturerModel[]> = new EventEmitter();
+  @Output() selectedPartTypes: EventEmitter<PartTypeModel[]> = new EventEmitter();
 
   constructor(public dialog: MatDialog,
               public manufacturerService: ManufacturerService,
@@ -36,15 +36,9 @@ export class PropertySelectorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.manufacturerService.get().subscribe(it => {
-      this.manufacturers = it
-    })
-    this.partTypeService.get().subscribe(it => {
-      this.partTypes = it
-    })
-    this.shelfService.get().subscribe(it => {
-      this.shelfs = it
-    })
+    this.manufacturerService.get().subscribe(it => this.manufacturers = it)
+    this.partTypeService.get().subscribe(it => this.partTypes = it)
+    this.shelfService.get().subscribe(it => this.shelfs = it)
   }
 
   getManufacturersSelected(options: MatSelectionList) {

@@ -1,6 +1,5 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {PartModel} from "../models/Part.model";
-import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {PartService} from "../service/data/Part.service";
 import {NotificationService} from "../service/notification.service";
@@ -15,13 +14,12 @@ import {PartTypeModel} from "../models/PartType.model";
   selector: 'part-table', templateUrl: './part-table.component.html', styleUrls: ['./part-table.component.scss']
 })
 
-export class PartTableComponent implements OnInit {
+export class PartTableComponent implements OnInit{
 
-  @ViewChild(MatSort) sort: MatSort = new MatSort()
   displayedColumns = ['name', 'quantity', 'partType', 'manufacturer', 'tray', 'value', 'footprint', 'actions'];
   dataSource = new MatTableDataSource<PartModel>();
+
   parts: PartModel[] = []
-  selectedParts: PartModel[] = []
   shelfs: ShelfModel[] = []
 
   constructor(public partService: PartService,
@@ -35,27 +33,22 @@ export class PartTableComponent implements OnInit {
 
   @Input() set selectedManufacturers(value: ManufacturerModel[]) {
     this._selectedManufacturers = value;
-    this.filterSelectedManufacturers(value)
+    this.filter()
   }
 
   private _selectedPartTypes: PartTypeModel[] = []
 
   @Input() set selectedPartTypes(value: PartTypeModel[]) {
     this._selectedPartTypes = value;
-    this.filterSelectedPartTypes(value)
+    this.filter()
   }
 
   ngOnInit() {
     this.partService.get().subscribe(it => {
       this.parts = it
-      this.selectedParts = this.parts
-      this.dataSource = new MatTableDataSource(this.selectedParts)
-      this.dataSource.sort = this.sort;
+      this.dataSource = new MatTableDataSource(this.parts)
     })
-
-    this.shelfService.get().subscribe(it => {
-      this.shelfs = it
-    })
+    this.shelfService.get().subscribe(it => this.shelfs = it)
   }
 
   add() {
@@ -118,46 +111,27 @@ export class PartTableComponent implements OnInit {
   }
 
   formatter(text: string) {
-    if (!text) {
-      return "-"
-    }
-    return text
+    return text || "-"
   }
 
   formatStorageLocation(element: PartModel) {
-    let trayName = element.tray?.name || ""
-    let shelfName = ""
-
-    shelfName = this.shelfs.find(shelf => shelf.trays && shelf.trays.some(tray => tray.id === element.tray?.id))?.name || ""
-
-    return shelfName + "-" + trayName
+    return (this.shelfs.find(shelf => shelf.trays && shelf.trays.some(tray => tray.id === element.tray?.id))?.name || "") + "-" + (element.tray?.name || "")
   }
 
-  filterSelectedManufacturers(value: ManufacturerModel[]) {
-    if (value.length > 0) {
-      value.forEach(manufacturer => {
-        this.selectedParts = this.parts.filter(it => it.manufacturer?.name == manufacturer.name)
-        this.dataSource = new MatTableDataSource(this.selectedParts)
-        this.dataSource.sort = this.sort;
-      })
-    } else {
-      this.selectedParts = this.parts
-      this.dataSource = new MatTableDataSource(this.selectedParts)
-      this.dataSource.sort = this.sort;
-    }
-  }
+  private filter() {
+    let tmp: PartModel[] = this.parts
 
-  filterSelectedPartTypes(value: PartTypeModel[]) {
-    if (value.length > 0) {
-      value.forEach(manufacturer => {
-        this.selectedParts = this.parts.filter(it => it.partType?.name == manufacturer.name)
-        this.dataSource = new MatTableDataSource(this.selectedParts)
-        this.dataSource.sort = this.sort;
+    if ((this._selectedPartTypes.length > 0) || (this._selectedManufacturers.length > 0)) {
+
+      this._selectedManufacturers.forEach(manufacturer => {
+        tmp = tmp.filter(it => it.manufacturer?.name == manufacturer.name)
       })
-    } else {
-      this.selectedParts = this.parts
-      this.dataSource = new MatTableDataSource(this.selectedParts)
-      this.dataSource.sort = this.sort;
+
+      this._selectedPartTypes.forEach(partType => {
+        tmp = tmp.filter(it => it.partType?.name == partType.name)
+      })
     }
+
+    this.dataSource.data = tmp
   }
 }
