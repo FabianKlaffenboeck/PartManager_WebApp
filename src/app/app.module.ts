@@ -24,6 +24,11 @@ import {ManufacturerDialogComponent} from "./dialogues/manufacturer-dialog/manuf
 import {PartTypeDialogComponent} from "./dialogues/partType-dialog/partType-dialog.component";
 import {ShelfDialogComponent} from "./dialogues/shelf-dialog/shelf-dialog.component";
 import {MatExpansionModule} from "@angular/material/expansion";
+import {ToolbarComponent} from "./toolbar/toolbar.component";
+import { DataComponent } from './data/data.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import { AppRoutingModule } from './app-routing.module';
+import {RouterOutlet} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -33,29 +38,34 @@ import {MatExpansionModule} from "@angular/material/expansion";
     PartDialogComponent,
     ManufacturerDialogComponent,
     PartTypeDialogComponent,
-    ShelfDialogComponent
+    ShelfDialogComponent,
+    ToolbarComponent,
+    DataComponent
   ],
-    imports: [
-        HttpClientModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        MatTableModule,
-        MatInputModule,
-        MatTabsModule,
-        MatPaginatorModule,
-        MatListModule,
-        MatTableModule,
-        MatTabsModule,
-        MatSortModule,
-        MatIconModule,
-        MatButtonModule,
-        MatSnackBarModule,
-        MatDialogModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatExpansionModule
-    ],
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatInputModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatListModule,
+    MatTableModule,
+    MatTabsModule,
+    MatSortModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatExpansionModule,
+    MatToolbarModule,
+    AppRoutingModule,
+    RouterOutlet
+  ],
   providers: [
     {provide: RestApiService},
   ],
