@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PartModel} from "../models/Part.model";
 import {MatTableDataSource} from "@angular/material/table";
 import {PartService} from "../service/data/Part.service";
-import {NotificationService} from "../service/notification.service";
+import {AlertServility, NotificationService} from "../service/notification.service";
 import {PartDialogComponent} from "../dialogues/part-dialog/part-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ShelfService} from "../service/data/Shelf.service";
@@ -63,9 +63,9 @@ export class PartTableComponent implements OnInit{
           this.parts.push(saved)
           this.dataSource = new MatTableDataSource(this.parts)
 
-          this.notificationService.success("add", saved.name)
+          this.notificationService.snackbar(AlertServility.OKAY,"")
         }, error => {
-          this.notificationService.error()
+          this.notificationService.snackbar(AlertServility.ERROR,"")
         })
       }
     });
@@ -84,9 +84,9 @@ export class PartTableComponent implements OnInit{
           this.dataSource.data[index] = saved
           this.dataSource = new MatTableDataSource(this.dataSource.data)
 
-          this.notificationService.success("edit", saved.name)
+          this.notificationService.snackbar(AlertServility.OKAY,"")
         }, error => {
-          this.notificationService.error()
+          this.notificationService.snackbar(AlertServility.ERROR,"")
         })
       }
     });
@@ -95,10 +95,10 @@ export class PartTableComponent implements OnInit{
   delete(element: PartModel) {
     if (element.id) {
       this.partService.delete(element.id).subscribe(() => {
-        this.notificationService.success("delete", element.name)
+        this.notificationService.snackbar(AlertServility.OKAY,"")
         this.dataSource = new MatTableDataSource(this.dataSource.data.filter(it => it.id != element.id));
       }, error => {
-        this.notificationService.error()
+        this.notificationService.snackbar(AlertServility.ERROR,"")
       })
     }
   }

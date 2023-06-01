@@ -4,7 +4,7 @@ import {PartTypeModel} from "../models/PartType.model";
 import {MatSelectionList} from "@angular/material/list";
 import {MatDialog} from "@angular/material/dialog";
 import {ManufacturerService} from "../service/data/Manufacturer.service";
-import {NotificationService} from "../service/notification.service";
+import {AlertServility, NotificationService} from "../service/notification.service";
 import {ManufacturerDialogComponent} from "../dialogues/manufacturer-dialog/manufacturer-dialog.component";
 import {PartTypeService} from "../service/data/PartType.service";
 import {PartTypeDialogComponent} from "../dialogues/partType-dialog/partType-dialog.component";
@@ -60,9 +60,9 @@ export class PropertySelectorComponent implements OnInit {
       if (result) {
         this.manufacturerService.save(result).subscribe(saved => {
           this.manufacturers?.push(saved)
-          this.notificationService.success("add", saved.name)
+          this.notificationService.snackbar(AlertServility.OKAY,"")
         }, error => {
-          this.notificationService.error()
+          this.notificationService.snackbar(AlertServility.ERROR,"")
         })
       }
     });
@@ -77,9 +77,9 @@ export class PropertySelectorComponent implements OnInit {
       if (result) {
         this.partTypeService.save(result).subscribe(saved => {
           this.partTypes?.push(saved)
-          this.notificationService.success("add", saved.name)
+          this.notificationService.snackbar(AlertServility.OKAY,"")
         }, error => {
-          this.notificationService.error()
+          this.notificationService.snackbar(AlertServility.ERROR,"")
         })
       }
     });
@@ -94,9 +94,9 @@ export class PropertySelectorComponent implements OnInit {
       if (result) {
         this.shelfService.save(result).subscribe(saved => {
           this.shelfs?.push(saved)
-          this.notificationService.success("add", saved.name)
+          this.notificationService.snackbar(AlertServility.OKAY,"")
         }, error => {
-          this.notificationService.error()
+          this.notificationService.snackbar(AlertServility.ERROR,"")
         })
       }
     });

@@ -11,24 +11,15 @@ export class NotificationService {
     private _snackBar: MatSnackBar) {
   }
 
-  error(message: string = "An error happened") {
+  snackbar(servility: AlertServility, message: string = "") {
     return this._snackBar.open(message, undefined, {
-      panelClass: ['snackbar-error'],
       duration: 2000
     });
   }
+}
 
-  success(methode: string | undefined, message: string | undefined) {
-    return this._snackBar.open(methode + " " + message + " was successful!", undefined, {
-      panelClass: ['snackbar-success'],
-      duration: 2000
-    });
-  }
-
-  info(message: string) {
-    return this._snackBar.open(message, undefined, {
-      panelClass: ['snackbar-info'],
-      duration: 2000
-    });
-  }
+export enum AlertServility {
+  OKAY,
+  ERROR,
+  INFO
 }
