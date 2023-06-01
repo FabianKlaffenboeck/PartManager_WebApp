@@ -63,7 +63,7 @@ export class PartTableComponent implements OnInit{
           this.parts.push(saved)
           this.dataSource = new MatTableDataSource(this.parts)
 
-          this.notificationService.snackbar(AlertServility.OKAY,"")
+          this.notificationService.snackbar(AlertServility.SUCCESS,"")
         }, error => {
           this.notificationService.snackbar(AlertServility.ERROR,"")
         })
@@ -84,7 +84,7 @@ export class PartTableComponent implements OnInit{
           this.dataSource.data[index] = saved
           this.dataSource = new MatTableDataSource(this.dataSource.data)
 
-          this.notificationService.snackbar(AlertServility.OKAY,"")
+          this.notificationService.snackbar(AlertServility.SUCCESS,"")
         }, error => {
           this.notificationService.snackbar(AlertServility.ERROR,"")
         })
@@ -95,7 +95,7 @@ export class PartTableComponent implements OnInit{
   delete(element: PartModel) {
     if (element.id) {
       this.partService.delete(element.id).subscribe(() => {
-        this.notificationService.snackbar(AlertServility.OKAY,"")
+        this.notificationService.snackbar(AlertServility.SUCCESS,"")
         this.dataSource = new MatTableDataSource(this.dataSource.data.filter(it => it.id != element.id));
       }, error => {
         this.notificationService.snackbar(AlertServility.ERROR,"")

@@ -60,7 +60,7 @@ export class PropertySelectorComponent implements OnInit {
       if (result) {
         this.manufacturerService.save(result).subscribe(saved => {
           this.manufacturers?.push(saved)
-          this.notificationService.snackbar(AlertServility.OKAY,"")
+          this.notificationService.snackbar(AlertServility.SUCCESS,"")
         }, error => {
           this.notificationService.snackbar(AlertServility.ERROR,"")
         })
@@ -77,7 +77,7 @@ export class PropertySelectorComponent implements OnInit {
       if (result) {
         this.partTypeService.save(result).subscribe(saved => {
           this.partTypes?.push(saved)
-          this.notificationService.snackbar(AlertServility.OKAY,"")
+          this.notificationService.snackbar(AlertServility.SUCCESS,"")
         }, error => {
           this.notificationService.snackbar(AlertServility.ERROR,"")
         })
@@ -94,7 +94,7 @@ export class PropertySelectorComponent implements OnInit {
       if (result) {
         this.shelfService.save(result).subscribe(saved => {
           this.shelfs?.push(saved)
-          this.notificationService.snackbar(AlertServility.OKAY,"")
+          this.notificationService.snackbar(AlertServility.SUCCESS,"")
         }, error => {
           this.notificationService.snackbar(AlertServility.ERROR,"")
         })

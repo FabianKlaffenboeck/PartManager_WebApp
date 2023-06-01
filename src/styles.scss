@@ -1,19 +1,19 @@
 @import '~bootstrap/dist/css/bootstrap.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-.mat-simple-snackbar {
-  font-size: 1.2em;
-  color: white;
-}
+.mat-mdc-snack-bar-container {
+  --mat-mdc-snack-bar-button-color: #ffffff;
+  --mdc-snackbar-supporting-text-color: #ffffff;
 
-.snackbar-error {
-  background-color: red;
-}
+  &.app-notification-error {
+    --mdc-snackbar-container-color: #f23a2f;
+  }
 
-.snackbar-success {
-  background-color: green;
-}
+  &.app-notification-success {
+    --mdc-snackbar-container-color: #43a446;
+  }
 
-.snackbar-info {
-  background-color: blue;
+  &.app-notification-info {
+    --mdc-snackbar-container-color: #f6ca02;
+  }
 }
