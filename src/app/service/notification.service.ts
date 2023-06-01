@@ -11,24 +11,33 @@ export class NotificationService {
     private _snackBar: MatSnackBar) {
   }
 
-  error(message: string = "An error happened") {
-    return this._snackBar.open(message, undefined, {
-      panelClass: ['snackbar-error'],
-      duration: 2000
-    });
-  }
+  snackbar(servility: AlertServility, message: string = "") {
 
-  success(methode: string | undefined, message: string | undefined) {
-    return this._snackBar.open(methode + " " + message + " was successful!", undefined, {
-      panelClass: ['snackbar-success'],
-      duration: 2000
-    });
-  }
+    let css: string = ""
+    switch (servility) {
+      case AlertServility.INFO: {
+        css = "app-notification-info"
+        break;
+      }
+      case AlertServility.SUCCESS: {
+        css = "app-notification-success"
+        break;
+      }
+      case AlertServility.ERROR: {
+        css = "app-notification-error"
+        break;
+      }
+    }
 
-  info(message: string) {
     return this._snackBar.open(message, undefined, {
-      panelClass: ['snackbar-info'],
+      panelClass: css,
       duration: 2000
     });
   }
+}
+
+export enum AlertServility {
+  INFO,
+  SUCCESS,
+  ERROR
 }

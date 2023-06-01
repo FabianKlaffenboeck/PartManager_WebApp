@@ -1,19 +1,4 @@
 @import '~bootstrap/dist/css/bootstrap.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-.mat-simple-snackbar {
-  font-size: 1.2em;
-  color: white;
-}
-
-.snackbar-error {
-  background-color: red;
-}
-
-.snackbar-success {
-  background-color: green;
-}
-
-.snackbar-info {
-  background-color: blue;
-}
+@import "styles/notification";
