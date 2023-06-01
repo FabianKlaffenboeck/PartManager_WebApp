@@ -63,9 +63,9 @@ export class PartTableComponent implements OnInit{
           this.parts.push(saved)
           this.dataSource = new MatTableDataSource(this.parts)
 
-          this.notificationService.snackbar(AlertServility.SUCCESS,"")
+          this.notificationService.snackbar(AlertServility.SUCCESS,"saving was successful")
         }, error => {
-          this.notificationService.snackbar(AlertServility.ERROR,"")
+          this.notificationService.snackbar(AlertServility.ERROR,"error while saving")
         })
       }
     });
@@ -84,9 +84,9 @@ export class PartTableComponent implements OnInit{
           this.dataSource.data[index] = saved
           this.dataSource = new MatTableDataSource(this.dataSource.data)
 
-          this.notificationService.snackbar(AlertServility.SUCCESS,"")
+          this.notificationService.snackbar(AlertServility.SUCCESS,"edit was successful")
         }, error => {
-          this.notificationService.snackbar(AlertServility.ERROR,"")
+          this.notificationService.snackbar(AlertServility.ERROR,"error while saving")
         })
       }
     });
@@ -95,10 +95,10 @@ export class PartTableComponent implements OnInit{
   delete(element: PartModel) {
     if (element.id) {
       this.partService.delete(element.id).subscribe(() => {
-        this.notificationService.snackbar(AlertServility.SUCCESS,"")
+        this.notificationService.snackbar(AlertServility.SUCCESS,"deleting was successful")
         this.dataSource = new MatTableDataSource(this.dataSource.data.filter(it => it.id != element.id));
       }, error => {
-        this.notificationService.snackbar(AlertServility.ERROR,"")
+        this.notificationService.snackbar(AlertServility.ERROR,"error while deleting")
       })
     }
   }

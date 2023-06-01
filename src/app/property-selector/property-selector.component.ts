@@ -60,9 +60,9 @@ export class PropertySelectorComponent implements OnInit {
       if (result) {
         this.manufacturerService.save(result).subscribe(saved => {
           this.manufacturers?.push(saved)
-          this.notificationService.snackbar(AlertServility.SUCCESS,"")
+          this.notificationService.snackbar(AlertServility.SUCCESS,"saving was successful")
         }, error => {
-          this.notificationService.snackbar(AlertServility.ERROR,"")
+          this.notificationService.snackbar(AlertServility.ERROR,"error while saving")
         })
       }
     });
@@ -77,9 +77,9 @@ export class PropertySelectorComponent implements OnInit {
       if (result) {
         this.partTypeService.save(result).subscribe(saved => {
           this.partTypes?.push(saved)
-          this.notificationService.snackbar(AlertServility.SUCCESS,"")
+          this.notificationService.snackbar(AlertServility.SUCCESS,"saving was successful")
         }, error => {
-          this.notificationService.snackbar(AlertServility.ERROR,"")
+          this.notificationService.snackbar(AlertServility.ERROR,"error while saving")
         })
       }
     });
@@ -94,9 +94,9 @@ export class PropertySelectorComponent implements OnInit {
       if (result) {
         this.shelfService.save(result).subscribe(saved => {
           this.shelfs?.push(saved)
-          this.notificationService.snackbar(AlertServility.SUCCESS,"")
+          this.notificationService.snackbar(AlertServility.SUCCESS,"saving was successful")
         }, error => {
-          this.notificationService.snackbar(AlertServility.ERROR,"")
+          this.notificationService.snackbar(AlertServility.ERROR,"error while saving")
         })
       }
     });
