@@ -40,7 +40,7 @@ import {RouterOutlet} from "@angular/router";
     PartTypeDialogComponent,
     ShelfDialogComponent,
     ToolbarComponent,
-    DataComponent
+    DataComponent,
   ],
   imports: [
     HttpClientModule,
