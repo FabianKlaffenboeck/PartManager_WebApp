@@ -43,10 +43,10 @@
         </button>
       </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button mat-icon-button color="primary" (click)="edit(element)">
+        <button mat-icon-button class="edit-button" (click)="edit(element)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="delete(element)">
+        <button mat-icon-button class="delete-button" (click)="delete(element)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>
