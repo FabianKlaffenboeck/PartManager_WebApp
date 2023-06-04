@@ -1,5 +1,5 @@
 <div class="example-container mat-elevation-z8">
-  <mat-table [dataSource]="dataSource" matSort>
+  <mat-table class="part-table" [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> name</mat-header-cell>
@@ -38,15 +38,15 @@
 
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>
-        <button mat-icon-button (click)="add()">
+        <button mat-icon-button class="add-button" (click)="add()">
           <mat-icon>add</mat-icon>
         </button>
       </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button mat-icon-button color="primary" (click)="edit(element)">
+        <button mat-icon-button class="edit-button" (click)="edit(element)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="delete(element)">
+        <button mat-icon-button class="delete-button" (click)="delete(element)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>

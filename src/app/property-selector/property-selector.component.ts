@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ManufacturerModel} from "../models/Manufacturer.model";
-import {PartTypeModel} from "../models/PartType.model";
+import {ManufacturerModel} from "../service/models/Manufacturer.model";
+import {PartTypeModel} from "../service/models/PartType.model";
 import {MatSelectionList} from "@angular/material/list";
 import {MatDialog} from "@angular/material/dialog";
 import {ManufacturerService} from "../service/data/Manufacturer.service";
@@ -9,7 +9,7 @@ import {ManufacturerDialogComponent} from "../dialogues/manufacturer-dialog/manu
 import {PartTypeService} from "../service/data/PartType.service";
 import {PartTypeDialogComponent} from "../dialogues/partType-dialog/partType-dialog.component";
 import {ShelfService} from "../service/data/Shelf.service";
-import {ShelfModel} from "../models/Shelf.model";
+import {ShelfModel} from "../service/models/Shelf.model";
 import {ShelfDialogComponent} from "../dialogues/shelf-dialog/shelf-dialog.component";
 
 @Component({

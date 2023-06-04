@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, Validators} from "@angular/forms";
 import {DialogModelData} from "../part-dialog/part-dialog.component";
-import {PartTypeModel} from "../../models/PartType.model";
+import {PartTypeModel} from "../../service/models/PartType.model";
 
 @Component({
   selector: 'app-part-dialog', templateUrl: './partType-dialog.component.html',

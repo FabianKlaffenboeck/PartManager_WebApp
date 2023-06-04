@@ -1,0 +1,11 @@
+@import "../constants";
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100% !important;
+  height: 48px !important;
+  background-color: $color-primary-500 !important;
+}

@@ -1,6 +1,6 @@
-import {Record} from '../service/rest-api.service';
+import {Record} from '../rest-api.service';
 
-export class PartTypeModel implements Record {
+export class TrayModel implements Record {
   id: number | undefined
   name: string | undefined
 

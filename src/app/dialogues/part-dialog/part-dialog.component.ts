@@ -1,16 +1,16 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {PartModel} from "../../models/Part.model";
+import {PartModel} from "../../service/models/Part.model";
 import {FormControl, Validators} from "@angular/forms";
-import {PartTypeModel} from "../../models/PartType.model";
-import {ManufacturerModel} from "../../models/Manufacturer.model";
-import {TrayModel} from "../../models/Tray.model";
+import {PartTypeModel} from "../../service/models/PartType.model";
+import {ManufacturerModel} from "../../service/models/Manufacturer.model";
+import {TrayModel} from "../../service/models/Tray.model";
 import {PartTypeService} from "../../service/data/PartType.service";
 import {TrayService} from "../../service/data/Tray.service";
 import {ManufacturerService} from "../../service/data/Manufacturer.service";
 import {measurementUnitService} from "../../service/enums/MeasurementUnit.service";
 import {FootprintService} from "../../service/enums/Footprint.service";
-import {ShelfModel} from "../../models/Shelf.model";
+import {ShelfModel} from "../../service/models/Shelf.model";
 import {ShelfService} from "../../service/data/Shelf.service";
 import {PartService} from "../../service/data/Part.service";
 

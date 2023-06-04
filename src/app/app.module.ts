@@ -29,6 +29,7 @@ import { DataComponent } from './data/data.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import { AppRoutingModule } from './app-routing.module';
 import {RouterOutlet} from "@angular/router";
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import {RouterOutlet} from "@angular/router";
     PartTypeDialogComponent,
     ShelfDialogComponent,
     ToolbarComponent,
-    DataComponent
+    DataComponent,
   ],
   imports: [
     HttpClientModule,
@@ -64,7 +65,8 @@ import {RouterOutlet} from "@angular/router";
     MatExpansionModule,
     MatToolbarModule,
     AppRoutingModule,
-    RouterOutlet
+    RouterOutlet,
+    NgOptimizedImage
   ],
   providers: [
     {provide: RestApiService},
