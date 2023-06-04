@@ -1,5 +1,7 @@
+@use '@angular/material' as mat;
 @import "bootstrap/dist/css/bootstrap.css";
-@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+@include mat.core();
 
 @import "constants";
 @import "ui/snackbar";
@@ -17,3 +19,4 @@ body {
   background-color: $color-dark-background;
   color: white;
 }
+
