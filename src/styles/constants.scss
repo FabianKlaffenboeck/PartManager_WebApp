@@ -57,10 +57,10 @@
   // generated with https://colors.eva.design/
 }
 
-$color-light-text: var(--color-light-text);
-$color-dark-text: var(--color-dark-text);
-$color-light-background: var(--color-light-background);
-$color-dark-background: var(--color-dark-background);
+$light-primary-text: var(--color-light-text);
+$dark-primary-text: var(--color-dark-text);
+$light-primary-background: var(--color-light-background);
+$dark-primary-background: var(--color-dark-background);
 
 $color-primary-100: var(--color-primary-100);
 $color-primary-200: var(--color-primary-200);
@@ -111,3 +111,119 @@ $color-danger-600: var(--color-danger-600);
 $color-danger-700: var(--color-danger-700);
 $color-danger-800: var(--color-danger-800);
 $color-danger-900: var(--color-danger-900);
+
+
+$primary-palette: (
+  100: $color-primary-100,
+  200: $color-primary-200,
+  300: $color-primary-300,
+  400: $color-primary-400,
+  500: $color-primary-500,
+  600: $color-primary-600,
+  700: $color-primary-700,
+  800: $color-primary-800,
+  900: $color-primary-900,
+  contrast: (
+    100: $light-primary-text,
+    200: $light-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+  )
+);
+
+$success-palette: (
+  100: $color-success-100,
+  200: $color-success-200,
+  300: $color-success-300,
+  400: $color-success-400,
+  500: $color-success-500,
+  600: $color-success-600,
+  700: $color-success-700,
+  800: $color-success-800,
+  900: $color-success-900,
+  contrast: (
+    100: $light-primary-text,
+    200: $light-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+  )
+);
+
+$info-palette: (
+  100: $color-info-100,
+  200: $color-info-200,
+  300: $color-info-300,
+  400: $color-info-400,
+  500: $color-info-500,
+  600: $color-info-600,
+  700: $color-info-700,
+  800: $color-info-800,
+  900: $color-info-900,
+  contrast: (
+    100: $light-primary-text,
+    200: $light-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+  )
+);
+
+$warning-palette: (
+  100: $color-warning-100,
+  200: $color-warning-200,
+  300: $color-warning-300,
+  400: $color-warning-400,
+  500: $color-warning-500,
+  600: $color-warning-600,
+  700: $color-warning-700,
+  800: $color-warning-800,
+  900: $color-warning-900,
+  contrast: (
+    100: $light-primary-text,
+    200: $light-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+  )
+);
+
+$danger-palette: (
+  100: $color-danger-100,
+  200: $color-danger-200,
+  300: $color-danger-300,
+  400: $color-danger-400,
+  500: $color-danger-500,
+  600: $color-danger-600,
+  700: $color-danger-700,
+  800: $color-danger-800,
+  900: $color-danger-900,
+  contrast: (
+    100: $light-primary-text,
+    200: $light-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+  )
+);

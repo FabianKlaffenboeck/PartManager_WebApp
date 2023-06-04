@@ -1,5 +1,7 @@
 @use '@angular/material' as mat;
+@import '@angular/material/theming';
 @import "bootstrap/dist/css/bootstrap.css";
+//@import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 @include mat.core();
 
@@ -9,6 +11,7 @@
 @import "ui/button";
 @import "ui/table";
 @import "ui/accordion";
+@import "ui/form";
 
 * {
   margin: 0;
@@ -16,7 +19,20 @@
 }
 
 body {
-  background-color: $color-dark-background;
+  background-color: $dark-primary-background;
   color: white;
 }
 
+$my-primary: mat.define-palette($primary-palette);
+$my-accent: mat.define-palette($info-palette);
+
+$my-theme: mat.define-dark-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+  ),
+  density: 0,
+));
+
+@include mat.core-theme($my-theme);
+@include mat.all-component-themes($my-theme);

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ManufacturerModel} from "../models/Manufacturer.model";
-import {PartTypeModel} from "../models/PartType.model";
+import {ManufacturerModel} from "../service/models/Manufacturer.model";
+import {PartTypeModel} from "../service/models/PartType.model";
 
 @Component({
   selector: 'app-data',

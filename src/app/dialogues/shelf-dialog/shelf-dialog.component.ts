@@ -2,8 +2,8 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl} from "@angular/forms";
 import {DialogModelData} from "../part-dialog/part-dialog.component";
-import {ShelfModel} from "../../models/Shelf.model";
-import {TrayModel} from "../../models/Tray.model";
+import {ShelfModel} from "../../service/models/Shelf.model";
+import {TrayModel} from "../../service/models/Tray.model";
 import {ShelfService} from "../../service/data/Shelf.service";
 
 @Component({

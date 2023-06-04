@@ -1,4 +1,4 @@
-import {Record} from '../service/rest-api.service';
+import {Record} from '../rest-api.service';
 import {TrayModel} from "./Tray.model";
 import {ManufacturerModel} from "./Manufacturer.model";
 import {PartTypeModel} from "./PartType.model";

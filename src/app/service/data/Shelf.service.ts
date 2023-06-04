@@ -8,7 +8,7 @@ import {
   FormSelectOption
 } from "../data-provider.service";
 import {RestApiService} from "../rest-api.service";
-import {ShelfModel} from "../../models/Shelf.model";
+import {ShelfModel} from "../models/Shelf.model";
 
 
 @Injectable({

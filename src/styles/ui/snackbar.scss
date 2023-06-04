@@ -2,8 +2,8 @@
 
 
 .mat-mdc-snack-bar-container {
-  --mat-mdc-snack-bar-button-color: #ffffff;
-  --mdc-snackbar-supporting-text-color: #ffffff;
+  --mat-mdc-snack-bar-button-color: #ffffff !important;
+  --mdc-snackbar-supporting-text-color: #ffffff !important;
 
   &.app-notification-error {
     --mdc-snackbar-container-color: var(--color-danger-500);
