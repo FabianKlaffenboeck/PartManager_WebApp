@@ -23,13 +23,12 @@ body {
   color: white;
 }
 
-$my-primary: mat.define-palette($primary-palette);
-$my-accent: mat.define-palette($info-palette);
+$pallet: mat.define-palette($info-palette);
 
 $my-theme: mat.define-dark-theme((
   color: (
-    primary: $my-primary,
-    accent: $my-accent,
+    primary: $pallet,
+    accent: $pallet,
   ),
   density: 0,
 ));
