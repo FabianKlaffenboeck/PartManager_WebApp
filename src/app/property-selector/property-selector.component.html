@@ -1,48 +1,36 @@
 <mat-accordion>
-
   <mat-expansion-panel>
     <mat-expansion-panel-header>
-      <mat-panel-title>
-        manufacturer
-      </mat-panel-title>
+      <mat-panel-title>Filters</mat-panel-title>
     </mat-expansion-panel-header>
 
-    <button mat-button class="add-button" (click)="addManufacturer()">
-      <mat-icon>add</mat-icon>
-    </button>
-    <mat-selection-list (selectionChange)="getManufacturersSelected($event.source)">
-      <mat-list-option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">
-        {{manufacturer.name}}
-      </mat-list-option>
-    </mat-selection-list>
+    <div>
+      <mat-form-field>
+        <mat-select [formControl]="manufacturerControl" placeholder="Manufacturer" multiple>
+          <mat-option *ngFor="let manufacturer of manufacturers"
+                      [value]="manufacturer">{{manufacturer.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-button class="add-button" (click)="addManufacturer()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-select [formControl]="partTypesControl"
+                    placeholder="Part Type" multiple>
+          <mat-option *ngFor="let partType of partTypes" [value]="partType">{{partType.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-button class="add-button" (click)="addPartType()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
   </mat-expansion-panel>
-
-  <!---->
 
   <mat-expansion-panel>
     <mat-expansion-panel-header>
-      <mat-panel-title>
-        part type
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-
-    <button mat-button class="add-button"  (click)="addPartType()">
-      <mat-icon>add</mat-icon>
-    </button>
-    <mat-selection-list (selectionChange)="getPartTypesSelected($event.source)">
-      <mat-list-option *ngFor="let partType of partTypes" [value]="partType">
-        {{partType.name}}
-      </mat-list-option>
-    </mat-selection-list>
-  </mat-expansion-panel>
-
-  <!---->
-
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        storage location
-      </mat-panel-title>
+      <mat-panel-title>storage location</mat-panel-title>
     </mat-expansion-panel-header>
 
     <button mat-button class="add-button" (click)="addShelf()">
@@ -59,7 +47,6 @@
       </mat-expansion-panel>
     </mat-accordion>
   </mat-expansion-panel>
-
 </mat-accordion>
 
 

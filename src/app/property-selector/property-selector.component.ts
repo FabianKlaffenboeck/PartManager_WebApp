@@ -11,6 +11,7 @@ import {PartTypeDialogComponent} from "../dialogues/partType-dialog/partType-dia
 import {ShelfService} from "../service/data/Shelf.service";
 import {ShelfModel} from "../service/models/Shelf.model";
 import {ShelfDialogComponent} from "../dialogues/shelf-dialog/shelf-dialog.component";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'property-selector',
@@ -23,6 +24,8 @@ export class PropertySelectorComponent implements OnInit {
   manufacturers: ManufacturerModel[] = []
   partTypes: PartTypeModel[] = []
   shelfs: ShelfModel[] = []
+  manufacturerControl = new FormControl();
+  partTypesControl = new FormControl();
 
   @Output() selectedManufacturers: EventEmitter<ManufacturerModel[]> = new EventEmitter();
   @Output() selectedPartTypes: EventEmitter<PartTypeModel[]> = new EventEmitter();
@@ -36,19 +39,18 @@ export class PropertySelectorComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.manufacturerControl.valueChanges.subscribe(it =>{
+      this.selectedManufacturers.next(it)
+    })
+
+    this.partTypesControl.valueChanges.subscribe(it =>{
+      this.selectedPartTypes.next(it)
+    })
+
     this.manufacturerService.get().subscribe(it => this.manufacturers = it)
     this.partTypeService.get().subscribe(it => this.partTypes = it)
     this.shelfService.get().subscribe(it => this.shelfs = it)
-  }
-
-  getManufacturersSelected(options: MatSelectionList) {
-    let selected = options.options.filter(o => o.selected).map(o => o.value);
-    this.selectedManufacturers.next(selected)
-  }
-
-  getPartTypesSelected(options: MatSelectionList) {
-    let selected = options.options.filter(o => o.selected).map(o => o.value);
-    this.selectedPartTypes.next(selected)
   }
 
   addManufacturer() {
