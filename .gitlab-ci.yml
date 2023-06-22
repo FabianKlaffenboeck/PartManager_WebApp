@@ -1,4 +1,5 @@
 stages:
+  - test
   - build
   - deploy
 
@@ -7,8 +8,26 @@ variables:
   BUILDX_VERSION: "v0.6.1"
   BUILDX_ARCH: "linux-amd64"
 
-build:
+.docker-job: &docker-job
+  image: docker:stable
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - wget -O /usr/bin/docker-buildx https://github.com/docker/buildx/releases/download/${BUILDX_VERSION}/buildx-${BUILDX_VERSION}.${BUILDX_ARCH}
+    - chmod +x /usr/bin/docker-buildx
+  script:
+    - docker-buildx create --use
+    - docker-buildx build
+      --platform linux/amd64,linux/arm/v7,linux/arm64/v8
+      --tag ${CI_REGISTRY_IMAGE}:$IMAGE_TAG
+      --push .
+
+.node-job: &node-job
   image: node:latest
+
+build:
+  <<: *node-job
   stage: build
   script:
     - npm install -g @angular/cli@15.1.6
@@ -22,20 +41,18 @@ build:
     paths:
       - node_modules/
 
-docker-build:
-  image: docker:stable
+deploy:
+  <<: *docker-job
   stage: deploy
   only:
-    - master
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - wget -O /usr/bin/docker-buildx https://github.com/docker/buildx/releases/download/${BUILDX_VERSION}/buildx-${BUILDX_VERSION}.${BUILDX_ARCH}
-    - chmod +x /usr/bin/docker-buildx
-  script:
-    - docker-buildx create --use
-    - docker-buildx build
-      --platform linux/amd64,linux/arm/v7,linux/arm64/v8
-      --tag ${CI_REGISTRY_IMAGE}:latest
-      --push .
+    - tags
+  variables:
+    IMAGE_TAG: $CI_COMMIT_REF_NAME
+
+deploy-latest:
+  <<: *docker-job
+  stage: deploy
+#  only:
+#    - master
+  variables:
+    IMAGE_TAG: latest
