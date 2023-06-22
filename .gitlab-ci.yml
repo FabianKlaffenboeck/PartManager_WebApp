@@ -8,6 +8,12 @@ variables:
   BUILDX_VERSION: "v0.6.1"
   BUILDX_ARCH: "linux-amd64"
 
+cache:
+  key: "$CI_PIPELINE_ID"
+  paths:
+    - dist/
+    - node_modules/
+
 .docker-job: &docker-job
   image: docker:stable
   services:
@@ -52,7 +58,7 @@ deploy:
 deploy-latest:
   <<: *docker-job
   stage: deploy
-#  only:
-#    - master
+  #  only:
+  #    - master
   variables:
     IMAGE_TAG: latest
