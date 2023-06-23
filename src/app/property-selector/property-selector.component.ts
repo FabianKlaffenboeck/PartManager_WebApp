@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ManufacturerModel} from "../service/models/Manufacturer.model";
 import {PartTypeModel} from "../service/models/PartType.model";
-import {MatSelectionList} from "@angular/material/list";
 import {MatDialog} from "@angular/material/dialog";
 import {ManufacturerService} from "../service/data/Manufacturer.service";
 import {AlertServility, NotificationService} from "../service/notification.service";
@@ -24,8 +23,15 @@ export class PropertySelectorComponent implements OnInit {
   manufacturers: ManufacturerModel[] = []
   partTypes: PartTypeModel[] = []
   shelfs: ShelfModel[] = []
+
   manufacturerControl = new FormControl();
   partTypesControl = new FormControl();
+
+  filteredManufacturers: ManufacturerModel[] = []
+  filteredPartTypes: PartTypeModel[] = []
+
+  manufacturerFilterControl = new FormControl<string>('');
+  partTypeFilterControl = new FormControl<string>('');
 
   @Output() selectedManufacturers: EventEmitter<ManufacturerModel[]> = new EventEmitter();
   @Output() selectedPartTypes: EventEmitter<PartTypeModel[]> = new EventEmitter();
@@ -39,18 +45,15 @@ export class PropertySelectorComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.manufacturerControl.valueChanges.subscribe(it =>{
-      this.selectedManufacturers.next(it)
-    })
-
-    this.partTypesControl.valueChanges.subscribe(it =>{
-      this.selectedPartTypes.next(it)
-    })
-
-    this.manufacturerService.get().subscribe(it => this.manufacturers = it)
-    this.partTypeService.get().subscribe(it => this.partTypes = it)
+    this.manufacturerService.get().subscribe(it => this.filteredManufacturers = this.manufacturers = it)
+    this.partTypeService.get().subscribe(it => this.filteredPartTypes = this.partTypes = it)
     this.shelfService.get().subscribe(it => this.shelfs = it)
+
+    this.manufacturerControl.valueChanges.subscribe(it => this.selectedManufacturers.next(it))
+    this.partTypesControl.valueChanges.subscribe(it => this.selectedPartTypes.next(it))
+
+    this.manufacturerFilterControl.valueChanges.subscribe(it => this.filterManufacturers(it));
+    this.partTypeFilterControl.valueChanges.subscribe(it => this.filterPartTypes(it));
   }
 
   addManufacturer() {
@@ -62,9 +65,9 @@ export class PropertySelectorComponent implements OnInit {
       if (result) {
         this.manufacturerService.save(result).subscribe(saved => {
           this.manufacturers?.push(saved)
-          this.notificationService.snackbar(AlertServility.SUCCESS,"saving was successful")
+          this.notificationService.snackbar(AlertServility.SUCCESS, "saving was successful")
         }, error => {
-          this.notificationService.snackbar(AlertServility.ERROR,"error while saving")
+          this.notificationService.snackbar(AlertServility.ERROR, "error while saving")
         })
       }
     });
@@ -79,9 +82,9 @@ export class PropertySelectorComponent implements OnInit {
       if (result) {
         this.partTypeService.save(result).subscribe(saved => {
           this.partTypes?.push(saved)
-          this.notificationService.snackbar(AlertServility.SUCCESS,"saving was successful")
+          this.notificationService.snackbar(AlertServility.SUCCESS, "saving was successful")
         }, error => {
-          this.notificationService.snackbar(AlertServility.ERROR,"error while saving")
+          this.notificationService.snackbar(AlertServility.ERROR, "error while saving")
         })
       }
     });
@@ -96,11 +99,33 @@ export class PropertySelectorComponent implements OnInit {
       if (result) {
         this.shelfService.save(result).subscribe(saved => {
           this.shelfs?.push(saved)
-          this.notificationService.snackbar(AlertServility.SUCCESS,"saving was successful")
+          this.notificationService.snackbar(AlertServility.SUCCESS, "saving was successful")
         }, error => {
-          this.notificationService.snackbar(AlertServility.ERROR,"error while saving")
+          this.notificationService.snackbar(AlertServility.ERROR, "error while saving")
         })
       }
     });
+  }
+
+  filterManufacturers(search: string | null) {
+    if (!this.manufacturers) {
+      return;
+    }
+    if (!search){
+      this.filteredManufacturers = this.manufacturers
+      return;
+    }
+    this.filteredManufacturers = this.manufacturers.filter(it => it.name!!.toLowerCase().indexOf(search.toLowerCase()) > -1)
+  }
+
+  filterPartTypes(search: string | null) {
+    if (!this.manufacturers) {
+      return;
+    }
+    if (!search){
+      this.filteredPartTypes = this.partTypes
+      return;
+    }
+    this.filteredPartTypes = this.partTypes.filter(it => it.name!!.toLowerCase().indexOf(search.toLowerCase()) > -1)
   }
 }

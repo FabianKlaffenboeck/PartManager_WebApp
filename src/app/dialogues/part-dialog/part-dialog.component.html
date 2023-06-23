@@ -18,17 +18,26 @@
       <td>
         <mat-form-field>
           <mat-label>part type</mat-label>
-          <mat-select [formControl]="partTypeControl" placeholder="part type">
-            <mat-option *ngFor="let partType of partTypes" [value]="partType.id">{{ partType.name }}</mat-option>
+          <mat-select [formControl]="partTypeControl" placeholder="Part Type">
+            <mat-option>
+              <ngx-mat-select-search [formControl]="partTypeFilterControl"></ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let partType of filteredPartTypes"
+                        [value]="partType.id">{{ partType.name }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </td>
       <td>
         <mat-form-field>
           <mat-label>manufacturer</mat-label>
-          <mat-select [formControl]="manufacturerControl" placeholder="manufacturer">
-            <mat-option *ngFor="let manufacturer of manufacturers"
-                        [value]="manufacturer.id">{{ manufacturer.name }}</mat-option>
+          <mat-select [formControl]="manufacturerControl" placeholder="Manufacturer">
+            <mat-option>
+              <ngx-mat-select-search [formControl]="manufacturerFilterControl"></ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let manufacturer of filteredManufacturers"
+                        [value]="manufacturer.id">{{ manufacturer.name }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </td>
@@ -47,7 +56,12 @@
         <mat-form-field>
           <mat-label>measuring unit</mat-label>
           <mat-select [formControl]="measurementUnitControl" placeholder="measuring unit">
-            <mat-option *ngFor="let unit of measurementUnits" [value]="unit">{{ unit }}</mat-option>
+            <mat-option>
+              <ngx-mat-select-search [formControl]="measurementUnitFilterControl"></ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let measurementUnit of filteredMeasurementUnits"
+                        [value]="measurementUnit">{{ measurementUnit }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </td>
@@ -63,7 +77,12 @@
         <mat-form-field>
           <mat-label>footprints</mat-label>
           <mat-select [formControl]="footprintControl" placeholder="footprint">
-            <mat-option *ngFor="let unit of footprints" [value]="unit">{{ unit }}</mat-option>
+            <mat-option>
+              <ngx-mat-select-search [formControl]="footprintFilterControl"></ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let footprint of filteredFootprints"
+                        [value]="footprint">{{ footprint }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </td>
@@ -75,14 +94,7 @@
 <mat-dialog-actions>
   <button mat-button class="cancel-button" (click)="onCancelClick()">Cancel</button>
   <button mat-button class="apply-button"
-          [disabled]="nameControl.invalid ||
-                      quantityControl.invalid ||
-                      measurementUnitControl.invalid ||
-                      valueControl.invalid ||
-                      footprintControl.invalid ||
-                      partTypeControl.invalid ||
-                      manufacturerControl.invalid ||
-                      trayControl.invalid"
+          [disabled]="allowSave()"
           (click)="onSaveClick()">Save
   </button>
 </mat-dialog-actions>

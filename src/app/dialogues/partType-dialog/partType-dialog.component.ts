@@ -11,7 +11,9 @@ import {PartTypeModel} from "../../service/models/PartType.model";
 export class PartTypeDialogComponent {
   typeControl = new FormControl('', [Validators.required]);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogModelData, public dialogRef: MatDialogRef<PartTypeDialogComponent>) {
+  constructor(@Inject(MAT_DIALOG_DATA)
+              public data: DialogModelData,
+              public dialogRef: MatDialogRef<PartTypeDialogComponent>) {
 
     if (data.mode == "edit") {
       this.typeControl.setValue(data.model.name || null)
@@ -22,15 +24,17 @@ export class PartTypeDialogComponent {
     this.dialogRef.close();
   }
 
+  allowSave(): boolean {
+    return this.typeControl.invalid;
+  }
+
   onSaveClick(): void {
     let partType: PartTypeModel = {
       id: undefined, name: this.typeControl.value || undefined,
     };
-
     if (this.data.mode == "edit") {
       partType.id = this.data.model.id
     }
-
     this.dialogRef.close(partType);
   }
 }

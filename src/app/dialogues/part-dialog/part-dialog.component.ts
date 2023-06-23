@@ -24,6 +24,7 @@ export interface DialogModelData {
 })
 
 export class PartDialogComponent {
+
   partTypes: PartTypeModel[] = []
   manufacturers: ManufacturerModel[] = []
   trays: TrayModel[] = []
@@ -41,6 +42,16 @@ export class PartDialogComponent {
   manufacturerControl = new FormControl(0, [Validators.required]);
   trayControl = new FormControl(0, [Validators.required]);
 
+  filteredPartTypes: PartTypeModel[] = []
+  filteredManufacturers: ManufacturerModel[] = []
+  filteredMeasurementUnits: string[] = []
+  filteredFootprints: string[] = []
+
+  partTypeFilterControl = new FormControl<string>('');
+  manufacturerFilterControl = new FormControl<string>('');
+  measurementUnitFilterControl = new FormControl<string>('');
+  footprintFilterControl = new FormControl<string>('');
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogModelData,
               public dialogRef: MatDialogRef<PartDialogComponent>,
               public partTypeService: PartTypeService,
@@ -52,13 +63,18 @@ export class PartDialogComponent {
               public partService: PartService,
               public dialog: MatDialog) {
 
-    partTypeService.get().subscribe(it => this.partTypes = it)
-    manufacturerService.get().subscribe(it => this.manufacturers = it)
+    partTypeService.get().subscribe(it => this.filteredPartTypes = this.partTypes = it)
+    manufacturerService.get().subscribe(it => this.filteredManufacturers = this.manufacturers = it)
     trayService.get().subscribe(it => this.trays = it)
-    measurementUnitService.get().subscribe(it => this.measurementUnits = it)
-    footprintService.get().subscribe(it => this.footprints = it)
+    measurementUnitService.get().subscribe(it => this.filteredMeasurementUnits = this.measurementUnits = it)
+    footprintService.get().subscribe(it => this.filteredFootprints = this.footprints = it)
     shelfService.get().subscribe(it => this.shelfs = it)
     partService.get().subscribe(it => this.parts = it)
+
+    this.partTypeFilterControl.valueChanges.subscribe(it => this.filterPartTypes(it));
+    this.manufacturerFilterControl.valueChanges.subscribe(it => this.filterManufacturers(it));
+    this.measurementUnitFilterControl.valueChanges.subscribe(it => this.filterMeasurementUnits(it));
+    this.footprintFilterControl.valueChanges.subscribe(it => this.filterFootprints(it));
 
     if (data.mode == "edit") {
       this.nameControl.setValue(data.model.name || null)
@@ -99,9 +115,7 @@ export class PartDialogComponent {
   formatStorageLocation(tray: TrayModel) {
     let trayName = tray?.name || ""
     let shelfName = ""
-
     shelfName = this.shelfs.find(shelf => shelf.trays && shelf.trays.some(it => it.id === tray?.id))?.name || ""
-
     return shelfName + "-" + trayName
   }
 
@@ -110,16 +124,67 @@ export class PartDialogComponent {
       return this.trays
     }
 
-    let tmpTrays: TrayModel[] = []
-
-    tmpTrays = this.trays.filter(tray => {
-
-      return this.parts.find(part =>{
+    return this.trays.filter(tray => {
+      return this.parts.find(part => {
         return part.tray?.id == tray.id
       }) == undefined
-
     })
+  }
 
-    return tmpTrays
+  allowSave(): boolean {
+    return this.nameControl.invalid ||
+      this.quantityControl.invalid ||
+      this.measurementUnitControl.invalid ||
+      this.valueControl.invalid ||
+      this.footprintControl.invalid ||
+      this.partTypeControl.invalid ||
+      this.manufacturerControl.invalid ||
+      this.trayControl.invalid
+  }
+
+  private filterPartTypes(search: string | null) {
+    if (!this.partTypes) {
+      return;
+    }
+    if (!search) {
+      this.filteredPartTypes = this.partTypes
+      return;
+    }
+    console.log(this.partTypes.filter(it => it.name!!.toLowerCase().indexOf(search.toLowerCase()) > -1));
+
+    this.filteredPartTypes = this.partTypes.filter(it => it.name!!.toLowerCase().indexOf(search.toLowerCase()) > -1)
+  }
+
+  private filterManufacturers(search: string | null) {
+    if (!this.manufacturers) {
+      return;
+    }
+    if (!search) {
+      this.filteredManufacturers = this.manufacturers
+      return;
+    }
+    this.filteredManufacturers = this.manufacturers.filter(it => it.name!!.toLowerCase().indexOf(search.toLowerCase()) > -1)
+  }
+
+  private filterMeasurementUnits(search: string | null) {
+    if (!this.measurementUnits) {
+      return;
+    }
+    if (!search) {
+      this.filteredMeasurementUnits = this.measurementUnits
+      return;
+    }
+    this.filteredMeasurementUnits = this.measurementUnits.filter(it => it.toLowerCase().indexOf(search.toLowerCase()) > -1)
+  }
+
+  private filterFootprints(search: string | null) {
+    if (!this.footprints) {
+      return;
+    }
+    if (!search) {
+      this.filteredFootprints = this.footprints
+      return;
+    }
+    this.filteredFootprints = this.footprints.filter(it => it.toLowerCase().indexOf(search.toLowerCase()) > -1)
   }
 }

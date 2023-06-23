@@ -30,6 +30,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import { AppRoutingModule } from './app-routing.module';
 import {RouterOutlet} from "@angular/router";
 import {NgOptimizedImage} from "@angular/common";
+import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 
 @NgModule({
   declarations: [
@@ -43,31 +44,32 @@ import {NgOptimizedImage} from "@angular/common";
     ToolbarComponent,
     DataComponent,
   ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatInputModule,
-    MatTabsModule,
-    MatPaginatorModule,
-    MatListModule,
-    MatTableModule,
-    MatTabsModule,
-    MatSortModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatDialogModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatExpansionModule,
-    MatToolbarModule,
-    AppRoutingModule,
-    RouterOutlet,
-    NgOptimizedImage
-  ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatInputModule,
+        MatTabsModule,
+        MatPaginatorModule,
+        MatListModule,
+        MatTableModule,
+        MatTabsModule,
+        MatSortModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSnackBarModule,
+        MatDialogModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatExpansionModule,
+        MatToolbarModule,
+        AppRoutingModule,
+        RouterOutlet,
+        NgOptimizedImage,
+        NgxMatSelectSearchModule
+    ],
   providers: [
     {provide: RestApiService},
   ],

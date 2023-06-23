@@ -1,34 +1,47 @@
 <mat-accordion>
+
   <mat-expansion-panel>
+
     <mat-expansion-panel-header>
       <mat-panel-title>Filters</mat-panel-title>
     </mat-expansion-panel-header>
 
     <div>
       <mat-form-field>
-        <mat-select [formControl]="manufacturerControl" placeholder="Manufacturer" multiple>
-          <mat-option *ngFor="let manufacturer of manufacturers"
-                      [value]="manufacturer">{{manufacturer.name}}</mat-option>
+        <mat-select [formControl]="manufacturerControl" placeholder="Manufacturer" [multiple]="true">
+          <mat-option>
+            <ngx-mat-select-search [formControl]="manufacturerFilterControl"></ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let manufacturer of filteredManufacturers" [value]="manufacturers">
+            {{manufacturer.name}}
+          </mat-option>
         </mat-select>
       </mat-form-field>
       <button mat-button class="add-button" (click)="addManufacturer()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
+
     <div>
       <mat-form-field>
-        <mat-select [formControl]="partTypesControl"
-                    placeholder="Part Type" multiple>
-          <mat-option *ngFor="let partType of partTypes" [value]="partType">{{partType.name}}</mat-option>
+        <mat-select [formControl]="partTypesControl" placeholder="Part Typ" [multiple]="true">
+          <mat-option>
+            <ngx-mat-select-search [formControl]="partTypeFilterControl"></ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let partType of filteredPartTypes" [value]="partType">
+            {{partType.name}}
+          </mat-option>
         </mat-select>
       </mat-form-field>
       <button mat-button class="add-button" (click)="addPartType()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
+
   </mat-expansion-panel>
 
   <mat-expansion-panel>
+
     <mat-expansion-panel-header>
       <mat-panel-title>storage location</mat-panel-title>
     </mat-expansion-panel-header>
@@ -36,6 +49,7 @@
     <button mat-button class="add-button" (click)="addShelf()">
       <mat-icon>add</mat-icon>
     </button>
+
     <mat-accordion>
       <mat-expansion-panel *ngFor="let shelf of shelfs">
         <mat-expansion-panel-header>
@@ -46,7 +60,9 @@
         </mat-nav-list>
       </mat-expansion-panel>
     </mat-accordion>
+
   </mat-expansion-panel>
+
 </mat-accordion>
 
 
