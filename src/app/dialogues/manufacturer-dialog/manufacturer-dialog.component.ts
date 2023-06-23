@@ -11,8 +11,9 @@ import {DialogModelData} from "../part-dialog/part-dialog.component";
 export class ManufacturerDialogComponent {
   nameControl = new FormControl('', [Validators.required]);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogModelData, public dialogRef: MatDialogRef<ManufacturerDialogComponent>) {
-
+  constructor(@Inject(MAT_DIALOG_DATA)
+              public data: DialogModelData,
+              public dialogRef: MatDialogRef<ManufacturerDialogComponent>) {
     if (data.mode == "edit") {
       this.nameControl.setValue(data.model.name || null)
     }
@@ -22,15 +23,17 @@ export class ManufacturerDialogComponent {
     this.dialogRef.close();
   }
 
+  allowSave(): boolean {
+    return this.nameControl.invalid;
+  }
+
   onSaveClick(): void {
     let manufacturer: ManufacturerModel = {
       id: undefined, name: this.nameControl.value || undefined,
     };
-
     if (this.data.mode == "edit") {
       manufacturer.id = this.data.model.id
     }
-
     this.dialogRef.close(manufacturer);
   }
 }

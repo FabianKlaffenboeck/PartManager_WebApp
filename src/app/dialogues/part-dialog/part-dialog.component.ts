@@ -99,9 +99,7 @@ export class PartDialogComponent {
   formatStorageLocation(tray: TrayModel) {
     let trayName = tray?.name || ""
     let shelfName = ""
-
     shelfName = this.shelfs.find(shelf => shelf.trays && shelf.trays.some(it => it.id === tray?.id))?.name || ""
-
     return shelfName + "-" + trayName
   }
 
@@ -110,16 +108,21 @@ export class PartDialogComponent {
       return this.trays
     }
 
-    let tmpTrays: TrayModel[] = []
-
-    tmpTrays = this.trays.filter(tray => {
-
-      return this.parts.find(part =>{
+    return this.trays.filter(tray => {
+      return this.parts.find(part => {
         return part.tray?.id == tray.id
       }) == undefined
-
     })
+  }
 
-    return tmpTrays
+  allowSave(): boolean {
+    return this.nameControl.invalid ||
+      this.quantityControl.invalid ||
+      this.measurementUnitControl.invalid ||
+      this.valueControl.invalid ||
+      this.footprintControl.invalid ||
+      this.partTypeControl.invalid ||
+      this.manufacturerControl.invalid ||
+      this.trayControl.invalid
   }
 }

@@ -32,9 +32,11 @@ export class ShelfDialogComponent {
     this.dialogRef.close();
   }
 
+  allowSave(): boolean {
+    return this.typeControl.invalid;
+  }
+
   onSaveClick(): void {
-
-
     let trays: TrayModel[] = []
 
     // @ts-ignore
@@ -43,10 +45,9 @@ export class ShelfDialogComponent {
     }
 
     if (this.typeControl.value?.length == 0) {
-
       let numAbbr: (num: number) => string;
       numAbbr = (num: number) => num <= 0 ? '' : numAbbr(Math.floor((num - 1) / 26)) + String.fromCharCode((num - 1) % 26 + 65);
-      this.typeControl.setValue(String(numAbbr(this.shelfs.length+1)).padStart(4, "0"))
+      this.typeControl.setValue(String(numAbbr(this.shelfs.length + 1)).padStart(4, "0"))
     }
 
     let shelfModel: ShelfModel = {

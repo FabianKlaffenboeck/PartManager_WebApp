@@ -75,14 +75,7 @@
 <mat-dialog-actions>
   <button mat-button class="cancel-button" (click)="onCancelClick()">Cancel</button>
   <button mat-button class="apply-button"
-          [disabled]="nameControl.invalid ||
-                      quantityControl.invalid ||
-                      measurementUnitControl.invalid ||
-                      valueControl.invalid ||
-                      footprintControl.invalid ||
-                      partTypeControl.invalid ||
-                      manufacturerControl.invalid ||
-                      trayControl.invalid"
+          [disabled]="allowSave()"
           (click)="onSaveClick()">Save
   </button>
 </mat-dialog-actions>
