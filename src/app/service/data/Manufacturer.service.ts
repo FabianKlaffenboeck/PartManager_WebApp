@@ -21,13 +21,9 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
   constructor(
     private api: RestApiService,
   ) {
-    this.restApi = this.api.for<ManufacturerModel>("manufacturer")
+    this.restApi = this.api.for<ManufacturerModel>("manufacturers")
   }
 
-  /**
-   * Returns a list of formSelectOptions, which is the bound to the
-   * SelectOption
-   */
   public getFormSelectOptions(filterParameters: { [key: string]: any; } = {}): Observable<FormSelectOption[]> {
     return new Observable<FormSelectOption[]>(subscriber => {
       this.get(filterParameters).subscribe(records => {
@@ -37,11 +33,6 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
     })
   }
 
-  /**
-   * Returns the manufacturer with the given id,
-   *
-   * @param id
-   */
   public getById(id: number,): Observable<ManufacturerModel[]> {
     return new Observable<ManufacturerModel[]>(subscriber => {
       this.restApi.getById(id, record => {
@@ -56,10 +47,6 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
     })
   }
 
-  /**
-   * returns all manufacturers
-   * @param parameters
-   */
   public get(parameters?: { [key: string]: any; }): Observable<ManufacturerModel[]> {
     return new Observable<ManufacturerModel[]>(
       subscriber => {
@@ -76,10 +63,6 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
     )
   }
 
-  /**
-   * Deletes the manufacturer with the given id
-   * @param recordId
-   */
   public delete(recordId: number): Observable<any> {
     return new Observable<any>(subscriber => {
       this.restApi.delete(recordId, () => {
@@ -91,10 +74,6 @@ export class ManufacturerService implements DataProviderService<ManufacturerMode
     })
   }
 
-  /**
-   * Saves the given manufacturer into the database
-   * @param record
-   */
   public save(record: ManufacturerModel): Observable<ManufacturerModel> {
     return new Observable<ManufacturerModel>(subscriber => {
       this.restApi.save(record, savedRecord => {

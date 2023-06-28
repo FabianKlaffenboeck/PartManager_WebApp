@@ -8,7 +8,7 @@ import {PartTypeModel} from "../service/models/PartType.model";
   styleUrls: ['./data.component.scss']
 })
 
-export class DataComponent implements OnInit {
+export class DataComponent {
 
   selectedManufacturers: ManufacturerModel[] = []
   selectedPartTypes: PartTypeModel[] = []
@@ -16,7 +16,5 @@ export class DataComponent implements OnInit {
   constructor(
   ) {
   }
-
-  ngOnInit() {
-  }
+  
 }

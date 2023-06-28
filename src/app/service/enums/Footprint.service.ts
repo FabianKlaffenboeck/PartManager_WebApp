@@ -14,12 +14,9 @@ export class FootprintService {
   constructor(
     private api: RestApiService,
   ) {
-    this.restApi = this.api.for<string>("footprint")
+    this.restApi = this.api.for<string>("footprints")
   }
 
-  /**
-   * returns all PartTypes
-   */
   public get(): Observable<string[]> {
     return new Observable<string[]>(
       subscriber => {

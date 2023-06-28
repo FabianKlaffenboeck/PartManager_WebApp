@@ -21,13 +21,9 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
   constructor(
     private api: RestApiService,
   ) {
-    this.restApi = this.api.for<TrayModel>("tray")
+    this.restApi = this.api.for<TrayModel>("trays")
   }
 
-  /**
-   * Returns a list of formSelectOptions, which is the bound to the
-   * SelectOption
-   */
   public getFormSelectOptions(filterParameters: { [key: string]: any; } = {}): Observable<FormSelectOption[]> {
     return new Observable<FormSelectOption[]>(subscriber => {
       this.get(filterParameters).subscribe(records => {
@@ -37,10 +33,6 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
     })
   }
 
-  /**
-   * Returns the tray with the given id
-   * @param id
-   */
   public getById(id: number): Observable<TrayModel[]> {
     return new Observable<TrayModel[]>(subscriber => {
       this.restApi.getById(id, record => {
@@ -55,10 +47,6 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
     })
   }
 
-  /**
-   * returns all trays
-   * @param parameters
-   */
   public get(parameters?: { [key: string]: any; }): Observable<TrayModel[]> {
     return new Observable<TrayModel[]>(
       subscriber => {
@@ -67,10 +55,6 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
     )
   }
 
-  /**
-   * Deletes the tray with the given id
-   * @param recordId
-   */
   public delete(recordId: number): Observable<any> {
     return new Observable<any>(subscriber => {
       this.restApi.delete(recordId, () => {
@@ -82,10 +66,6 @@ export class TrayService implements DataProviderService<TrayModel>, DataTransfor
     })
   }
 
-  /**
-   * Saves the given tray into the database
-   * @param record
-   */
   public save(record: TrayModel): Observable<TrayModel> {
     return new Observable<TrayModel>(subscriber => {
       this.restApi.save(record, savedRecord => {

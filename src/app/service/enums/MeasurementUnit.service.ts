@@ -14,12 +14,9 @@ export class measurementUnitService {
   constructor(
     private api: RestApiService,
   ) {
-    this.restApi = this.api.for<string>("measurementUnit")
+    this.restApi = this.api.for<string>("measurementUnits")
   }
 
-  /**
-   * returns all partTypes
-   */
   public get(): Observable<string[]> {
     return new Observable<string[]>(
       subscriber => {

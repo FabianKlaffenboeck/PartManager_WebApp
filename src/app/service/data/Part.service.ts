@@ -21,13 +21,9 @@ export class PartService implements DataProviderService<PartModel>, DataTransfor
   constructor(
     private api: RestApiService,
   ) {
-    this.restApi = this.api.for<PartModel>("part")
+    this.restApi = this.api.for<PartModel>("parts")
   }
 
-  /**
-   * Returns a list of formSelectOptions, which is the bound to the
-   * SelectOption
-   */
   public getFormSelectOptions(filterParameters: { [key: string]: any; } = {}): Observable<FormSelectOption[]> {
     return new Observable<FormSelectOption[]>(subscriber => {
       this.get(filterParameters).subscribe(records => {
@@ -37,10 +33,6 @@ export class PartService implements DataProviderService<PartModel>, DataTransfor
     })
   }
 
-  /**
-   * Returns the part with the given id
-   * @param id
-   */
   public getById(id: number): Observable<PartModel[]> {
     return new Observable<PartModel[]>(subscriber => {
       this.restApi.getById(id, record => {
@@ -55,10 +47,6 @@ export class PartService implements DataProviderService<PartModel>, DataTransfor
     })
   }
 
-  /**
-   * returns all parts
-   * @param parameters
-   */
   public get(parameters?: { [key: string]: any; }): Observable<PartModel[]> {
     return new Observable<PartModel[]>(
       subscriber => {
@@ -75,10 +63,6 @@ export class PartService implements DataProviderService<PartModel>, DataTransfor
     )
   }
 
-  /**
-   * Deletes the part with the given id
-   * @param recordId
-   */
   public delete(recordId: number): Observable<any> {
     return new Observable<any>(subscriber => {
       this.restApi.delete(recordId, () => {
@@ -90,10 +74,6 @@ export class PartService implements DataProviderService<PartModel>, DataTransfor
     })
   }
 
-  /**
-   * Saves the given part into the database
-   * @param record
-   */
   public save(record: PartModel): Observable<PartModel> {
     return new Observable<PartModel>(subscriber => {
       this.restApi.save(record, savedRecord => {

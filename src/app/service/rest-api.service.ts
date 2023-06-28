@@ -15,15 +15,9 @@ export class RestApiService {
   ) {
   }
 
-
   private restApiServerUrl = environment.apiUrl
-
   private static _apiClientInstances: { [key: string]: RestApiClient<any> } = {}
 
-  /**
-   * Access a specific API client, identified by the resource name
-   * @param resource Name of the REST resource
-   */
   for<T extends Record | any>(resource: string): RestApiClient<T> {
     if (RestApiService._apiClientInstances[resource] == undefined) {
       RestApiService._apiClientInstances[resource] = new RestApiClient<T>(resource, this.http, this.restApiServerUrl)
@@ -32,10 +26,6 @@ export class RestApiService {
   }
 }
 
-
-/**
- * A Database Records with an ID. All models which use the api service must implement this interface.
- */
 export interface Record {
   id: number | string | undefined
 }
@@ -49,11 +39,6 @@ class RestApiClient<T extends Record | any> {
   ) {
   }
 
-  /**
-   * Save the given record on the server.
-   *
-   * This also updates or adds it in the list, a manual reload is not necessary
-   */
   save(
     record: T,
     onSuccess: (savedRecord: T) => void = () => {
@@ -95,11 +80,6 @@ class RestApiClient<T extends Record | any> {
     )
   }
 
-  /**
-   * Delete the record with the given id from the server.
-   *
-   * This also removes it from the list, a manual reload is not necessary
-   */
   delete(
     id: number,
     onSuccess: () => void = () => {
@@ -123,10 +103,6 @@ class RestApiClient<T extends Record | any> {
     )
   }
 
-  /**
-   * Explicitly fetch a set of records from the API. No default error or success handling is implemented, this
-   * must be done using one of both callback functions.
-   */
   get(
     onSuccess: (records: T[]) => void,
     onError: (error: HttpErrorResponse) => void = () => {
@@ -153,9 +129,6 @@ class RestApiClient<T extends Record | any> {
       })
   }
 
-  /**
-   * get a single record by its id.
-   */
   getById(
     id: number,
     onSuccess: (record: T) => void,
