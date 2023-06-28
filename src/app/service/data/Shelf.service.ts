@@ -21,13 +21,9 @@ export class ShelfService implements DataProviderService<ShelfModel>, DataTransf
   constructor(
     private api: RestApiService,
   ) {
-    this.restApi = this.api.for<ShelfModel>("shelf")
+    this.restApi = this.api.for<ShelfModel>("shelfs")
   }
 
-  /**
-   * Returns a list of formSelectOptions, which is the bound to the
-   * SelectOption
-   */
   public getFormSelectOptions(filterParameters: { [key: string]: any; } = {}): Observable<FormSelectOption[]> {
     return new Observable<FormSelectOption[]>(subscriber => {
       this.get(filterParameters).subscribe(records => {
@@ -37,10 +33,6 @@ export class ShelfService implements DataProviderService<ShelfModel>, DataTransf
     })
   }
 
-  /**
-   * Returns the shelf with the given id
-   * @param id
-   */
   public getById(id: number): Observable<ShelfModel[]> {
     return new Observable<ShelfModel[]>(subscriber => {
       this.restApi.getById(id, record => {
@@ -55,10 +47,6 @@ export class ShelfService implements DataProviderService<ShelfModel>, DataTransf
     })
   }
 
-  /**
-   * returns all shelfs
-   * @param parameters
-   */
   public get(parameters?: { [key: string]: any; }): Observable<ShelfModel[]> {
     return new Observable<ShelfModel[]>(
       subscriber => {
@@ -75,10 +63,6 @@ export class ShelfService implements DataProviderService<ShelfModel>, DataTransf
     )
   }
 
-  /**
-   * Deletes the shelf with the given id
-   * @param recordId
-   */
   public delete(recordId: number): Observable<any> {
     return new Observable<any>(subscriber => {
       this.restApi.delete(recordId, () => {
@@ -90,10 +74,6 @@ export class ShelfService implements DataProviderService<ShelfModel>, DataTransf
     })
   }
 
-  /**
-   * Saves the given shelf into the database
-   * @param record
-   */
   public save(record: ShelfModel): Observable<ShelfModel> {
     return new Observable<ShelfModel>(subscriber => {
       this.restApi.save(record, savedRecord => {
