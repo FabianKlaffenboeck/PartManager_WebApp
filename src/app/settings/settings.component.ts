@@ -4,6 +4,7 @@ import {PartTypeService} from "../service/data/PartType.service";
 import {ShelfService} from "../service/data/Shelf.service";
 import {PartService} from "../service/data/Part.service";
 import {TrayService} from "../service/data/Tray.service";
+import {saveAs} from "file-saver";
 
 @Component({
   selector: 'app-settings',
@@ -22,24 +23,24 @@ export class SettingsComponent {
   }
 
   export() {
-    this.manufacturerService.get().subscribe(it =>{
-      console.log(it)
+    this.manufacturerService.get().subscribe(it => {
+      saveAs(new Blob([JSON.stringify(it)]),"Manufacturers.json");
     })
-    this.partService.get().subscribe(it =>{
-      console.log(it)
+    this.partService.get().subscribe(it => {
+      saveAs(new Blob([JSON.stringify(it)]),"Parts.json");
     })
-    this.partTypeService.get().subscribe(it =>{
-      console.log(it)
+    this.partTypeService.get().subscribe(it => {
+      saveAs(new Blob([JSON.stringify(it)]),"PartTypes.json");
     })
-    this.shelfService.get().subscribe(it =>{
-      console.log(it)
+    this.shelfService.get().subscribe(it => {
+      saveAs(new Blob([JSON.stringify(it)]),"Shelfs.json");
     })
-    this.trayService.get().subscribe(it =>{
-      console.log(it)
+    this.trayService.get().subscribe(it => {
+      saveAs(new Blob([JSON.stringify(it)]),"Trays.json");
     })
   }
 
   import() {
-
   }
+
 }
