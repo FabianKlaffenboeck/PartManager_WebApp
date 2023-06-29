@@ -71,7 +71,7 @@ import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
         NgxMatSelectSearchModule
     ],
   providers: [
-    {provide: RestApiService},
+    {provide: RestApiService}
   ],
   bootstrap: [AppComponent]
 })

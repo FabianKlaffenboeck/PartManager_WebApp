@@ -20,7 +20,7 @@
 
 body {
   background-color: $dark-primary-background;
-  color: white;
+  color: $light-primary-text;
 }
 
 $pallet: mat.define-palette($info-palette);

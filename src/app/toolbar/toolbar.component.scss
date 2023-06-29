@@ -1,3 +1,15 @@
-.logo{
+@import "src/styles/constants";
+
+.logo {
   height: 45px;
+}
+
+.flexExpand {
+  flex: 1 1 auto;
+}
+
+.tool {
+  height: 30px;
+  width: 30px;
+  color: $light-primary-text;
 }
