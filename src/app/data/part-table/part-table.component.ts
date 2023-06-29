@@ -1,14 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {PartModel} from "../service/models/Part.model";
+import {PartModel} from "../../service/models/Part.model";
 import {MatTableDataSource} from "@angular/material/table";
-import {PartService} from "../service/data/Part.service";
-import {AlertServility, NotificationService} from "../service/notification.service";
-import {PartDialogComponent} from "../dialogues/part-dialog/part-dialog.component";
+import {PartService} from "../../service/data/Part.service";
+import {AlertServility, NotificationService} from "../../service/notification.service";
+import {PartDialogComponent} from "../../dialogues/part-dialog/part-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {ShelfService} from "../service/data/Shelf.service";
-import {ShelfModel} from "../service/models/Shelf.model";
-import {ManufacturerModel} from "../service/models/Manufacturer.model";
-import {PartTypeModel} from "../service/models/PartType.model";
+import {ShelfService} from "../../service/data/Shelf.service";
+import {ShelfModel} from "../../service/models/Shelf.model";
+import {ManufacturerModel} from "../../service/models/Manufacturer.model";
+import {PartTypeModel} from "../../service/models/PartType.model";
 
 @Component({
   selector: 'part-table', templateUrl: './part-table.component.html', styleUrls: ['./part-table.component.scss']

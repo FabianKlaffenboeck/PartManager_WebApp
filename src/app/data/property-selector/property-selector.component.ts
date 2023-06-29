@@ -1,15 +1,15 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ManufacturerModel} from "../service/models/Manufacturer.model";
-import {PartTypeModel} from "../service/models/PartType.model";
+import {ManufacturerModel} from "../../service/models/Manufacturer.model";
+import {PartTypeModel} from "../../service/models/PartType.model";
 import {MatDialog} from "@angular/material/dialog";
-import {ManufacturerService} from "../service/data/Manufacturer.service";
-import {AlertServility, NotificationService} from "../service/notification.service";
-import {ManufacturerDialogComponent} from "../dialogues/manufacturer-dialog/manufacturer-dialog.component";
-import {PartTypeService} from "../service/data/PartType.service";
-import {PartTypeDialogComponent} from "../dialogues/partType-dialog/partType-dialog.component";
-import {ShelfService} from "../service/data/Shelf.service";
-import {ShelfModel} from "../service/models/Shelf.model";
-import {ShelfDialogComponent} from "../dialogues/shelf-dialog/shelf-dialog.component";
+import {ManufacturerService} from "../../service/data/Manufacturer.service";
+import {AlertServility, NotificationService} from "../../service/notification.service";
+import {ManufacturerDialogComponent} from "../../dialogues/manufacturer-dialog/manufacturer-dialog.component";
+import {PartTypeService} from "../../service/data/PartType.service";
+import {PartTypeDialogComponent} from "../../dialogues/partType-dialog/partType-dialog.component";
+import {ShelfService} from "../../service/data/Shelf.service";
+import {ShelfModel} from "../../service/models/Shelf.model";
+import {ShelfDialogComponent} from "../../dialogues/shelf-dialog/shelf-dialog.component";
 import {FormControl} from "@angular/forms";
 
 @Component({
