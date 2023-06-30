@@ -2,7 +2,8 @@
   <mat-tab label="Import or Export all data">
     <div class="container-box mat-elevation-z4">
       <button mat-button class="cancel-button" (click)="export()">Export</button>
-      <button mat-button class="cancel-button" (click)="import()">Import</button>
+      <input multiple  type='file' (change)="import($event)">
     </div>
   </mat-tab>
 </mat-tab-group>
+
