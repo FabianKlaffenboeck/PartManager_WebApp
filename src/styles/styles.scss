@@ -12,6 +12,7 @@
 @import "ui/table";
 @import "ui/accordion";
 @import "ui/form";
+@import "ui/tab-group";
 
 * {
   margin: 0;
@@ -20,10 +21,34 @@
 
 body {
   background-color: $dark-primary-background;
-  color: white;
+  color: $light-primary-text;
 }
 
-$pallet: mat.define-palette($info-palette);
+$white-palette: (
+  100: $light-primary-text,
+  200: $light-primary-text,
+  300: $light-primary-text,
+  400: $light-primary-text,
+  500: $light-primary-text,
+  600: $light-primary-text,
+  700: $light-primary-text,
+  800: $light-primary-text,
+  900: $light-primary-text,
+  contrast: (
+    100: $light-primary-text,
+    200: $light-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+  )
+);
+
+
+$pallet: mat.define-palette($white-palette);
 
 $my-theme: mat.define-dark-theme((
   color: (

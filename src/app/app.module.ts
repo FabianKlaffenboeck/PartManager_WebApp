@@ -6,8 +6,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatTableModule} from "@angular/material/table";
 import {MatInputModule} from "@angular/material/input";
 import {MatTabsModule} from "@angular/material/tabs";
-import {PropertySelectorComponent} from './property-selector/property-selector.component';
-import {PartTableComponent} from './part-table/part-table.component';
+import {PropertySelectorComponent} from './data/property-selector/property-selector.component';
+import {PartTableComponent} from './data/part-table/part-table.component';
 import {RestApiService} from "./service/rest-api.service";
 import {HttpClientModule} from "@angular/common/http";
 import {MatPaginatorModule} from "@angular/material/paginator";
@@ -28,9 +28,10 @@ import {ToolbarComponent} from "./toolbar/toolbar.component";
 import { DataComponent } from './data/data.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import { AppRoutingModule } from './app-routing.module';
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
 import {NgOptimizedImage} from "@angular/common";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -43,35 +44,37 @@ import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
     ShelfDialogComponent,
     ToolbarComponent,
     DataComponent,
+    SettingsComponent,
   ],
-    imports: [
-        HttpClientModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        MatTableModule,
-        MatInputModule,
-        MatTabsModule,
-        MatPaginatorModule,
-        MatListModule,
-        MatTableModule,
-        MatTabsModule,
-        MatSortModule,
-        MatIconModule,
-        MatButtonModule,
-        MatSnackBarModule,
-        MatDialogModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatExpansionModule,
-        MatToolbarModule,
-        AppRoutingModule,
-        RouterOutlet,
-        NgOptimizedImage,
-        NgxMatSelectSearchModule
-    ],
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatInputModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatListModule,
+    MatTableModule,
+    MatTabsModule,
+    MatSortModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatExpansionModule,
+    MatToolbarModule,
+    AppRoutingModule,
+    RouterOutlet,
+    NgOptimizedImage,
+    NgxMatSelectSearchModule,
+    RouterLink
+  ],
   providers: [
-    {provide: RestApiService},
+    {provide: RestApiService}
   ],
   bootstrap: [AppComponent]
 })
