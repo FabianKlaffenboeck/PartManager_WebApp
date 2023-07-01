@@ -50,7 +50,7 @@ class RestApiClient<T extends Record | any> {
       return
     }
 
-    this.http.post<T>(`${this.apiServerUrl}/${this.apiResource}?userId=${localStorage.getItem('userId')}`, record,
+    this.http.post<T>(`${this.apiServerUrl}/${this.apiResource}}`, record,
       {}).subscribe(
       (savedRecord: T) => {
         onSuccess(savedRecord)
@@ -68,7 +68,7 @@ class RestApiClient<T extends Record | any> {
     onError: (error: HttpErrorResponse) => void = () => {
     }
   ) {
-    this.http.post<T>(`${this.apiServerUrl}/${this.apiResource}?userId=${localStorage.getItem('userId')}`,
+    this.http.post<T>(`${this.apiServerUrl}/${this.apiResource}}`,
       {}).subscribe(
       (savedRecord: T) => {
         onSuccess(savedRecord)
@@ -108,13 +108,8 @@ class RestApiClient<T extends Record | any> {
     onError: (error: HttpErrorResponse) => void = () => {
     },
     parameters: { [key: string]: any; } = {},
-    userUserId: boolean = true
   ) {
     let url = `${this.apiServerUrl}/${this.apiResource}?`
-
-    if (userUserId) {
-      url = url + `userId=${localStorage.getItem('userId')}&`
-    }
 
     url = url + Object.keys(parameters).map(key => `${key}=${parameters[key].toString()}`).join("&")
 
