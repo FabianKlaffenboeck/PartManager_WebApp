@@ -150,7 +150,6 @@ export class PartDialogComponent {
       this.filteredPartTypes = this.partTypes
       return;
     }
-    console.log(this.partTypes.filter(it => it.name!!.toLowerCase().indexOf(search.toLowerCase()) > -1));
 
     this.filteredPartTypes = this.partTypes.filter(it => it.name!!.toLowerCase().indexOf(search.toLowerCase()) > -1)
   }
