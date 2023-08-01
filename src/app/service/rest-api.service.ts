@@ -50,7 +50,7 @@ class RestApiClient<T extends Record | any> {
       return
     }
 
-    this.http.post<T>(`${this.apiServerUrl}/${this.apiResource}}`, record,
+    this.http.post<T>(`${this.apiServerUrl}/${this.apiResource}`, record,
       {}).subscribe(
       (savedRecord: T) => {
         onSuccess(savedRecord)
