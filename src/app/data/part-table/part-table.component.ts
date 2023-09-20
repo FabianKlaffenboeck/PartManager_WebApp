@@ -14,13 +14,16 @@ import {PartTypeModel} from "../../service/models/PartType.model";
   selector: 'part-table', templateUrl: './part-table.component.html', styleUrls: ['./part-table.component.scss']
 })
 
-export class PartTableComponent implements OnInit{
+export class PartTableComponent implements OnInit {
 
   displayedColumns = ['name', 'quantity', 'partType', 'manufacturer', 'tray', 'value', 'footprint', 'actions'];
   dataSource = new MatTableDataSource<PartModel>();
 
   parts: PartModel[] = []
   shelfs: ShelfModel[] = []
+
+  private _selectedManufacturers: ManufacturerModel[] = []
+  private _selectedPartTypes: PartTypeModel[] = []
 
   constructor(public partService: PartService,
               public shelfService: ShelfService,
@@ -29,14 +32,11 @@ export class PartTableComponent implements OnInit{
   ) {
   }
 
-  private _selectedManufacturers: ManufacturerModel[] = []
-
   @Input() set selectedManufacturers(value: ManufacturerModel[]) {
     this._selectedManufacturers = value;
     this.filter()
   }
 
-  private _selectedPartTypes: PartTypeModel[] = []
 
   @Input() set selectedPartTypes(value: PartTypeModel[]) {
     this._selectedPartTypes = value;
@@ -63,9 +63,9 @@ export class PartTableComponent implements OnInit{
           this.parts.push(saved)
           this.dataSource = new MatTableDataSource(this.parts)
 
-          this.notificationService.snackbar(AlertServility.SUCCESS,"saving was successful")
+          this.notificationService.snackbar(AlertServility.SUCCESS, "saving was successful")
         }, error => {
-          this.notificationService.snackbar(AlertServility.ERROR,"error while saving")
+          this.notificationService.snackbar(AlertServility.ERROR, "error while saving")
         })
       }
     });
@@ -84,9 +84,9 @@ export class PartTableComponent implements OnInit{
           this.dataSource.data[index] = saved
           this.dataSource = new MatTableDataSource(this.dataSource.data)
 
-          this.notificationService.snackbar(AlertServility.SUCCESS,"edit was successful")
+          this.notificationService.snackbar(AlertServility.SUCCESS, "edit was successful")
         }, error => {
-          this.notificationService.snackbar(AlertServility.ERROR,"error while saving")
+          this.notificationService.snackbar(AlertServility.ERROR, "error while saving")
         })
       }
     });
@@ -95,10 +95,10 @@ export class PartTableComponent implements OnInit{
   delete(element: PartModel) {
     if (element.id) {
       this.partService.delete(element.id).subscribe(() => {
-        this.notificationService.snackbar(AlertServility.SUCCESS,"deleting was successful")
+        this.notificationService.snackbar(AlertServility.SUCCESS, "deleting was successful")
         this.dataSource = new MatTableDataSource(this.dataSource.data.filter(it => it.id != element.id));
       }, error => {
-        this.notificationService.snackbar(AlertServility.ERROR,"error while deleting")
+        this.notificationService.snackbar(AlertServility.ERROR, "error while deleting")
       })
     }
   }
@@ -107,7 +107,7 @@ export class PartTableComponent implements OnInit{
     if (!element.value) {
       return "-"
     }
-    return element.value + " " + element.measurementUnit
+    return `${element.value} ${element.measurementUnit}`
   }
 
   formatter(text: string) {
@@ -115,22 +115,24 @@ export class PartTableComponent implements OnInit{
   }
 
   formatStorageLocation(element: PartModel) {
-    return (this.shelfs.find(shelf => shelf.trays && shelf.trays.some(tray => tray.id === element.tray?.id))?.name || "") + "-" + (element.tray?.name || "")
+    return `${this.shelfs.find(shelf => shelf.trays && shelf.trays.some(tray => tray.id === element.tray?.id))?.name || ""}-${element.tray?.name || ""}`
   }
 
   private filter() {
     let tmp: PartModel[] = this.parts
 
     if ((this._selectedPartTypes.length > 0) || (this._selectedManufacturers.length > 0)) {
+      tmp = []
 
       this._selectedManufacturers.forEach(manufacturer => {
-        tmp = tmp.filter(it => it.manufacturer?.name == manufacturer.name)
+        tmp = tmp.concat(this.parts.filter(it => it.manufacturer?.id == manufacturer.id))
       })
 
       this._selectedPartTypes.forEach(partType => {
-        tmp = tmp.filter(it => it.partType?.name == partType.name)
+        tmp = tmp.concat(this.parts.filter(it => it.partType?.id == partType.id))
       })
     }
+
 
     this.dataSource.data = tmp
   }
