@@ -111,21 +111,25 @@ export class PropertySelectorComponent implements OnInit {
     if (!this.manufacturers) {
       return;
     }
+
     if (!search){
       this.filteredManufacturers = this.manufacturers
       return;
     }
+
     this.filteredManufacturers = this.manufacturers.filter(it => it.name!!.toLowerCase().indexOf(search.toLowerCase()) > -1)
   }
 
   filterPartTypes(search: string | null) {
-    if (!this.manufacturers) {
+    if (!this.partTypes) {
       return;
     }
+
     if (!search){
       this.filteredPartTypes = this.partTypes
       return;
     }
+
     this.filteredPartTypes = this.partTypes.filter(it => it.name!!.toLowerCase().indexOf(search.toLowerCase()) > -1)
   }
 }

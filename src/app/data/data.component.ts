@@ -13,8 +13,7 @@ export class DataComponent {
   selectedManufacturers: ManufacturerModel[] = []
   selectedPartTypes: PartTypeModel[] = []
 
-  constructor(
-  ) {
+  constructor() {
   }
-  
+
 }

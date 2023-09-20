@@ -1,7 +1,6 @@
 <mat-accordion>
 
   <mat-expansion-panel>
-
     <mat-expansion-panel-header>
       <mat-panel-title>Filters</mat-panel-title>
     </mat-expansion-panel-header>
@@ -12,7 +11,7 @@
           <mat-option>
             <ngx-mat-select-search [formControl]="manufacturerFilterControl"></ngx-mat-select-search>
           </mat-option>
-          <mat-option *ngFor="let manufacturer of filteredManufacturers" [value]="manufacturers">
+          <mat-option *ngFor="let manufacturer of filteredManufacturers" [value]="manufacturer">
             {{manufacturer.name}}
           </mat-option>
         </mat-select>
@@ -40,8 +39,8 @@
 
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
 
+  <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>storage location</mat-panel-title>
     </mat-expansion-panel-header>
@@ -60,7 +59,6 @@
         </mat-nav-list>
       </mat-expansion-panel>
     </mat-accordion>
-
   </mat-expansion-panel>
 
 </mat-accordion>
