@@ -12,7 +12,7 @@
             <ngx-mat-select-search [formControl]="manufacturerFilterControl"></ngx-mat-select-search>
           </mat-option>
           <mat-option *ngFor="let manufacturer of filteredManufacturers" [value]="manufacturer">
-            {{manufacturer.name}}
+            {{manufacturer.name}} / {{getSpecificManufacturerCount(manufacturer)}} pc
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -28,7 +28,7 @@
             <ngx-mat-select-search [formControl]="partTypeFilterControl"></ngx-mat-select-search>
           </mat-option>
           <mat-option *ngFor="let partType of filteredPartTypes" [value]="partType">
-            {{partType.name}}
+            {{partType.name}} / {{getSpecificPartTypeCount(partType)}} pc
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -37,10 +37,7 @@
       </button>
     </div>
 
-  </mat-expansion-panel>
 
-
-  <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>storage location</mat-panel-title>
     </mat-expansion-panel-header>
@@ -60,6 +57,7 @@
       </mat-expansion-panel>
     </mat-accordion>
   </mat-expansion-panel>
+
 
 </mat-accordion>
 
