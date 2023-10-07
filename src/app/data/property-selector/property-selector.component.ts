@@ -11,6 +11,8 @@ import {ShelfService} from "../../service/data/Shelf.service";
 import {ShelfModel} from "../../service/models/Shelf.model";
 import {ShelfDialogComponent} from "../../dialogues/shelf-dialog/shelf-dialog.component";
 import {FormControl} from "@angular/forms";
+import {PartModel} from "../../service/models/Part.model";
+import {PartService} from "../../service/data/Part.service";
 
 @Component({
   selector: 'property-selector',
@@ -22,7 +24,10 @@ export class PropertySelectorComponent implements OnInit {
 
   manufacturers: ManufacturerModel[] = []
   partTypes: PartTypeModel[] = []
+
   shelfs: ShelfModel[] = []
+
+  parts: PartModel[] = []
 
   manufacturerControl = new FormControl();
   partTypesControl = new FormControl();
@@ -40,6 +45,7 @@ export class PropertySelectorComponent implements OnInit {
               public manufacturerService: ManufacturerService,
               public partTypeService: PartTypeService,
               public shelfService: ShelfService,
+              public partService: PartService,
               public notificationService: NotificationService
   ) {
   }
@@ -47,7 +53,10 @@ export class PropertySelectorComponent implements OnInit {
   ngOnInit() {
     this.manufacturerService.get().subscribe(it => this.filteredManufacturers = this.manufacturers = it)
     this.partTypeService.get().subscribe(it => this.filteredPartTypes = this.partTypes = it)
+
     this.shelfService.get().subscribe(it => this.shelfs = it)
+
+    this.partService.get().subscribe(it => this.parts = it)
 
     this.manufacturerControl.valueChanges.subscribe(it => this.selectedManufacturers.next(it))
     this.partTypesControl.valueChanges.subscribe(it => this.selectedPartTypes.next(it))
@@ -112,7 +121,7 @@ export class PropertySelectorComponent implements OnInit {
       return;
     }
 
-    if (!search){
+    if (!search) {
       this.filteredManufacturers = this.manufacturers
       return;
     }
@@ -125,11 +134,19 @@ export class PropertySelectorComponent implements OnInit {
       return;
     }
 
-    if (!search){
+    if (!search) {
       this.filteredPartTypes = this.partTypes
       return;
     }
 
     this.filteredPartTypes = this.partTypes.filter(it => it.name!!.toLowerCase().indexOf(search.toLowerCase()) > -1)
+  }
+
+  getSpecificPartTypeCount(partType: PartTypeModel): number {
+    return this.parts.filter(it => it.partType?.id == partType.id).length
+  }
+
+  getSpecificManufacturerCount(manufacturer: ManufacturerModel): number {
+    return this.parts.filter(it => it.manufacturer?.id == manufacturer.id).length
   }
 }
