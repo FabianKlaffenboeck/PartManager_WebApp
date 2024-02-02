@@ -1,5 +1,4 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
-import {IconService} from "./service/icon.service";
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +6,5 @@ import {IconService} from "./service/icon.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'PartManagerWebApp';
-
-  constructor(private iconService: IconService) {
-  }
-
+  title = 'PartManager';
 }
