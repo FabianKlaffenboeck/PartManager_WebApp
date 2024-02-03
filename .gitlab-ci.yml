@@ -37,7 +37,7 @@ build:
   stage: build
   script:
     - npm install -g @angular/cli@15.1.6
-    - npm install
+    - npm install --legacy-peer-deps --force
     - ng build
   artifacts:
     paths:
