@@ -36,8 +36,9 @@ build:
   <<: *node-job
   stage: build
   script:
+    - npm config set registry http://registry.npmjs.org/
     - npm install -g @angular/cli@15.1.6
-    - npm install --legacy-peer-deps
+    - npm install
     - ng build
   artifacts:
     paths:
