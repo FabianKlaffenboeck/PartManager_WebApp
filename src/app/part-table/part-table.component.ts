@@ -35,6 +35,7 @@ export class PartTableComponent implements OnInit {
   }
 
   delete(part: PartModel) {
-
+    this.partService.delete(part.id!).subscribe()
+    this.parts = this.parts.filter(it => it.id != part.id)
   }
 }
