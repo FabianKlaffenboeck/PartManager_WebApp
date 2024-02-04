@@ -1,7 +1,12 @@
 <div>
   <header>
-<!--    <app-toolbar [title]="title"></app-toolbar>-->
+    <p-menubar>
+      <ng-template pTemplate="start">
+        <img src="assets/Logo.svg" height="45" class="mr-2"/>
+      </ng-template>
+    </p-menubar>
   </header>
+  <br>
   <main>
     <router-outlet></router-outlet>
   </main>

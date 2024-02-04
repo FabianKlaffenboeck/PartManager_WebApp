@@ -10,6 +10,7 @@ import {TableModule} from "primeng/table";
 import {RestApiService} from "../../service/rest-api.service";
 import {HttpClientModule} from "@angular/common/http";
 import {ToastModule} from "primeng/toast";
+import {MenubarModule} from "primeng/menubar";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {ToastModule} from "primeng/toast";
     ToolbarModule,
     SplitButtonModule,
     TableModule,
-    ToastModule
+    ToastModule,
+    MenubarModule
   ],
   providers: [
     {provide: RestApiService}
