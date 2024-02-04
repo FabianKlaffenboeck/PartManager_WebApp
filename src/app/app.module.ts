@@ -9,6 +9,7 @@ import {PartTableComponent} from './part-table/part-table.component';
 import {TableModule} from "primeng/table";
 import {RestApiService} from "../../service/rest-api.service";
 import {HttpClientModule} from "@angular/common/http";
+import {ToastModule} from "primeng/toast";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     ToolbarModule,
     SplitButtonModule,
-    TableModule
+    TableModule,
+    ToastModule
   ],
   providers: [
     {provide: RestApiService}

@@ -21,8 +21,12 @@ export class PartTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.partService.get().subscribe(it => console.log(it))
+    this.partService.get().subscribe(it => this.parts = it)
+    this.shelfService.get().subscribe(it => this.shelfs = it)
   }
 
 
+  getStorageLocation(part: PartModel) {
+    return `${this.shelfs.find(shelf => shelf.trays && shelf.trays.some(tray => tray.id === part.tray?.id))?.name || ""}-${part.tray?.name || ""}`
+  }
 }
