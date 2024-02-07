@@ -3,7 +3,7 @@ import {PartModel} from "../../../service/models/Part.model";
 import {ShelfModel} from "../../../service/models/Shelf.model";
 import {PartService} from "../../../service/data/Part.service";
 import {ShelfService} from "../../../service/data/Shelf.service";
-import {NotificationService} from "../../../service/notification.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'part-table',
@@ -17,7 +17,7 @@ export class PartTableComponent implements OnInit {
 
   constructor(public partService: PartService,
               public shelfService: ShelfService,
-              public notificationService: NotificationService) {
+              private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -30,12 +30,31 @@ export class PartTableComponent implements OnInit {
     return `${this.shelfs.find(shelf => shelf.trays && shelf.trays.some(tray => tray.id === part.tray?.id))?.name || ""}-${part.tray?.name || ""}`
   }
 
-  edit(part: PartModel) {
+  add() {
+  }
 
+  edit(part: PartModel) {
+    this.messageService.addAll([{
+      severity: 'success',
+      summary: 'Edited successfully',
+      detail: part.name + " was edited successfully"
+    }]);
   }
 
   delete(part: PartModel) {
-    this.partService.delete(part.id!).subscribe()
-    this.parts = this.parts.filter(it => it.id != part.id)
+    this.partService.delete(part.id!).subscribe(it => {
+      this.messageService.addAll([{
+        severity: 'success',
+        summary: 'Delete successfully',
+        detail: part.name + " was deleted successfully"
+      }]);
+      this.parts = this.parts.filter(it => it.id != part.id)
+    }, _ => {
+      this.messageService.addAll([{
+        severity: 'error',
+        summary: 'Delete not possible',
+        detail: "An error occurred while deleting " + part.name
+      }]);
+    })
   }
 }

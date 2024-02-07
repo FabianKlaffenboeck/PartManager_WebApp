@@ -11,6 +11,8 @@ import {RestApiService} from "../../service/rest-api.service";
 import {HttpClientModule} from "@angular/common/http";
 import {ToastModule} from "primeng/toast";
 import {MenubarModule} from "primeng/menubar";
+import {MessageService} from "primeng/api";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -25,10 +27,12 @@ import {MenubarModule} from "primeng/menubar";
     SplitButtonModule,
     TableModule,
     ToastModule,
-    MenubarModule
+    MenubarModule,
+    BrowserAnimationsModule
   ],
   providers: [
-    {provide: RestApiService}
+    MessageService,
+    RestApiService
   ],
   bootstrap: [AppComponent]
 })
