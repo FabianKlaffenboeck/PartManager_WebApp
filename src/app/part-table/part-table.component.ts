@@ -4,6 +4,8 @@ import {ShelfModel} from "../../../service/models/Shelf.model";
 import {PartService} from "../../../service/data/Part.service";
 import {ShelfService} from "../../../service/data/Shelf.service";
 import {MessageService} from "primeng/api";
+import {DialogService} from "primeng/dynamicdialog";
+import {PartDialogComponent} from "../dialogs/part-dialog/part-dialog.component";
 
 @Component({
   selector: 'part-table',
@@ -17,7 +19,8 @@ export class PartTableComponent implements OnInit {
 
   constructor(public partService: PartService,
               public shelfService: ShelfService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              public dialogService: DialogService,) {
   }
 
   ngOnInit() {
@@ -31,14 +34,44 @@ export class PartTableComponent implements OnInit {
   }
 
   add() {
+    this.dialogService.open(PartDialogComponent, {
+      header: 'Add Part',
+      width: '70%',
+      baseZIndex: 10000,
+      data: {model: null},
+      contentStyle: {
+        'max-height': '500px',
+        overflow: 'auto'
+      },
+    }).onClose.subscribe(result => {
+      if (!result) {
+        this.messageService.addAll([{
+          severity: 'error',
+          summary: 'Something went wrong',
+        }]);
+        return
+      }
+      this.partService.save(result).subscribe(it => {
+        this.messageService.addAll([{
+          severity: 'success',
+          summary: 'Saved successfully',
+          detail: result.name + " was saved successfully"
+        }]);
+      }, _ => {
+        this.messageService.addAll([{
+          severity: 'error',
+          summary: 'Something went wrong',
+        }]);
+      })
+    })
   }
 
   edit(part: PartModel) {
-    this.messageService.addAll([{
-      severity: 'success',
-      summary: 'Edited successfully',
-      detail: part.name + " was edited successfully"
-    }]);
+    // this.messageService.addAll([{
+    //   severity: 'success',
+    //   summary: 'Edited successfully',
+    //   detail: part.name + " was edited successfully"
+    // }]);
   }
 
   delete(part: PartModel) {

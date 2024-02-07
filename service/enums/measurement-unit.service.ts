@@ -7,7 +7,7 @@ import {RestApiService} from "../rest-api.service";
 @Injectable({
   providedIn: 'root'
 })
-export class measurementUnitService {
+export class MeasurementUnitService {
 
   private restApi
 

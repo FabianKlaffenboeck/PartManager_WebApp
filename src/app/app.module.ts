@@ -13,11 +13,14 @@ import {ToastModule} from "primeng/toast";
 import {MenubarModule} from "primeng/menubar";
 import {MessageService} from "primeng/api";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { PartDialogComponent } from './dialogs/part-dialog/part-dialog.component';
+import {DialogService} from "primeng/dynamicdialog";
 
 @NgModule({
   declarations: [
     AppComponent,
-    PartTableComponent
+    PartTableComponent,
+    PartDialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -32,7 +35,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   ],
   providers: [
     MessageService,
-    RestApiService
+    RestApiService,
+    DialogService
   ],
   bootstrap: [AppComponent]
 })
