@@ -15,6 +15,10 @@ import {MessageService} from "primeng/api";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { PartDialogComponent } from './dialogs/part-dialog/part-dialog.component';
 import {DialogService} from "primeng/dynamicdialog";
+import {FormsModule} from "@angular/forms";
+import {InputTextModule} from "primeng/inputtext";
+import {InputNumberModule} from "primeng/inputnumber";
+import {DropdownModule} from "primeng/dropdown";
 
 @NgModule({
   declarations: [
@@ -31,7 +35,11 @@ import {DialogService} from "primeng/dynamicdialog";
     TableModule,
     ToastModule,
     MenubarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    InputTextModule,
+    InputNumberModule,
+    DropdownModule
   ],
   providers: [
     MessageService,

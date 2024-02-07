@@ -28,6 +28,8 @@ export class PartDialogComponent implements OnInit {
   shelfs: ShelfModel[] = []
   parts: PartModel[] = []
 
+  value: any;
+
   constructor(
     public dialogRef: DynamicDialogRef,
     public config: DynamicDialogConfig,
@@ -49,10 +51,11 @@ export class PartDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.config.data.model);
   }
 
   onCancelClick(): void {
+    console.log(this.value);
+    return
     this.dialogRef.close();
   }
 

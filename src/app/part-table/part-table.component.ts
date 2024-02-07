@@ -37,12 +37,9 @@ export class PartTableComponent implements OnInit {
     this.dialogService.open(PartDialogComponent, {
       header: 'Add Part',
       width: '70%',
+      height: '70%',
       baseZIndex: 10000,
       data: {model: null},
-      contentStyle: {
-        'max-height': '500px',
-        overflow: 'auto'
-      },
     }).onClose.subscribe(result => {
       if (!result) {
         this.messageService.addAll([{
