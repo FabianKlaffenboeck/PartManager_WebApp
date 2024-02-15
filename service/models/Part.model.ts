@@ -2,14 +2,16 @@ import {Record} from '../rest-api.service';
 import {TrayModel} from "./Tray.model";
 import {ManufacturerModel} from "./Manufacturer.model";
 import {PartTypeModel} from "./PartType.model";
+import {FootprintModel} from "./Footprint.model";
+import {MeasurementUnitModel} from "./MeasurementUnit.model";
 
 export class PartModel implements Record {
   id: number | undefined
   name: string | undefined
   quantity: number | undefined
-  measurementUnit: string | null
+  measurementUnit: MeasurementUnitModel | null
   value: number | null
-  footprint: string | null
+  footprint: FootprintModel | null
   partType: PartTypeModel | undefined
   manufacturer: ManufacturerModel | undefined
   tray: TrayModel | undefined
@@ -18,9 +20,9 @@ export class PartModel implements Record {
     id?: number | undefined
     name?: string | undefined
     quantity?: number | undefined
-    measurementUnit?: string | null
+    measurementUnit?: MeasurementUnitModel | null
     value?: number | null
-    footprint?: string | null
+    footprint?: FootprintModel | null
     partType?: PartTypeModel | undefined
     manufacturer?: ManufacturerModel | undefined
     tray?: TrayModel | undefined

@@ -1,19 +1,19 @@
 <span class="p-float-label">
-    <input pInputText id="name" [(ngModel)]="value"/>
+    <input pInputText id="name" [(ngModel)]="name"/>
     <label for="name">Name</label>
 </span>
 
 <span class="p-float-label">
-    <p-inputNumber inputId="integeronly" id="quantity" [(ngModel)]="value"> </p-inputNumber>
+    <p-inputNumber inputId="integeronly" id="quantity" [(ngModel)]="quantity"> </p-inputNumber>
     <label for="quantity">Quantity</label>
 </span>
 
 <div class="card flex justify-content-center">
-  <p-dropdown [options]="partTypes" [(ngModel)]="value" optionLabel="name" [filter]="true" filterBy="name"
+  <p-dropdown [options]="partTypes" [(ngModel)]="partType" optionLabel="name" [filter]="true" filterBy="name"
               [showClear]="true" placeholder="PartType">
     <ng-template pTemplate="selectedItem">
-      <div class="flex align-items-center gap-2" *ngIf="value">
-        <div>{{ value.name }}</div>
+      <div class="flex align-items-center gap-2" *ngIf="partType">
+        <div>{{ partType.name }}</div>
       </div>
     </ng-template>
     <ng-template let-partType pTemplate="item">
@@ -25,11 +25,11 @@
 </div>
 
 <div class="card flex justify-content-center">
-  <p-dropdown [options]="manufacturers" [(ngModel)]="value" optionLabel="name" [filter]="true" filterBy="name"
+  <p-dropdown [options]="manufacturers" [(ngModel)]="manufacturer" optionLabel="name" [filter]="true" filterBy="name"
               [showClear]="true" placeholder="Manufacturer">
     <ng-template pTemplate="selectedItem">
-      <div class="flex align-items-center gap-2" *ngIf="value">
-        <div>{{ value.name }}</div>
+      <div class="flex align-items-center gap-2" *ngIf="manufacturer">
+        <div>{{ manufacturer.name }}</div>
       </div>
     </ng-template>
     <ng-template let-manufacturer pTemplate="item">
@@ -41,11 +41,12 @@
 </div>
 
 <div class="card flex justify-content-center">
-  <p-dropdown [options]="measurementUnits" [(ngModel)]="value" optionLabel="name" [filter]="true" filterBy="name"
+  <p-dropdown [options]="measurementUnits" [(ngModel)]="measurementUnit" optionLabel="name" [filter]="true"
+              filterBy="name"
               [showClear]="true" placeholder="MeasurementUnit">
     <ng-template pTemplate="selectedItem">
-      <div class="flex align-items-center gap-2" *ngIf="value">
-        <div>{{ value.name }}</div>
+      <div class="flex align-items-center gap-2" *ngIf="measurementUnit">
+        <div>{{ measurementUnit.name }}</div>
       </div>
     </ng-template>
     <ng-template let-measurementUnit pTemplate="item">
@@ -62,16 +63,32 @@
 </span>
 
 <div class="card flex justify-content-center">
-  <p-dropdown [options]="footprints" [(ngModel)]="value" [filter]="true" filterBy="name"
+  <p-dropdown [options]="footprints" [(ngModel)]="footprint" [filter]="true" filterBy="name"
               [showClear]="true" placeholder="Footprint">
     <ng-template pTemplate="selectedItem">
-      <div class="flex align-items-center gap-2" *ngIf="value">
-        <div>{{ value }}</div>
+      <div class="flex align-items-center gap-2" *ngIf="footprint">
+        <div>{{ footprint.name }}</div>
       </div>
     </ng-template>
     <ng-template let-footprint pTemplate="item">
       <div class="flex align-items-center gap-2">
-        <div>{{ footprint }}</div>
+        <div>{{ footprint.name }}</div>
+      </div>
+    </ng-template>
+  </p-dropdown>
+</div>
+
+<div class="card flex justify-content-center">
+  <p-dropdown [options]="trays" [(ngModel)]="tray" [filter]="true" filterBy="name"
+              [showClear]="true" placeholder="Tray">
+    <ng-template pTemplate="selectedItem">
+      <div class="flex align-items-center gap-2" *ngIf="tray">
+        <div>{{ tray.name }}</div>
+      </div>
+    </ng-template>
+    <ng-template let-tray pTemplate="item">
+      <div class="flex align-items-center gap-2">
+        <div>{{ tray.name }}</div>
       </div>
     </ng-template>
   </p-dropdown>

@@ -64,11 +64,33 @@ export class PartTableComponent implements OnInit {
   }
 
   edit(part: PartModel) {
-    // this.messageService.addAll([{
-    //   severity: 'success',
-    //   summary: 'Edited successfully',
-    //   detail: part.name + " was edited successfully"
-    // }]);
+    this.dialogService.open(PartDialogComponent, {
+      header: 'Add Part',
+      width: '70%',
+      height: '70%',
+      baseZIndex: 10000,
+      data: {model: part},
+    }).onClose.subscribe(result => {
+      if (!result) {
+        this.messageService.addAll([{
+          severity: 'error',
+          summary: 'Something went wrong',
+        }]);
+        return
+      }
+      this.partService.save(result).subscribe(it => {
+        this.messageService.addAll([{
+          severity: 'success',
+          summary: 'Edit was successfully',
+          detail: result.name + " was saved successfully"
+        }]);
+      }, _ => {
+        this.messageService.addAll([{
+          severity: 'error',
+          summary: 'Something went wrong',
+        }]);
+      })
+    })
   }
 
   delete(part: PartModel) {

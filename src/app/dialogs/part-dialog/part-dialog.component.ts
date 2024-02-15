@@ -30,7 +30,14 @@ export class PartDialogComponent implements OnInit {
   shelfs: ShelfModel[] = []
   parts: PartModel[] = []
 
+  name: any;
+  quantity: any;
+  measurementUnit: any;
   value: any;
+  footprint: any;
+  partType: any;
+  manufacturer: any;
+  tray: any;
 
   constructor(
     public dialogRef: DynamicDialogRef,
@@ -53,6 +60,16 @@ export class PartDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.config.data.model != undefined) {
+      this.name = this.config.data.model.name
+      this.quantity = this.config.data.model.quantity
+      this.measurementUnit = this.config.data.model.measurementUnit
+      this.value = this.config.data.model.value
+      this.footprint = this.config.data.model.footprint
+      this.partType = this.config.data.model.partType
+      this.manufacturer = this.config.data.model.manufacturer
+      this.tray = this.config.data.model.tray
+    }
   }
 
   onCancelClick(): void {
@@ -62,17 +79,17 @@ export class PartDialogComponent implements OnInit {
   onSaveClick() {
     let part: PartModel = {
       id: undefined,
-      name: undefined,
-      quantity: undefined,
-      measurementUnit: null,
-      value: null,
-      footprint: null,
-      partType: undefined,
-      manufacturer: undefined,
-      tray: undefined,
+      name: this.name,
+      quantity: this.quantity,
+      measurementUnit: this.measurementUnit,
+      value: this.value,
+      footprint: this.footprint,
+      partType: this.partType,
+      manufacturer: this.manufacturer,
+      tray: this.tray,
     };
 
-    if (this.config.data.mode) {
+    if (this.config.data.model != undefined) {
       part.id = this.config.data.model.id
     }
 
