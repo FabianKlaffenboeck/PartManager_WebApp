@@ -9,9 +9,11 @@ import {PartTypeService} from "../../../../service/data/PartType.service";
 import {ManufacturerService} from "../../../../service/data/Manufacturer.service";
 import {TrayService} from "../../../../service/data/Tray.service";
 import {ShelfService} from "../../../../service/data/Shelf.service";
-import {FootprintService} from "../../../../service/enums/Footprint.service";
 import {PartService} from "../../../../service/data/Part.service";
-import {MeasurementUnitService} from "../../../../service/enums/measurement-unit.service";
+import {FootprintModel} from "../../../../service/models/Footprint.model";
+import {FootprintService} from "../../../../service/data/Footprint.service";
+import {MeasurementUnitService} from "../../../../service/data/MeasurementUnit.service";
+import {MeasurementUnitModel} from "../../../../service/models/MeasurementUnit.model";
 
 @Component({
   selector: 'app-part-dialog',
@@ -23,8 +25,8 @@ export class PartDialogComponent implements OnInit {
   partTypes: PartTypeModel[] = []
   manufacturers: ManufacturerModel[] = []
   trays: TrayModel[] = []
-  measurementUnits: string[] = []
-  footprints: string[] = []
+  measurementUnits: MeasurementUnitModel[] = []
+  footprints: FootprintModel[] = []
   shelfs: ShelfModel[] = []
   parts: PartModel[] = []
 
@@ -54,8 +56,6 @@ export class PartDialogComponent implements OnInit {
   }
 
   onCancelClick(): void {
-    console.log(this.value);
-    return
     this.dialogRef.close();
   }
 

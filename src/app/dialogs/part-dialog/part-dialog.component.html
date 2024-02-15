@@ -2,10 +2,12 @@
     <input pInputText id="name" [(ngModel)]="value"/>
     <label for="name">Name</label>
 </span>
+
 <span class="p-float-label">
     <p-inputNumber inputId="integeronly" id="quantity" [(ngModel)]="value"> </p-inputNumber>
     <label for="quantity">Quantity</label>
 </span>
+
 <div class="card flex justify-content-center">
   <p-dropdown [options]="partTypes" [(ngModel)]="value" optionLabel="name" [filter]="true" filterBy="name"
               [showClear]="true" placeholder="PartType">
@@ -21,6 +23,7 @@
     </ng-template>
   </p-dropdown>
 </div>
+
 <div class="card flex justify-content-center">
   <p-dropdown [options]="manufacturers" [(ngModel)]="value" optionLabel="name" [filter]="true" filterBy="name"
               [showClear]="true" placeholder="Manufacturer">
@@ -37,7 +40,6 @@
   </p-dropdown>
 </div>
 
-
 <div class="card flex justify-content-center">
   <p-dropdown [options]="measurementUnits" [(ngModel)]="value" optionLabel="name" [filter]="true" filterBy="name"
               [showClear]="true" placeholder="MeasurementUnit">
@@ -53,10 +55,12 @@
     </ng-template>
   </p-dropdown>
 </div>
+
 <span class="p-float-label">
     <p-inputNumber inputId="integeronly" id="value" [(ngModel)]="value"> </p-inputNumber>
     <label for="value">Value</label>
 </span>
+
 <div class="card flex justify-content-center">
   <p-dropdown [options]="footprints" [(ngModel)]="value" [filter]="true" filterBy="name"
               [showClear]="true" placeholder="Footprint">
@@ -72,7 +76,6 @@
     </ng-template>
   </p-dropdown>
 </div>
-
 
 <p-button severity="success" (onClick)="onSaveClick()">Save</p-button>
 <p-button severity="danger" (click)="onCancelClick()">Cancel</p-button>
