@@ -6,6 +6,11 @@ import {ShelfService} from "../../../service/data/Shelf.service";
 import {MessageService} from "primeng/api";
 import {DialogService} from "primeng/dynamicdialog";
 import {PartDialogComponent} from "../dialogs/part-dialog/part-dialog.component";
+import {ShelfDialogComponent} from "../dialogs/shelf-dialog/shelf-dialog.component";
+import {FootprintDialogComponent} from "../dialogs/footprint-dialog/footprint-dialog.component";
+import {MeasurementUnitDialogComponent} from "../dialogs/measurementUnit-dialog/measurementUnit-dialog.component";
+import {ManufacturerDialogComponent} from "../dialogs/manufacturer-dialog/manufacturer-dialog.component";
+import {PartTypeDialogComponent} from "../dialogs/partType-dialog/partType-dialog.component";
 
 @Component({
   selector: 'part-table',
@@ -46,6 +51,7 @@ export class PartTableComponent implements OnInit {
   edit(part: PartModel) {
     this.dialogService.open(PartDialogComponent, {
       header: 'Edit Part',
+      height: '60%',
       baseZIndex: 10000,
       data: {model: part},
     }).onClose.subscribe(result => {
@@ -96,6 +102,56 @@ export class PartTableComponent implements OnInit {
         summary: 'Delete not possible',
         detail: "An error occurred while deleting " + part.name
       }]);
+    })
+  }
+
+  addShelf() {
+    this.dialogService.open(ShelfDialogComponent, {
+      header: 'Add Shelf',
+      height: '60%',
+      baseZIndex: 10000,
+      data: {model: null},
+    }).onClose.subscribe(result => {
+    })
+  }
+
+  addFootprint() {
+    this.dialogService.open(FootprintDialogComponent, {
+      header: 'Add Footprint',
+      height: '60%',
+      baseZIndex: 10000,
+      data: {model: null},
+    }).onClose.subscribe(result => {
+    })
+  }
+
+  addMeasurementUnit() {
+    this.dialogService.open(MeasurementUnitDialogComponent, {
+      header: 'Add MeasurementUnit',
+      height: '60%',
+      baseZIndex: 10000,
+      data: {model: null},
+    }).onClose.subscribe(result => {
+    })
+  }
+
+  addManufacturer() {
+    this.dialogService.open(ManufacturerDialogComponent, {
+      header: 'Add Manufacturer',
+      height: '60%',
+      baseZIndex: 10000,
+      data: {model: null},
+    }).onClose.subscribe(result => {
+    })
+  }
+
+  addPartType() {
+    this.dialogService.open(PartTypeDialogComponent, {
+      header: 'Add PartType',
+      height: '60%',
+      baseZIndex: 10000,
+      data: {model: null},
+    }).onClose.subscribe(result => {
     })
   }
 }
