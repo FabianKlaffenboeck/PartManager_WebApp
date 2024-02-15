@@ -28,7 +28,6 @@ export class PartTableComponent implements OnInit {
     this.shelfService.get().subscribe(it => this.shelfs = it)
   }
 
-
   getStorageLocation(part: PartModel) {
     return `${this.shelfs.find(shelf => shelf.trays && shelf.trays.some(tray => tray.id === part.tray?.id))?.name || ""}-${part.tray?.name || ""}`
   }
@@ -36,8 +35,7 @@ export class PartTableComponent implements OnInit {
   add() {
     this.dialogService.open(PartDialogComponent, {
       header: 'Add Part',
-      width: '70%',
-      height: '70%',
+      height: '60%',
       baseZIndex: 10000,
       data: {model: null},
     }).onClose.subscribe(result => {
@@ -47,9 +45,7 @@ export class PartTableComponent implements OnInit {
 
   edit(part: PartModel) {
     this.dialogService.open(PartDialogComponent, {
-      header: 'Add Part',
-      width: '70%',
-      height: '70%',
+      header: 'Edit Part',
       baseZIndex: 10000,
       data: {model: part},
     }).onClose.subscribe(result => {

@@ -95,4 +95,9 @@ export class PartDialogComponent implements OnInit {
 
     this.dialogRef.close(part);
   }
+
+  mapTrayShelf(tray: TrayModel): string {
+    let shelfName = this.shelfs.find(shelf => shelf.trays?.find(it => it.id == tray.id))?.name || ""
+    return shelfName + "-" + tray.name
+  }
 }

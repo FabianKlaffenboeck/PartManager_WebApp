@@ -19,6 +19,7 @@ import {FormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {InputNumberModule} from "primeng/inputnumber";
 import {DropdownModule} from "primeng/dropdown";
+import {DialogModule} from "primeng/dialog";
 
 @NgModule({
   declarations: [
@@ -26,21 +27,22 @@ import {DropdownModule} from "primeng/dropdown";
     PartTableComponent,
     PartDialogComponent
   ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    AppRoutingModule,
-    ToolbarModule,
-    SplitButtonModule,
-    TableModule,
-    ToastModule,
-    MenubarModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    InputTextModule,
-    InputNumberModule,
-    DropdownModule
-  ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        AppRoutingModule,
+        ToolbarModule,
+        SplitButtonModule,
+        TableModule,
+        ToastModule,
+        MenubarModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        InputTextModule,
+        InputNumberModule,
+        DropdownModule,
+        DialogModule
+    ],
   providers: [
     MessageService,
     RestApiService,
