@@ -41,25 +41,7 @@ export class PartTableComponent implements OnInit {
       baseZIndex: 10000,
       data: {model: null},
     }).onClose.subscribe(result => {
-      if (!result) {
-        this.messageService.addAll([{
-          severity: 'error',
-          summary: 'Something went wrong',
-        }]);
-        return
-      }
-      this.partService.save(result).subscribe(it => {
-        this.messageService.addAll([{
-          severity: 'success',
-          summary: 'Saved successfully',
-          detail: result.name + " was saved successfully"
-        }]);
-      }, _ => {
-        this.messageService.addAll([{
-          severity: 'error',
-          summary: 'Something went wrong',
-        }]);
-      })
+      this.executeSaveOrUpdate(result)
     })
   }
 
@@ -71,25 +53,36 @@ export class PartTableComponent implements OnInit {
       baseZIndex: 10000,
       data: {model: part},
     }).onClose.subscribe(result => {
-      if (!result) {
-        this.messageService.addAll([{
-          severity: 'error',
-          summary: 'Something went wrong',
-        }]);
-        return
+      this.executeSaveOrUpdate(result)
+    })
+  }
+
+  executeSaveOrUpdate(part: PartModel) {
+    if (!part) {
+      this.messageService.addAll([{
+        severity: 'error',
+        summary: 'Something went wrong',
+      }]);
+      return
+    }
+    this.partService.save(part).subscribe(result => {
+
+      if (this.parts.find(it => it.id == result.id)) {
+        this.parts[this.parts.findIndex(it => it.id == part.id)] = part
+      } else {
+        this.parts.push(part)
       }
-      this.partService.save(result).subscribe(it => {
-        this.messageService.addAll([{
-          severity: 'success',
-          summary: 'Edit was successfully',
-          detail: result.name + " was saved successfully"
-        }]);
-      }, _ => {
-        this.messageService.addAll([{
-          severity: 'error',
-          summary: 'Something went wrong',
-        }]);
-      })
+
+      this.messageService.addAll([{
+        severity: 'success',
+        summary: 'Successfully',
+        detail: part.name + " was saved successfully"
+      }]);
+    }, _ => {
+      this.messageService.addAll([{
+        severity: 'error',
+        summary: 'Something went wrong',
+      }]);
     })
   }
 
