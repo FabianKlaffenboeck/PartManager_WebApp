@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
+import {ManufacturerModel} from "../../../../service/models/Manufacturer.model";
 
 @Component({
   selector: 'app-part-dialog',
@@ -7,6 +8,8 @@ import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
   styleUrls: ['./manufacturer-dialog.component.scss']
 })
 export class ManufacturerDialogComponent implements OnInit {
+
+  name: any;
 
   constructor(
     public dialogRef: DynamicDialogRef,
@@ -24,6 +27,15 @@ export class ManufacturerDialogComponent implements OnInit {
   }
 
   onSaveClick() {
-    this.dialogRef.close(null);
+    let manufacturer: ManufacturerModel = {
+      id: undefined,
+      name: this.name
+    }
+
+    if (this.config.data.model != undefined) {
+      manufacturer.id = this.config.data.model.id
+    }
+
+    this.dialogRef.close(manufacturer);
   }
 }

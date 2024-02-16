@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
+import {PartTypeModel} from "../../../../service/models/PartType.model";
 
 @Component({
   selector: 'app-part-dialog',
@@ -7,6 +8,8 @@ import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
   styleUrls: ['./partType-dialog.component.scss']
 })
 export class PartTypeDialogComponent implements OnInit {
+
+  name: any;
 
   constructor(
     public dialogRef: DynamicDialogRef,
@@ -16,6 +19,7 @@ export class PartTypeDialogComponent implements OnInit {
 
   ngOnInit() {
     if (this.config.data.model != undefined) {
+      this.name = this.config.data.model.name
     }
   }
 
@@ -24,6 +28,15 @@ export class PartTypeDialogComponent implements OnInit {
   }
 
   onSaveClick() {
-    this.dialogRef.close(null);
+    let partType: PartTypeModel = {
+      id: undefined,
+      name: this.name
+    }
+
+    if (this.config.data.model != undefined) {
+      partType.id = this.config.data.model.id
+    }
+
+    this.dialogRef.close(partType);
   }
 }

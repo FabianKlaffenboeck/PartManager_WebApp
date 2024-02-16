@@ -11,6 +11,11 @@ import {FootprintDialogComponent} from "../dialogs/footprint-dialog/footprint-di
 import {MeasurementUnitDialogComponent} from "../dialogs/measurementUnit-dialog/measurementUnit-dialog.component";
 import {ManufacturerDialogComponent} from "../dialogs/manufacturer-dialog/manufacturer-dialog.component";
 import {PartTypeDialogComponent} from "../dialogs/partType-dialog/partType-dialog.component";
+import {PartTypeService} from "../../../service/data/PartType.service";
+import {ManufacturerService} from "../../../service/data/Manufacturer.service";
+import {FootprintService} from "../../../service/data/Footprint.service";
+import {MeasurementUnitModel} from "../../../service/models/MeasurementUnit.model";
+import {MeasurementUnitService} from "../../../service/data/MeasurementUnit.service";
 
 @Component({
   selector: 'part-table',
@@ -23,7 +28,11 @@ export class PartTableComponent implements OnInit {
   shelfs: ShelfModel[] = []
 
   constructor(public partService: PartService,
+              public partTypeService: PartTypeService,
               public shelfService: ShelfService,
+              public manufacturerService: ManufacturerService,
+              public footprintService: FootprintService,
+              public measurementUnitService: MeasurementUnitService,
               private messageService: MessageService,
               public dialogService: DialogService,) {
   }
@@ -112,6 +121,25 @@ export class PartTableComponent implements OnInit {
       baseZIndex: 10000,
       data: {model: null},
     }).onClose.subscribe(result => {
+      if (!result) {
+        this.messageService.addAll([{
+          severity: 'error',
+          summary: 'Something went wrong',
+        }]);
+        return
+      }
+      this.shelfService.save(result).subscribe(result => {
+        this.messageService.addAll([{
+          severity: 'success',
+          summary: 'Successfully',
+          detail: result.name + " was saved successfully"
+        }]);
+      }, _ => {
+        this.messageService.addAll([{
+          severity: 'error',
+          summary: 'Something went wrong',
+        }]);
+      })
     })
   }
 
@@ -122,6 +150,25 @@ export class PartTableComponent implements OnInit {
       baseZIndex: 10000,
       data: {model: null},
     }).onClose.subscribe(result => {
+      if (!result) {
+        this.messageService.addAll([{
+          severity: 'error',
+          summary: 'Something went wrong',
+        }]);
+        return
+      }
+      this.footprintService.save(result).subscribe(result => {
+        this.messageService.addAll([{
+          severity: 'success',
+          summary: 'Successfully',
+          detail: result.name + " was saved successfully"
+        }]);
+      }, _ => {
+        this.messageService.addAll([{
+          severity: 'error',
+          summary: 'Something went wrong',
+        }]);
+      })
     })
   }
 
@@ -132,6 +179,25 @@ export class PartTableComponent implements OnInit {
       baseZIndex: 10000,
       data: {model: null},
     }).onClose.subscribe(result => {
+      if (!result) {
+        this.messageService.addAll([{
+          severity: 'error',
+          summary: 'Something went wrong',
+        }]);
+        return
+      }
+      this.measurementUnitService.save(result).subscribe(result => {
+        this.messageService.addAll([{
+          severity: 'success',
+          summary: 'Successfully',
+          detail: result.name + " was saved successfully"
+        }]);
+      }, _ => {
+        this.messageService.addAll([{
+          severity: 'error',
+          summary: 'Something went wrong',
+        }]);
+      })
     })
   }
 
@@ -142,6 +208,25 @@ export class PartTableComponent implements OnInit {
       baseZIndex: 10000,
       data: {model: null},
     }).onClose.subscribe(result => {
+      if (!result) {
+        this.messageService.addAll([{
+          severity: 'error',
+          summary: 'Something went wrong',
+        }]);
+        return
+      }
+      this.manufacturerService.save(result).subscribe(result => {
+        this.messageService.addAll([{
+          severity: 'success',
+          summary: 'Successfully',
+          detail: result.name + " was saved successfully"
+        }]);
+      }, _ => {
+        this.messageService.addAll([{
+          severity: 'error',
+          summary: 'Something went wrong',
+        }]);
+      })
     })
   }
 
@@ -152,6 +237,25 @@ export class PartTableComponent implements OnInit {
       baseZIndex: 10000,
       data: {model: null},
     }).onClose.subscribe(result => {
+      if (!result) {
+        this.messageService.addAll([{
+          severity: 'error',
+          summary: 'Something went wrong',
+        }]);
+        return
+      }
+      this.partTypeService.save(result).subscribe(result => {
+        this.messageService.addAll([{
+          severity: 'success',
+          summary: 'Successfully',
+          detail: result.name + " was saved successfully"
+        }]);
+      }, _ => {
+        this.messageService.addAll([{
+          severity: 'error',
+          summary: 'Something went wrong',
+        }]);
+      })
     })
   }
 }
