@@ -28,13 +28,9 @@ export class PartTableComponent implements OnInit {
   shelfs: ShelfModel[] = []
 
   constructor(public partService: PartService,
-              public partTypeService: PartTypeService,
               public shelfService: ShelfService,
-              public manufacturerService: ManufacturerService,
-              public footprintService: FootprintService,
-              public measurementUnitService: MeasurementUnitService,
               private messageService: MessageService,
-              public dialogService: DialogService,) {
+              public dialogService: DialogService) {
   }
 
   ngOnInit() {
@@ -111,151 +107,6 @@ export class PartTableComponent implements OnInit {
         summary: 'Delete not possible',
         detail: "An error occurred while deleting " + part.name
       }]);
-    })
-  }
-
-  addShelf() {
-    this.dialogService.open(ShelfDialogComponent, {
-      header: 'Add Shelf',
-      height: '60%',
-      baseZIndex: 10000,
-      data: {model: null},
-    }).onClose.subscribe(result => {
-      if (!result) {
-        this.messageService.addAll([{
-          severity: 'error',
-          summary: 'Something went wrong',
-        }]);
-        return
-      }
-      this.shelfService.save(result).subscribe(result => {
-        this.messageService.addAll([{
-          severity: 'success',
-          summary: 'Successfully',
-          detail: result.name + " was saved successfully"
-        }]);
-      }, _ => {
-        this.messageService.addAll([{
-          severity: 'error',
-          summary: 'Something went wrong',
-        }]);
-      })
-    })
-  }
-
-  addFootprint() {
-    this.dialogService.open(FootprintDialogComponent, {
-      header: 'Add Footprint',
-      height: '60%',
-      baseZIndex: 10000,
-      data: {model: null},
-    }).onClose.subscribe(result => {
-      if (!result) {
-        this.messageService.addAll([{
-          severity: 'error',
-          summary: 'Something went wrong',
-        }]);
-        return
-      }
-      this.footprintService.save(result).subscribe(result => {
-        this.messageService.addAll([{
-          severity: 'success',
-          summary: 'Successfully',
-          detail: result.name + " was saved successfully"
-        }]);
-      }, _ => {
-        this.messageService.addAll([{
-          severity: 'error',
-          summary: 'Something went wrong',
-        }]);
-      })
-    })
-  }
-
-  addMeasurementUnit() {
-    this.dialogService.open(MeasurementUnitDialogComponent, {
-      header: 'Add MeasurementUnit',
-      height: '60%',
-      baseZIndex: 10000,
-      data: {model: null},
-    }).onClose.subscribe(result => {
-      if (!result) {
-        this.messageService.addAll([{
-          severity: 'error',
-          summary: 'Something went wrong',
-        }]);
-        return
-      }
-      this.measurementUnitService.save(result).subscribe(result => {
-        this.messageService.addAll([{
-          severity: 'success',
-          summary: 'Successfully',
-          detail: result.name + " was saved successfully"
-        }]);
-      }, _ => {
-        this.messageService.addAll([{
-          severity: 'error',
-          summary: 'Something went wrong',
-        }]);
-      })
-    })
-  }
-
-  addManufacturer() {
-    this.dialogService.open(ManufacturerDialogComponent, {
-      header: 'Add Manufacturer',
-      height: '60%',
-      baseZIndex: 10000,
-      data: {model: null},
-    }).onClose.subscribe(result => {
-      if (!result) {
-        this.messageService.addAll([{
-          severity: 'error',
-          summary: 'Something went wrong',
-        }]);
-        return
-      }
-      this.manufacturerService.save(result).subscribe(result => {
-        this.messageService.addAll([{
-          severity: 'success',
-          summary: 'Successfully',
-          detail: result.name + " was saved successfully"
-        }]);
-      }, _ => {
-        this.messageService.addAll([{
-          severity: 'error',
-          summary: 'Something went wrong',
-        }]);
-      })
-    })
-  }
-
-  addPartType() {
-    this.dialogService.open(PartTypeDialogComponent, {
-      header: 'Add PartType',
-      height: '60%',
-      baseZIndex: 10000,
-      data: {model: null},
-    }).onClose.subscribe(result => {
-      if (!result) {
-        this.messageService.addAll([{
-          severity: 'error',
-          summary: 'Something went wrong',
-        }]);
-        return
-      }
-      this.partTypeService.save(result).subscribe(result => {
-        this.messageService.addAll([{
-          severity: 'success',
-          summary: 'Successfully',
-          detail: result.name + " was saved successfully"
-        }]);
-      }, _ => {
-        this.messageService.addAll([{
-          severity: 'error',
-          summary: 'Something went wrong',
-        }]);
-      })
     })
   }
 }

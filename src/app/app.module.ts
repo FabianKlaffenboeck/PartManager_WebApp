@@ -35,7 +35,7 @@ import {ShelfDialogComponent} from "./dialogs/shelf-dialog/shelf-dialog.componen
     ManufacturerDialogComponent,
     MeasurementUnitDialogComponent,
     PartTypeDialogComponent,
-    ShelfDialogComponent
+    ShelfDialogComponent,
   ],
   imports: [
     HttpClientModule,
