@@ -1,0 +1,20 @@
+<div>
+  <table>
+    <tr>
+      <td>
+        <span class="p-float-label">
+          <input pInputText type="text" id="name" [(ngModel)]="name">
+          <label for="name">Name</label>
+        </span>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p-button severity="success" (onClick)="onSaveClick()">Save</p-button>
+        <p-button severity="danger" (click)="onCancelClick()">Cancel</p-button>
+      </td>
+      <td></td>
+    </tr>
+  </table>
+</div>

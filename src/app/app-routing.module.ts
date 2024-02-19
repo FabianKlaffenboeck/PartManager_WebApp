@@ -1,20 +1,15 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterModule, Routes} from "@angular/router";
-import {DataComponent} from "./data/data.component";
-import {SettingsComponent} from "./settings/settings.component";
+import {RouterModule, Routes} from '@angular/router';
+import {PartTableComponent} from "./part-table/part-table.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/data', pathMatch: 'full' },
-  { path: 'data', component: DataComponent },
-  { path: 'settings', component: SettingsComponent },
+  {path: '', redirectTo: '/data', pathMatch: 'full'},
+  {path: 'data', component: PartTableComponent},
 ]
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule, RouterModule.forRoot(routes)
-  ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {
 }

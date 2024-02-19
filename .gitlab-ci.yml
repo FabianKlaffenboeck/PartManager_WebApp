@@ -30,14 +30,14 @@ cache:
       --push .
 
 .node-job: &node-job
-  image: node:latest
+  image: node:18.18.0
 
 build:
   <<: *node-job
   stage: build
   script:
     - npm install -g @angular/cli@15.1.6
-    - npm install
+    - npm install --legacy-peer-deps --force
     - ng build
   artifacts:
     paths:

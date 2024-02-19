@@ -1,0 +1,36 @@
+<p-table [value]="parts" [scrollable]="true" scrollHeight="50rem" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>name</th>
+      <th>quantity</th>
+      <th>partType</th>
+      <th>manufacturer</th>
+      <th>storage location</th>
+      <th>value</th>
+      <th>footprint</th>
+      <th style="width: 5rem">edit</th>
+      <th style="width: 5rem">delete</th>
+      <th>
+        <p-button icon="pi pi-plus" severity="info" (click)="add()"></p-button>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-part>
+    <tr>
+      <td>{{ part.name }}</td>
+      <td>{{ part.quantity }}</td>
+      <td>{{ part.partType?.name }}</td>
+      <td>{{ part.manufacturer?.name }}</td>
+      <td>{{ getStorageLocation(part) }}</td>
+      <td>{{ part.value }}</td>
+      <td>{{ part.footprint?.name }}</td>
+      <td>
+        <p-button icon="pi pi-pencil" severity="warning" (onClick)="edit(part)"></p-button>
+      </td>
+      <td>
+        <p-button icon="pi pi-trash" severity="danger" (click)="delete(part)"></p-button>
+      </td>
+      <td></td>
+    </tr>
+  </ng-template>
+</p-table>

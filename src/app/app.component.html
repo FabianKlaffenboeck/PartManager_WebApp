@@ -1,8 +1,25 @@
 <div>
   <header>
-    <app-toolbar [title]="title"></app-toolbar>
+
+    <p-toolbar [style]="{'height': '4rem','padding-top': '0','padding-bottom': '0'}">
+      <div class="p-toolbar-group-start">
+        <a routerLink="">
+          <img src="assets/Logo.svg" height="50" class="mr-2"/>
+        </a>
+      </div>
+      <div class="p-toolbar-group-end">
+        <p-button severity="info" class="mr-2" (onClick)="addShelf()">Add Shelf</p-button>
+        <p-button severity="info" class="mr-2" (onClick)="addFootprint()">Add Footprint</p-button>
+        <p-button severity="info" class="mr-2" (onClick)="addMeasurementUnit()">Add MeasurementUnit</p-button>
+        <p-button severity="info" class="mr-2" (onClick)="addManufacturer()">Add Manufacturer</p-button>
+        <p-button severity="info" (onClick)="addPartType()">Add PartType</p-button>
+      </div>
+    </p-toolbar>
+
   </header>
+  <br>
   <main>
+    <p-toast></p-toast>
     <router-outlet></router-outlet>
   </main>
 </div>
