@@ -100,4 +100,12 @@ export class PartDialogComponent implements OnInit {
     let shelfName = this.shelfs.find(shelf => shelf.trays?.find(it => it.id == tray.id))?.name || ""
     return shelfName + "-" + tray.name
   }
+
+  getTraysFiltered(trays: TrayModel[]):TrayModel[] {
+    if(this.config.data.model != undefined){
+      return trays
+    }
+
+    return trays.filter(tray => !this.parts.some(part => part.tray?.id == tray.id))
+  }
 }
