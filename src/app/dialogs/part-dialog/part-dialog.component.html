@@ -100,7 +100,7 @@
       </td>
       <td>
         <div class="card flex justify-content-center">
-          <p-dropdown [options]="trays" [(ngModel)]="tray" [filter]="true" filterBy="name"
+          <p-dropdown [options]="getTraysFiltered(trays)" [(ngModel)]="tray" [filter]="true" filterBy="name"
                       [showClear]="true" placeholder="Tray">
             <ng-template pTemplate="selectedItem">
               <div class="flex align-items-center gap-2" *ngIf="tray">
