@@ -22,7 +22,7 @@
       <td>{{ part.partType?.name }}</td>
       <td>{{ part.manufacturer?.name }}</td>
       <td>{{ getStorageLocation(part) }}</td>
-      <td>{{ part.value }}</td>
+      <td>{{ part.value + " " + part.measurementUnit.name }}</td>
       <td>{{ part.footprint?.name }}</td>
       <td>
         <p-button icon="pi pi-pencil" severity="warning" (onClick)="edit(part)"></p-button>
