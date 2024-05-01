@@ -1,2 +1,2 @@
 include:
-  remote: https://git01.klaffenboeck.eu/FabianKla/cicd_dry_templates/-/blob/main/Build_Angular15.1.6_Node18.8.yml
+  remote: 'https://git01.klaffenboeck.eu/FabianKla/cicd_dry_templates/-/raw/main/Build_Angular15.1.6_Node18.8.yml'
