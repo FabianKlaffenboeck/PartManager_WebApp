@@ -1,13 +1,13 @@
 <p-table [value]="parts" [scrollable]="true" scrollHeight="50rem" [tableStyle]="{ 'min-width': '50rem' }">
   <ng-template pTemplate="header">
     <tr>
-      <th>name</th>
-      <th>quantity</th>
-      <th>partType</th>
-      <th>manufacturer</th>
-      <th>storage location</th>
-      <th>value</th>
-      <th>footprint</th>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>PartType</th>
+      <th>Manufacturer</th>
+      <th>Storage location</th>
+      <th>Value</th>
+      <th>Footprint</th>
       <th style="width: 5rem">edit</th>
       <th style="width: 5rem">delete</th>
       <th>
@@ -22,7 +22,7 @@
       <td>{{ part.partType?.name }}</td>
       <td>{{ part.manufacturer?.name }}</td>
       <td>{{ getStorageLocation(part) }}</td>
-      <td>{{ part.value + " " + part.measurementUnit.name }}</td>
+      <td>{{ getPartValue(part) }}</td>
       <td>{{ part.footprint?.name }}</td>
       <td>
         <p-button icon="pi pi-pencil" severity="warning" (onClick)="edit(part)"></p-button>
