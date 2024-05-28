@@ -25,6 +25,7 @@ import {ManufacturerDialogComponent} from "./dialogs/manufacturer-dialog/manufac
 import {MeasurementUnitDialogComponent} from "./dialogs/measurementUnit-dialog/measurementUnit-dialog.component";
 import {PartTypeDialogComponent} from "./dialogs/partType-dialog/partType-dialog.component";
 import {ShelfDialogComponent} from "./dialogs/shelf-dialog/shelf-dialog.component";
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {ShelfDialogComponent} from "./dialogs/shelf-dialog/shelf-dialog.componen
     MeasurementUnitDialogComponent,
     PartTypeDialogComponent,
     ShelfDialogComponent,
+    SettingsComponent,
   ],
   imports: [
     HttpClientModule,

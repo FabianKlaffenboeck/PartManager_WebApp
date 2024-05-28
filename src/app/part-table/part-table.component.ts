@@ -42,6 +42,16 @@ export class PartTableComponent implements OnInit {
     return `${this.shelfs.find(shelf => shelf.trays && shelf.trays.some(tray => tray.id === part.tray?.id))?.name || ""}-${part.tray?.name || ""}`
   }
 
+  getPartValue(part: PartModel) {
+    let value = part.value;
+    let unit = part.measurementUnit?.name;
+
+    if ((value == undefined) || (unit == undefined)) {
+      return ""
+    }
+    return `${value} ${unit}`;
+  }
+
   add() {
     this.dialogService.open(PartDialogComponent, {
       header: 'Add Part',
