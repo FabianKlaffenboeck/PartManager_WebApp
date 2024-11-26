@@ -1,3 +1,4 @@
 include:
-  project: 'FabianKla/cicd_dry_templates'
-  file: 'complete/angular/Build_Angular15_1_6_Node18_8.yml'
+  project: 'FKLab/cicd_dry_templates'
+  file: 'templates/angular_pipeline.yml'
+
