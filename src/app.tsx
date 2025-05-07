@@ -9,8 +9,23 @@ import {
 } from "@/components/ui/breadcrumb"
 import {Separator} from "@/components/ui/separator"
 import {SidebarInset, SidebarProvider, SidebarTrigger,} from "@/components/ui/sidebar"
+import {useLocation} from "react-router-dom";
+import Parts from "@/Parts.tsx";
+import HomePlaceholder from "@/HomePlaceholder.tsx";
 
-export default function Page() {
+export default function App() {
+    const location = useLocation()
+    const path = location.pathname
+
+    let RenderedPart
+    if (path.includes('/home')) {
+        RenderedPart = <HomePlaceholder/>
+    } else if (path.includes('/parts')) {
+        RenderedPart = <Parts/>
+    } else {
+        RenderedPart = <div>Default Content</div>
+    }
+
     return (
         <SidebarProvider>
             <AppSidebar/>
@@ -36,14 +51,7 @@ export default function Page() {
                     </div>
                 </header>
 
-                <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-                    <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                        <div className="aspect-video rounded-xl bg-muted/50"/>
-                        <div className="aspect-video rounded-xl bg-muted/50"/>
-                        <div className="aspect-video rounded-xl bg-muted/50"/>
-                    </div>
-                    <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min"/>
-                </div>
+                {RenderedPart}
 
             </SidebarInset>
         </SidebarProvider>
