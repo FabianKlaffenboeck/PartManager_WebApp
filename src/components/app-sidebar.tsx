@@ -4,7 +4,7 @@ import {
     Bot,
     Frame,
     Settings2,
-    Component,
+    CircuitBoard,
 } from "lucide-react"
 
 import {NavMain} from "@/components/nav-main"
@@ -23,7 +23,7 @@ const data = {
         {
             title: "Parts",
             url: "parts",
-            icon: Component,
+            icon: CircuitBoard,
             isActive: true,
             items: [
                 {
@@ -38,24 +38,24 @@ const data = {
         },
         {
             title: "Data",
-            url: "#",
+            url: "data",
             icon: Bot,
             items: [
                 {
                     title: "Footprints",
-                    url: "#",
+                    url: "footprints",
                 },
                 {
                     title: "Manufacturer",
-                    url: "#",
+                    url: "manufacturer",
                 },
                 {
                     title: "Part Type",
-                    url: "#",
+                    url: "parttype",
                 },
                 {
                     title: "Storage",
-                    url: "#",
+                    url: "storage",
                 }
             ],
         },
