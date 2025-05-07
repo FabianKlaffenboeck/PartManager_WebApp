@@ -20,7 +20,6 @@ export default function App() {
     let RenderedPart
     let redirectHome = false
 
-
     if (path.match('/parts/all')) {
         RenderedPart = <PartsAll/>
     } else if (path.match('/parts/low')) {
@@ -49,8 +48,7 @@ export default function App() {
         }
     }, [navigate]);
 
-    return (
-        <SidebarProvider>
+    return (<SidebarProvider>
             <AppSidebar/>
             <SidebarInset>
                 <header
@@ -58,15 +56,10 @@ export default function App() {
                     <div className="flex items-center gap-2 px-4">
                         <SidebarTrigger className="-ml-1"/>
                         <Separator orientation="vertical" className="mr-2 h-4"/>
-
                         <Breadcrumbs/>
-
                     </div>
                 </header>
-
                 {RenderedPart}
-
             </SidebarInset>
-        </SidebarProvider>
-    )
+        </SidebarProvider>)
 }
