@@ -1,182 +1,132 @@
 import * as React from "react"
-
-import { SearchForm } from "@/components/search-form"
-import { VersionSwitcher } from "@/components/version-switcher"
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarRail,
-} from "@/components/ui/sidebar"
+    BookOpen,
+    Bot,
+    Frame,
+    Settings2,
+    Component,
+} from "lucide-react"
+
+import {NavMain} from "@/components/nav-main"
+import {NavProjects} from "@/components/nav-projects"
+import {NavUser} from "@/components/nav-user"
+import {Sidebar, SidebarContent, SidebarFooter, SidebarRail,} from "@/components/ui/sidebar"
 
 // This is sample data.
 const data = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
-  navMain: [
-    {
-      title: "Getting Started",
-      url: "#",
-      items: [
-        {
-          title: "Installation",
-          url: "#",
-        },
-        {
-          title: "Project Structure",
-          url: "#",
-        },
-      ],
+    user: {
+        name: "shadcn",
+        email: "m@example.com",
+        avatar: "/avatars/shadcn.jpg",
     },
-    {
-      title: "Building Your Application",
-      url: "#",
-      items: [
+    navMain: [
         {
-          title: "Routing",
-          url: "#",
+            title: "Parts",
+            url: "#",
+            icon: Component,
+            isActive: true,
+            items: [
+                {
+                    title: "Show all",
+                    url: "#",
+                },
+                {
+                    title: "Low Stock",
+                    url: "#",
+                },
+            ],
         },
         {
-          title: "Data Fetching",
-          url: "#",
-          isActive: true,
+            title: "Data",
+            url: "#",
+            icon: Bot,
+            items: [
+                {
+                    title: "Footprints",
+                    url: "#",
+                },
+                {
+                    title: "Manufacturer",
+                    url: "#",
+                },
+                {
+                    title: "Part Type",
+                    url: "#",
+                },
+                {
+                    title: "Storage",
+                    url: "#",
+                }
+            ],
         },
         {
-          title: "Rendering",
-          url: "#",
+            title: "Documentation",
+            url: "#",
+            icon: BookOpen,
+            items: [
+                {
+                    title: "Introduction",
+                    url: "#",
+                },
+                {
+                    title: "Get Started",
+                    url: "#",
+                },
+                {
+                    title: "Tutorials",
+                    url: "#",
+                },
+                {
+                    title: "Changelog",
+                    url: "#",
+                },
+            ],
         },
         {
-          title: "Caching",
-          url: "#",
+            title: "Settings",
+            url: "#",
+            icon: Settings2,
+            items: [
+                {
+                    title: "General",
+                    url: "#",
+                },
+                {
+                    title: "Team",
+                    url: "#",
+                },
+                {
+                    title: "Billing",
+                    url: "#",
+                },
+                {
+                    title: "Limits",
+                    url: "#",
+                },
+            ],
         },
+    ],
+
+    projects: [
         {
-          title: "Styling",
-          url: "#",
-        },
-        {
-          title: "Optimizing",
-          url: "#",
-        },
-        {
-          title: "Configuring",
-          url: "#",
-        },
-        {
-          title: "Testing",
-          url: "#",
-        },
-        {
-          title: "Authentication",
-          url: "#",
-        },
-        {
-          title: "Deploying",
-          url: "#",
-        },
-        {
-          title: "Upgrading",
-          url: "#",
-        },
-        {
-          title: "Examples",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "API Reference",
-      url: "#",
-      items: [
-        {
-          title: "Components",
-          url: "#",
-        },
-        {
-          title: "File Conventions",
-          url: "#",
-        },
-        {
-          title: "Functions",
-          url: "#",
-        },
-        {
-          title: "next.config.js Options",
-          url: "#",
-        },
-        {
-          title: "CLI",
-          url: "#",
-        },
-        {
-          title: "Edge Runtime",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Architecture",
-      url: "#",
-      items: [
-        {
-          title: "Accessibility",
-          url: "#",
-        },
-        {
-          title: "Fast Refresh",
-          url: "#",
-        },
-        {
-          title: "Next.js Compiler",
-          url: "#",
-        },
-        {
-          title: "Supported Browsers",
-          url: "#",
-        },
-        {
-          title: "Turbopack",
-          url: "#",
-        },
-      ],
-    },
-  ],
+            name: "Test Project",
+            url: "#",
+            icon: Frame,
+        }
+    ]
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  return (
-    <Sidebar {...props}>
-      <SidebarHeader>
-        <VersionSwitcher
-          versions={data.versions}
-          defaultVersion={data.versions[0]}
-        />
-        <SearchForm />
-      </SidebarHeader>
-      <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
-          <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
-                      <a href={item.url}>{item.title}</a>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
-      </SidebarContent>
-      <SidebarRail />
-    </Sidebar>
-  )
+export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
+    return (
+        <Sidebar collapsible="icon" {...props}>
+            <SidebarContent>
+                <NavMain items={data.navMain}/>
+                <NavProjects projects={data.projects}/>
+            </SidebarContent>
+            <SidebarFooter>
+                <NavUser user={data.user}/>
+            </SidebarFooter>
+            <SidebarRail/>
+        </Sidebar>
+    )
 }
