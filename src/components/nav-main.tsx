@@ -46,7 +46,6 @@ export function NavMain({
                                     <Link to={item.url} className="flex items-center">
                                         {item.icon && <item.icon className="w-5 h-5" />}
                                     </Link>
-
                                     <span>{item.title}</span>
                                     <ChevronRight
                                         className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90"/>

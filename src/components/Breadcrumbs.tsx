@@ -12,13 +12,11 @@ export function Breadcrumbs() {
     const location = useLocation()
     const segments = location.pathname.split('/').filter(Boolean)
 
-    return (
-        <Breadcrumb>
+    return (<Breadcrumb>
             <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                    <BreadcrumbLink href="home">
+                <BreadcrumbItem>
+                    <BreadcrumbLink asChild>
                         <Link to="/home">Home</Link>
-
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
@@ -29,16 +27,14 @@ export function Breadcrumbs() {
                         .replace(/-/g, ' ')
                         .replace(/\b\w/g, l => l.toUpperCase())
 
-                    return (
-                        <React.Fragment key={path}>
+                    return (<React.Fragment key={path}>
                             <BreadcrumbSeparator className="hidden md:block"/>
                             <BreadcrumbItem>
                                 <BreadcrumbLink asChild>
                                     <Link to={path}>{label}</Link>
                                 </BreadcrumbLink>
                             </BreadcrumbItem>
-                        </React.Fragment>
-                    )
+                        </React.Fragment>)
                 })}
 
 

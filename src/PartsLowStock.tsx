@@ -1,5 +1,5 @@
 export default function PartsLowStock() {
     return (
-        <a>PartsLowStock</a>
+        <span>PartsLowStock</span>
     )
 }

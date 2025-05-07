@@ -1,7 +1,7 @@
 import {AppSidebar} from "@/components/app-sidebar"
 import {Separator} from "@/components/ui/separator"
 import {SidebarInset, SidebarProvider, SidebarTrigger,} from "@/components/ui/sidebar"
-import {useLocation} from "react-router-dom";
+import {redirect, useLocation} from "react-router-dom";
 import Parts from "@/Parts.tsx";
 import Home from "@/Home.tsx";
 import {Breadcrumbs} from "@/components/Breadcrumbs.tsx";
@@ -19,6 +19,7 @@ export default function App() {
     } else if (path.includes('/parts/low')) {
         RenderedPart = <PartsLowStock/>
     } else {
+        redirect("/home")
         RenderedPart = <div>Default Content</div>
     }
 
