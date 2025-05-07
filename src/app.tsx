@@ -1,27 +1,53 @@
 import {AppSidebar} from "@/components/app-sidebar"
 import {Separator} from "@/components/ui/separator"
 import {SidebarInset, SidebarProvider, SidebarTrigger,} from "@/components/ui/sidebar"
-import {redirect, useLocation} from "react-router-dom";
-import Parts from "@/Parts.tsx";
-import Home from "@/Home.tsx";
+import {useLocation, useNavigate} from "react-router-dom";
+import Parts from "@/pages/Parts/Parts.tsx";
+import Home from "@/pages/Home.tsx";
 import {Breadcrumbs} from "@/components/Breadcrumbs.tsx";
-import PartsLowStock from "@/PartsLowStock.tsx";
+import PartsLowStock from "@/pages/Parts/PartsLowStock.tsx";
+import {useEffect} from "react";
+import PartsAll from "@/pages/Parts/PartsAll.tsx";
+import PartTypes from "@/pages/Data/PartTypes.tsx";
+import Storage from "@/pages/Data/Storage.tsx";
+import Footprints from "./pages/Data/Footprints";
+import Data from "@/pages/Data/Data.tsx";
 
 export default function App() {
     const location = useLocation()
+    const navigate = useNavigate();
     const path = location.pathname
-
     let RenderedPart
-    if (path.includes('/home')) {
-        RenderedPart = <Home/>
-    } else if (path.includes('/parts/all')) {
-        RenderedPart = <Parts/>
-    } else if (path.includes('/parts/low')) {
+    let redirectHome = false
+
+
+    if (path.match('/parts/all')) {
+        RenderedPart = <PartsAll/>
+    } else if (path.match('/parts/low')) {
         RenderedPart = <PartsLowStock/>
+    } else if (path.match('/data/footprints')) {
+        RenderedPart = <Footprints/>
+    } else if (path.match('/data/manufacturers')) {
+        RenderedPart = <PartsLowStock/>
+    } else if (path.match('/data/parttypes')) {
+        RenderedPart = <PartTypes/>
+    } else if (path == ('/data/storage')) {
+        RenderedPart = <Storage/>
+    } else if (path.match('/home')) {
+        RenderedPart = <Home/>
+    } else if (path.match('/data')) {
+        RenderedPart = <Data/>
+    } else if (path.match('/parts')) {
+        RenderedPart = <Parts/>
     } else {
-        redirect("/home")
-        RenderedPart = <div>Default Content</div>
+        redirectHome = true
     }
+
+    useEffect(() => {
+        if (redirectHome) {
+            navigate("/home");
+        }
+    }, [navigate]);
 
     return (
         <SidebarProvider>

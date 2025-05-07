@@ -1,11 +1,5 @@
 import * as React from "react"
-import {
-    BookOpen,
-    Bot,
-    Frame,
-    Settings2,
-    CircuitBoard,
-} from "lucide-react"
+import {CircuitBoard, DatabaseZap, Frame,} from "lucide-react"
 
 import {NavMain} from "@/components/nav-main"
 import {NavProjects} from "@/components/nav-projects"
@@ -39,70 +33,24 @@ const data = {
         {
             title: "Data",
             url: "data",
-            icon: Bot,
+            icon: DatabaseZap,
             items: [
                 {
                     title: "Footprints",
                     url: "footprints",
                 },
                 {
-                    title: "Manufacturer",
-                    url: "manufacturer",
+                    title: "Manufacturers",
+                    url: "manufacturers",
                 },
                 {
-                    title: "Part Type",
-                    url: "parttype",
+                    title: "Part Types",
+                    url: "parttypes",
                 },
                 {
                     title: "Storage",
                     url: "storage",
                 }
-            ],
-        },
-        {
-            title: "Documentation",
-            url: "#",
-            icon: BookOpen,
-            items: [
-                {
-                    title: "Introduction",
-                    url: "#",
-                },
-                {
-                    title: "Get Started",
-                    url: "#",
-                },
-                {
-                    title: "Tutorials",
-                    url: "#",
-                },
-                {
-                    title: "Changelog",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "Settings",
-            url: "#",
-            icon: Settings2,
-            items: [
-                {
-                    title: "General",
-                    url: "#",
-                },
-                {
-                    title: "Team",
-                    url: "#",
-                },
-                {
-                    title: "Billing",
-                    url: "#",
-                },
-                {
-                    title: "Limits",
-                    url: "#",
-                },
             ],
         },
     ],
