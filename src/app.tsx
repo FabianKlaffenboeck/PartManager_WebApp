@@ -1,17 +1,11 @@
 import {AppSidebar} from "@/components/app-sidebar"
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
 import {Separator} from "@/components/ui/separator"
 import {SidebarInset, SidebarProvider, SidebarTrigger,} from "@/components/ui/sidebar"
 import {useLocation} from "react-router-dom";
 import Parts from "@/Parts.tsx";
-import HomePlaceholder from "@/HomePlaceholder.tsx";
+import Home from "@/Home.tsx";
+import {Breadcrumbs} from "@/components/Breadcrumbs.tsx";
+import PartsLowStock from "@/PartsLowStock.tsx";
 
 export default function App() {
     const location = useLocation()
@@ -19,9 +13,11 @@ export default function App() {
 
     let RenderedPart
     if (path.includes('/home')) {
-        RenderedPart = <HomePlaceholder/>
-    } else if (path.includes('/parts')) {
+        RenderedPart = <Home/>
+    } else if (path.includes('/parts/all')) {
         RenderedPart = <Parts/>
+    } else if (path.includes('/parts/low')) {
+        RenderedPart = <PartsLowStock/>
     } else {
         RenderedPart = <div>Default Content</div>
     }
@@ -35,19 +31,9 @@ export default function App() {
                     <div className="flex items-center gap-2 px-4">
                         <SidebarTrigger className="-ml-1"/>
                         <Separator orientation="vertical" className="mr-2 h-4"/>
-                        <Breadcrumb>
-                            <BreadcrumbList>
-                                <BreadcrumbItem className="hidden md:block">
-                                    <BreadcrumbLink href="#">
-                                        Building Your Application
-                                    </BreadcrumbLink>
-                                </BreadcrumbItem>
-                                <BreadcrumbSeparator className="hidden md:block"/>
-                                <BreadcrumbItem>
-                                    <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                                </BreadcrumbItem>
-                            </BreadcrumbList>
-                        </Breadcrumb>
+
+                        <Breadcrumbs/>
+
                     </div>
                 </header>
 

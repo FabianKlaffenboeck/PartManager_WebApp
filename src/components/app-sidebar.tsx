@@ -22,17 +22,17 @@ const data = {
     navMain: [
         {
             title: "Parts",
-            url: "#",
+            url: "parts",
             icon: Component,
             isActive: true,
             items: [
                 {
                     title: "Show all",
-                    url: "parts",
+                    url: "all",
                 },
                 {
                     title: "Low Stock",
-                    url: "home",
+                    url: "lowstock",
                 },
             ],
         },
