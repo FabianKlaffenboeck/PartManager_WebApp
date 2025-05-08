@@ -13,6 +13,17 @@ export const payments: Part[] = [
         manufacturer: {id: 0, name: "test"},
         tray: {id: 0, name: "test"},
     },
+    {
+        id: 2,
+        name: "test",
+        quantity: 1,
+        value: 1,
+        electricalUnit: ElectricalUnit.VOLT,
+        footprint: {id: 0, metric: "1010", imperial: "41"},
+        partType: {id: 0, name: "test"},
+        manufacturer: {id: 0, name: "test"},
+        tray: {id: 0, name: "test"},
+    },
 ]
 
 export default function PartsAll() {
