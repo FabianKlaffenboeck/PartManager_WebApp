@@ -1,36 +1,26 @@
-import {ElectricalUnit, type Part, PartsTable} from "@/pages/Parts/parts-table.tsx";
-
-
-export const payments: Part[] = [
-    {
-        id: 1,
-        name: "test",
-        quantity: 1,
-        value: 1,
-        electricalUnit: ElectricalUnit.VOLT,
-        footprint: {id: 0, metric: "1010", imperial: "41"},
-        partType: {id: 0, name: "test"},
-        manufacturer: {id: 0, name: "test"},
-        tray: {id: 0, name: "test"},
-    },
-    {
-        id: 2,
-        name: "test",
-        quantity: 1,
-        value: 1,
-        electricalUnit: ElectricalUnit.VOLT,
-        footprint: {id: 0, metric: "1010", imperial: "41"},
-        partType: {id: 0, name: "test"},
-        manufacturer: {id: 0, name: "test"},
-        tray: {id: 0, name: "test"},
-    },
-]
+import {PartsTable} from "@/pages/Parts/parts-table.tsx";
+import {useEffect, useState} from "react";
 
 export default function PartsAll() {
+
+    const [parts, setParts] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:8080/api/parts', {headers: {'Authorization': 'Basic ' + btoa('q:q')}})
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setParts(data);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    }, []);
+
     return (
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
             <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
-                <PartsTable data={payments}/>
+                <PartsTable data={parts}/>
             </div>
         </div>
     )
