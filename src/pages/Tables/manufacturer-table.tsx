@@ -14,166 +14,28 @@ import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
     DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table"
+} from "@/components/ui/dropdown-menu.tsx"
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table.tsx"
 import {Button} from "@/components/ui/button.tsx";
-import React, {useState} from "react";
-import {ChevronDown, MoreHorizontal, Replace} from "lucide-react";
-
-export enum ElectricalUnit {
-    VOLT,
-    AMPERE,
-    OHM,
-    SIEMENS,
-    FARAD,
-    HENRY,
-    WATT,
-    JOULE,
-    COULOMB,
-    HERTZ
-}
-
-export type PartType = {
-    id: number
-    name: string
-}
-
-export type Manufacturer = {
-    id: number
-    name: string
-}
-
-export type Tray = {
-    id: number
-    name: string
-}
-
-export type Shelf = {
-    id: number
-    name: string
-    trays: Tray[]
-}
-
-export type Footprint = {
-    id: number
-    metric: string
-    imperial: string
-}
-
-export type Part = {
-    id: number
-    name: string
-    quantity: number
-    value: number | null
-    electricalUnit: ElectricalUnit | null
-    footprint: Footprint | null
-    partType: PartType
-    manufacturer: Manufacturer
-    tray: Tray
-}
+import React from "react";
+import {ChevronDown} from "lucide-react";
+import {type Manufacturer} from "@/Models.ts";
 
 interface DataTableProps {
-    data: Part[]
+    data: Manufacturer[]
 }
 
-export function PartsTable({data}: DataTableProps) {
+export function ManufacturersTable({data}: DataTableProps) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
-    const [showMetric, setShowMetric] = useState(true);
 
-    const columns: ColumnDef<Part>[] = [
-        {
-            accessorKey: "id",
-            header: "Id"
-        },
-        {
-            accessorKey: "name",
-            header: "Name"
-        },
-        {
-            accessorKey: "quantity",
-            header: "Quantity"
-        },
-        {
-            accessorKey: "value",
-            header: "Value"
-        },
-        {
-            accessorKey: "electricalUnit",
-            header: "ElectricalUnit",
-            cell: ({row}) => {
-                if (row.original.electricalUnit == null) {
-                    return <div></div>;
-                }
-                return <div>{ElectricalUnit[row.original.electricalUnit]}</div>
-            },
-        },
-        {
-            accessorKey: "footprint",
-            header: () => {
-                return (
-                    <div
-                        onClick={() => setShowMetric(!showMetric)}
-                        className="flex items-center cursor-pointer"
-                    >
-                        <span>Footprint</span>
-                        <Replace className="ml-2 h-4 w-4"/>
-                    </div>
-                )
-            },
-            cell: ({row: {original: {footprint}}}) => {
-                if (showMetric) {
-                    return <div>{footprint?.metric}</div>
-                } else {
-                    return <div>{footprint?.imperial}</div>
-                }
-            },
-        },
-        {
-            accessorKey: "partType",
-            header: "PartType",
-            cell: ({row}) => {
-                return <div>{row.original.partType.name}</div>
-            },
-        },
-        {
-            accessorKey: "manufacturer",
-            header: "Manufacturer",
-            cell: ({row}) => {
-                return <div>{row.original.manufacturer.name}</div>
-            },
-        },
-        {
-            accessorKey: "tray",
-            header: "Tray",
-            cell: ({row}) => {
-                return <div>{row.original.tray.name}</div>
-            },
-        },
-        {
-            id: "actions", cell: () => {
-                return (<DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4"/>
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuSeparator/>
-                        <DropdownMenuItem>View customer</DropdownMenuItem>
-                        <DropdownMenuItem>View payment details</DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>)
-            },
-        }
-    ]
+    const columns: ColumnDef<Manufacturer>[] = [{
+        accessorKey: "id", header: "Id"
+    }, {
+        accessorKey: "name", header: "Name"
+    }]
 
     const table = useReactTable({
         data,

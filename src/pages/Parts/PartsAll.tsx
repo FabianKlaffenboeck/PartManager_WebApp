@@ -1,4 +1,4 @@
-import {PartsTable} from "@/pages/Parts/parts-table.tsx";
+import {PartTable} from "@/pages/Tables/part-table.tsx";
 import {useEffect, useState} from "react";
 
 export default function PartsAll() {
@@ -20,7 +20,7 @@ export default function PartsAll() {
     return (
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
             <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
-                <PartsTable data={parts}/>
+                <PartTable data={parts}/>
             </div>
         </div>
     )

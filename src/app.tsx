@@ -12,6 +12,7 @@ import PartTypes from "@/pages/Data/PartTypes.tsx";
 import Storage from "@/pages/Data/Storage.tsx";
 import Footprints from "./pages/Data/Footprints";
 import Data from "@/pages/Data/Data.tsx";
+import Manufacturers from "@/pages/Data/Manufacturers.tsx";
 
 export default function App() {
     const location = useLocation()
@@ -27,7 +28,7 @@ export default function App() {
     } else if (path.match('/data/footprints')) {
         RenderedPart = <Footprints/>
     } else if (path.match('/data/manufacturers')) {
-        RenderedPart = <PartsLowStock/>
+        RenderedPart = <Manufacturers/>
     } else if (path.match('/data/parttypes')) {
         RenderedPart = <PartTypes/>
     } else if (path == ('/data/storage')) {
