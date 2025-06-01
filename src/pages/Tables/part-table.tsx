@@ -25,11 +25,11 @@ import React, {useState} from "react";
 import {ChevronDown, MoreHorizontal, Replace} from "lucide-react";
 import {ElectricalUnit, type Part} from "@/Models.ts";
 
-interface DataTableProps {
+export function PartTable({data, editHandler, adjustStockHandler}: {
     data: Part[]
-}
-
-export function PartTable({data}: DataTableProps) {
+    editHandler: (id: number) => void;
+    adjustStockHandler: (id: number) => void;
+}) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -105,7 +105,7 @@ export function PartTable({data}: DataTableProps) {
             },
         },
         {
-            id: "actions", cell: () => {
+            id: "actions", cell: ({row}) => {
                 return (<DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-8 w-8 p-0">
@@ -116,8 +116,8 @@ export function PartTable({data}: DataTableProps) {
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator/>
-                        <DropdownMenuItem>View customer</DropdownMenuItem>
-                        <DropdownMenuItem>View payment details</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => editHandler(row.original.id)}>Edit</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => adjustStockHandler(row.original.id)}>Adjust Stock</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>)
             },

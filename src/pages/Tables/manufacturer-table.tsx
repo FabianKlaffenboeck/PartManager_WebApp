@@ -22,11 +22,10 @@ import React from "react";
 import {ChevronDown} from "lucide-react";
 import {type Manufacturer} from "@/Models.ts";
 
-interface DataTableProps {
-    data: Manufacturer[]
-}
 
-export function ManufacturersTable({data}: DataTableProps) {
+export function ManufacturersTable({data}: {
+    data: Manufacturer[]
+}) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})

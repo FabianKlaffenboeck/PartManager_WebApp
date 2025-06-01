@@ -22,11 +22,10 @@ import React from "react";
 import {ChevronDown} from "lucide-react";
 import {type Footprint} from "@/Models.ts";
 
-interface DataTableProps {
-    data: Footprint[]
-}
 
-export function FootprintsTable({data}: DataTableProps) {
+export function FootprintsTable({data}: {
+    data: Footprint[]
+}) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
