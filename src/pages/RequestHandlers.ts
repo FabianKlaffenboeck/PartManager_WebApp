@@ -1,4 +1,4 @@
-import type {Footprint, Manufacturer, Part, PartType} from "@/Models.ts";
+import type {Footprint, Manufacturer, Part, PartType, Shelf} from "@/Models.ts";
 
 const backEndUrl: string = "http://localhost:8080/api";
 
@@ -56,6 +56,17 @@ export async function getManufacturers(): Promise<Manufacturer[]> {
 
 export async function getPartTypes(): Promise<PartType[]> {
     const response = await fetch(backEndUrl + '/partTypes', {
+        method: 'GET',
+        headers: genHeader(),
+    });
+    if (!response.ok) {
+        throw new Error('Failed to fetch parts');
+    }
+    return await response.json();
+}
+
+export async function getShelfs(): Promise<Shelf[]> {
+    const response = await fetch(backEndUrl + '/shelfs', {
         method: 'GET',
         headers: genHeader(),
     });
