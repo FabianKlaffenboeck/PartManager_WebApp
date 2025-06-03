@@ -13,6 +13,7 @@ import Storage from "@/pages/Data/Storage.tsx";
 import Footprints from "./pages/Data/Footprints";
 import Data from "@/pages/Data/Data.tsx";
 import Manufacturers from "@/pages/Data/Manufacturers.tsx";
+import {Toaster} from "sonner";
 
 export default function App() {
     const location = useLocation()
@@ -49,7 +50,8 @@ export default function App() {
         }
     }, [navigate]);
 
-    return (<SidebarProvider>
+    return (
+        <SidebarProvider>
             <AppSidebar/>
             <SidebarInset>
                 <header
@@ -62,5 +64,7 @@ export default function App() {
                 </header>
                 {RenderedPart}
             </SidebarInset>
-        </SidebarProvider>)
+            <Toaster />
+        </SidebarProvider>
+    )
 }
