@@ -21,9 +21,14 @@ import {
 } from "@/components/ui/dropdown-menu.tsx"
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table.tsx"
 import {Button} from "@/components/ui/button.tsx";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {ChevronDown, MoreHorizontal, Replace} from "lucide-react";
-import {ElectricalUnit, type Part} from "@/Models.ts";
+import {ElectricalUnit, type Part, type Shelf, type Tray} from "@/Models.ts";
+import {getShelfs} from "@/pages/RequestHandlers.ts";
+
+function parsElectricalUnit(unit: ElectricalUnit): string {
+    return unit.toString()
+}
 
 export function PartTable({data, editHandler, adjustStockHandler}: {
     data: Part[]
@@ -34,6 +39,14 @@ export function PartTable({data, editHandler, adjustStockHandler}: {
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
     const [showMetric, setShowMetric] = useState(true);
+
+    const [shelfs, setShelfs] = useState<Shelf[]>([]);
+
+    useEffect(() => {
+        getShelfs()
+            .then((data) => setShelfs(data))
+            .catch((error) => console.error('Error:', error));
+    }, []);
 
     const columns: ColumnDef<Part>[] = [
         {
@@ -59,7 +72,7 @@ export function PartTable({data, editHandler, adjustStockHandler}: {
                 if (row.original.electricalUnit == null) {
                     return <div></div>;
                 }
-                return <div>{ElectricalUnit[row.original.electricalUnit]}</div>
+                return <div>{parsElectricalUnit(row.original.electricalUnit)}</div>
             },
         },
         {
@@ -101,7 +114,12 @@ export function PartTable({data, editHandler, adjustStockHandler}: {
             accessorKey: "tray",
             header: "Tray",
             cell: ({row}) => {
-                return <div>{row.original.tray.name}</div>
+                function generateShelfTrayName(tray: Tray): string {
+                    const shelf = shelfs.find(shelf => shelf.trays.filter(it => it.id == tray.id))
+                    return shelf?.name + "-" + tray.name;
+                }
+
+                return <div>{generateShelfTrayName(row.original.tray)}</div>
             },
         },
         {
@@ -117,7 +135,8 @@ export function PartTable({data, editHandler, adjustStockHandler}: {
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator/>
                         <DropdownMenuItem onClick={() => editHandler(row.original.id)}>Edit</DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => adjustStockHandler(row.original.id)}>Adjust Stock</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => adjustStockHandler(row.original.id)}>Adjust
+                            Stock</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>)
             },
