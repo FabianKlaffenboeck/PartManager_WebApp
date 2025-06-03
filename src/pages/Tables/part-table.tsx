@@ -24,7 +24,7 @@ import {Button} from "@/components/ui/button.tsx";
 import React, {useEffect, useState} from "react";
 import {ChevronDown, MoreHorizontal, Replace} from "lucide-react";
 import {ElectricalUnit, type Part, type Shelf, type Tray} from "@/Models.ts";
-import {getShelfs} from "@/pages/RequestHandlers.ts";
+import {getShelfs} from "@/RequestHandlers.ts";
 
 function parsElectricalUnit(unit: ElectricalUnit): string {
     return unit.toString()

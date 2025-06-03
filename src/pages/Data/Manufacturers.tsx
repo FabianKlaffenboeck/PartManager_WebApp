@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {ManufacturersTable} from "@/pages/Tables/manufacturer-table.tsx";
-import {getManufacturers} from "@/pages/RequestHandlers.ts";
+import {getManufacturers} from "@/RequestHandlers.ts";
 import type {Manufacturer} from "@/Models.ts";
 
 export default function Manufacturers() {

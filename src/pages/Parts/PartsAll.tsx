@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {StockDrawer} from "@/pages/Parts/StockDrawer.tsx";
 import type {Part} from "@/Models.ts";
 import {toast} from "sonner";
-import {getParts, updatePart} from "../RequestHandlers";
+import {getParts, updatePart} from "../../RequestHandlers.ts";
 
 export default function PartsAll() {
 

@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {PartTypesTable} from "@/pages/Tables/partTypes-table.tsx";
 import type {PartType} from "@/Models.ts";
-import {getPartTypes} from "@/pages/RequestHandlers.ts";
+import {getPartTypes} from "@/RequestHandlers.ts";
 
 export default function PartTypes() {
     const [partTypes, setPartTypes] = useState<PartType[]>([]);

@@ -1,4 +1,3 @@
-import * as React from "react"
 import {CircuitBoard, DatabaseZap, Frame,} from "lucide-react"
 
 import {NavMain} from "@/components/nav-main"
@@ -64,15 +63,17 @@ const data = {
     ]
 }
 
-export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({logOutHandler}: {
+    logOutHandler: () => void
+}) {
     return (
-        <Sidebar collapsible="icon" {...props}>
+        <Sidebar collapsible="icon">
             <SidebarContent>
                 <NavMain items={data.navMain}/>
                 <NavProjects projects={data.projects}/>
             </SidebarContent>
             <SidebarFooter>
-                <NavUser user={data.user}/>
+                <NavUser user={data.user} logOutHandler={logOutHandler}/>
             </SidebarFooter>
             <SidebarRail/>
         </Sidebar>

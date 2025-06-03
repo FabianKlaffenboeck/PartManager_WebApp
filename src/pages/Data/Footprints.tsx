@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {FootprintsTable} from "@/pages/Tables/footprint-table.tsx";
-import {getFootprints} from "@/pages/RequestHandlers.ts";
+import {getFootprints} from "@/RequestHandlers.ts";
 import type {Footprint} from "@/Models.ts";
 
 export default function Footprints() {

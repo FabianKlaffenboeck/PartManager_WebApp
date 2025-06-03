@@ -1,12 +1,11 @@
 import {AppSidebar} from "@/components/app-sidebar"
 import {Separator} from "@/components/ui/separator"
 import {SidebarInset, SidebarProvider, SidebarTrigger,} from "@/components/ui/sidebar"
-import {useLocation, useNavigate} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import Parts from "@/pages/Parts/Parts.tsx";
 import Home from "@/pages/Home.tsx";
 import {Breadcrumbs} from "@/components/Breadcrumbs.tsx";
 import PartsLowStock from "@/pages/Parts/PartsLowStock.tsx";
-import {useEffect} from "react";
 import PartsAll from "@/pages/Parts/PartsAll.tsx";
 import PartTypes from "@/pages/Data/PartTypes.tsx";
 import Storage from "@/pages/Data/Storage.tsx";
@@ -14,45 +13,42 @@ import Footprints from "./pages/Data/Footprints";
 import Data from "@/pages/Data/Data.tsx";
 import Manufacturers from "@/pages/Data/Manufacturers.tsx";
 import {Toaster} from "sonner";
+import Login from "./pages/Login/Login";
+import {useEffect, useState} from "react";
+
 
 export default function App() {
-    const location = useLocation()
-    const navigate = useNavigate();
-    const path = location.pathname
-    let RenderedPart
-    let redirectHome = false
 
-    if (path.match('/parts/all')) {
-        RenderedPart = <PartsAll/>
-    } else if (path.match('/parts/low')) {
-        RenderedPart = <PartsLowStock/>
-    } else if (path.match('/data/footprints')) {
-        RenderedPart = <Footprints/>
-    } else if (path.match('/data/manufacturers')) {
-        RenderedPart = <Manufacturers/>
-    } else if (path.match('/data/parttypes')) {
-        RenderedPart = <PartTypes/>
-    } else if (path == ('/data/storage')) {
-        RenderedPart = <Storage/>
-    } else if (path.match('/home')) {
-        RenderedPart = <Home/>
-    } else if (path.match('/data')) {
-        RenderedPart = <Data/>
-    } else if (path.match('/parts')) {
-        RenderedPart = <Parts/>
-    } else {
-        redirectHome = true
-    }
+    const [token, setToken] = useState<string | null>(null);
 
     useEffect(() => {
-        if (redirectHome) {
-            navigate("/home");
-        }
-    }, [navigate]);
+        const storedToken = localStorage.getItem('token');
+        setToken(storedToken);
+    }, []);
+
+    function onLoginSuccess(token: string) {
+        localStorage.setItem('token', token);
+        setToken(token);
+    }
+
+    function logOutHandler() {
+        localStorage.removeItem('token');
+        setToken(null);
+        console.log("asd")
+    }
+
+    if (!token) {
+        return (
+            <div>
+                <Login onLoginSuccess={onLoginSuccess}/>
+                <Toaster/>
+            </div>
+        )
+    }
 
     return (
         <SidebarProvider>
-            <AppSidebar/>
+            <AppSidebar logOutHandler={logOutHandler}/>
             <SidebarInset>
                 <header
                     className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
@@ -62,9 +58,24 @@ export default function App() {
                         <Breadcrumbs/>
                     </div>
                 </header>
-                {RenderedPart}
+
+                <Routes>
+                    <Route path="/parts/all" element={<PartsAll/>}/>
+                    <Route path="/parts/lowstock" element={<PartsLowStock/>}/>
+                    <Route path="/parts" element={<Parts/>}/>
+
+                    <Route path="/data/footprints" element={<Footprints/>}/>
+                    <Route path="/data/manufacturers" element={<Manufacturers/>}/>
+                    <Route path="/data/parttypes" element={<PartTypes/>}/>
+                    <Route path="/data/storage" element={<Storage/>}/>
+                    <Route path="/data" element={<Data/>}/>
+
+                    <Route path="/home" element={<Home/>}/>
+
+                    <Route path="*" element={<Navigate to="/home" replace/>}/>
+                </Routes>
             </SidebarInset>
-            <Toaster />
+            <Toaster/>
         </SidebarProvider>
     )
 }
