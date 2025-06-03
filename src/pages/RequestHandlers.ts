@@ -1,14 +1,18 @@
-import type {Part} from "@/Models.ts";
+import type {Footprint, Manufacturer, Part, PartType} from "@/Models.ts";
 
 const backEndUrl: string = "http://localhost:8080/api";
+
+function genHeader() {
+    return {
+        'Authorization': 'Basic ' + btoa('q:q'),
+        'Content-Type': 'application/json'
+    }
+}
 
 export async function getParts(): Promise<Part[]> {
     const response = await fetch(backEndUrl + '/parts', {
         method: 'GET',
-        headers: {
-            'Authorization': 'Basic ' + btoa('q:q'),
-            'Content-Type': 'application/json'
-        }
+        headers: genHeader()
     });
     if (!response.ok) {
         throw new Error('Failed to fetch parts');
@@ -19,14 +23,44 @@ export async function getParts(): Promise<Part[]> {
 export async function updatePart(part: Part): Promise<Part[]> {
     const response = await fetch(backEndUrl + '/parts', {
         method: 'POST',
-        headers: {
-            'Authorization': 'Basic ' + btoa('q:q'),
-            'Content-Type': 'application/json'
-        },
+        headers: genHeader(),
         body: JSON.stringify(part)
     });
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+}
+
+export async function getFootprints(): Promise<Footprint[]> {
+    const response = await fetch(backEndUrl + '/footprints', {
+        method: 'GET',
+        headers: genHeader(),
+    });
+    if (!response.ok) {
+        throw new Error('Failed to fetch parts');
+    }
+    return await response.json();
+}
+
+export async function getManufacturers(): Promise<Manufacturer[]> {
+    const response = await fetch(backEndUrl + '/manufacturers', {
+        method: 'GET',
+        headers: genHeader(),
+    });
+    if (!response.ok) {
+        throw new Error('Failed to fetch parts');
+    }
+    return await response.json();
+}
+
+export async function getPartTypes(): Promise<PartType[]> {
+    const response = await fetch(backEndUrl + '/partTypes', {
+        method: 'GET',
+        headers: genHeader(),
+    });
+    if (!response.ok) {
+        throw new Error('Failed to fetch parts');
     }
     return await response.json();
 }

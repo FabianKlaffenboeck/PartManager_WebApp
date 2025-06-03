@@ -1,19 +1,15 @@
 import {useEffect, useState} from "react";
 import {PartTypesTable} from "@/pages/Tables/partTypes-table.tsx";
+import type {PartType} from "@/Models.ts";
+import {getPartTypes} from "@/pages/RequestHandlers.ts";
 
 export default function PartTypes() {
-    const [partTypes, setPartTypes] = useState([]);
+    const [partTypes, setPartTypes] = useState<PartType[]>([]);
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/partTypes', {headers: {'Authorization': 'Basic ' + btoa('q:q')}})
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                setPartTypes(data);
-            })
-            .catch((err) => {
-                console.log(err.message);
-            });
+        getPartTypes()
+            .then((data) => setPartTypes(data))
+            .catch((error) => console.error('Error:', error));
     }, []);
 
     return (

@@ -1,19 +1,15 @@
 import {useEffect, useState} from "react";
 import {FootprintsTable} from "@/pages/Tables/footprint-table.tsx";
+import {getFootprints} from "@/pages/RequestHandlers.ts";
+import type {Footprint} from "@/Models.ts";
 
 export default function Footprints() {
-    const [footprints, setFootprints] = useState([]);
+    const [footprints, setFootprints] = useState<Footprint[]>([]);
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/footprints', {headers: {'Authorization': 'Basic ' + btoa('q:q')}})
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                setFootprints(data);
-            })
-            .catch((err) => {
-                console.log(err.message);
-            });
+        getFootprints()
+            .then((data) => setFootprints(data))
+            .catch((error) => console.error('Error:', error));
     }, []);
 
     return (

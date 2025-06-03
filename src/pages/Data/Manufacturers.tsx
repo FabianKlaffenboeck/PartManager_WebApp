@@ -1,20 +1,18 @@
 import {useEffect, useState} from "react";
 import {ManufacturersTable} from "@/pages/Tables/manufacturer-table.tsx";
+import {getManufacturers} from "@/pages/RequestHandlers.ts";
+import type {Manufacturer} from "@/Models.ts";
 
 export default function Manufacturers() {
-    const [manufacturers, setManufacturers] = useState([]);
+    const [manufacturers, setManufacturers] = useState<Manufacturer[]>([]);
+
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/manufacturers', {headers: {'Authorization': 'Basic ' + btoa('q:q')}})
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                setManufacturers(data);
-            })
-            .catch((err) => {
-                console.log(err.message);
-            });
+        getManufacturers()
+            .then((data) => setManufacturers(data))
+            .catch((error) => console.error('Error:', error));
     }, []);
+
 
     return (
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
