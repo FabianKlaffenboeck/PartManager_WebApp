@@ -4,3 +4,4 @@ variables:
 include:
   project: 'FKLab/cicd_dry_templates'
   file: 'templates/react_pipeline.yml'
+
