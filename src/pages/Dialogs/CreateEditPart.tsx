@@ -6,19 +6,19 @@ import {
     SheetDescription,
     SheetFooter,
     SheetHeader,
-    SheetTitle,
-    SheetTrigger
+    SheetTitle
 } from "@/components/ui/sheet";
 import {useEffect, useState} from "react";
 import type {Footprint} from "@/Models/Footprint.ts";
-import {getFootprints, getManufacturers, getPartTypes, getShelfs} from "@/api/RequestHandlers.ts";
+import {getElectricalUnits, getFootprints, getManufacturers, getPartTypes, getShelfs} from "@/api/RequestHandlers.ts";
 import type {Manufacturer} from "@/Models/Manufacturer.ts";
 import type {PartType} from "@/Models/PartType.ts";
 import type {Shelf} from "@/Models/Shelf.ts";
 import type {Part} from "@/Models/Part.ts";
 import {Input} from "@/components/ui/input.tsx";
 import {Label} from "@/components/ui/label.tsx";
-import {ExampleCombobox} from "@/components/example-combobox.tsx";
+import {SearchableSelect} from "@/components/searchableSelect.tsx";
+import type {ElectricalUnit} from "@/Models/ElectricalUnit.ts";
 
 export function CreateEditPart({open, part, cb}: {
     open: boolean
@@ -30,10 +30,17 @@ export function CreateEditPart({open, part, cb}: {
     const [manufacturers, setManufacturers] = useState<Manufacturer[]>([]);
     const [partTypes, setPartTypes] = useState<PartType[]>([]);
     const [shelfs, setShelfs] = useState<Shelf[]>([]);
+    const [electricalUnits, setElectricalUnits] = useState<ElectricalUnit[]>([]);
 
     useEffect(() => {
         getFootprints()
             .then((data) => setFootprints(data))
+            .catch((error) => console.error('Error:', error));
+    }, []);
+
+    useEffect(() => {
+        getElectricalUnits()
+            .then((data) => setElectricalUnits(data))
             .catch((error) => console.error('Error:', error));
     }, []);
 
@@ -57,7 +64,6 @@ export function CreateEditPart({open, part, cb}: {
 
     return (
         <Sheet open={open}>
-            <SheetTrigger>Open</SheetTrigger>
             <SheetContent>
                 <SheetHeader>
                     <SheetTitle>Are you absolutely sure?</SheetTitle>
@@ -68,31 +74,75 @@ export function CreateEditPart({open, part, cb}: {
                 </SheetHeader>
 
                 <div className="grid flex-1 auto-rows-min gap-6 px-4">
+
+                    {/*name: string*/}
                     <div className="grid gap-3">
                         <Label htmlFor="sheet-demo-name">Name</Label>
-                        <Input id="sheet-demo-name" defaultValue="Pedro Duarte" />
+                        <Input id="sheet-demo-name" defaultValue="Pedro Duarte"/>
                     </div>
 
-
-
+                    {/*quantity: number*/}
                     <div className="grid gap-3">
-                        <Label htmlFor="sheet-demo-username">Username</Label>
-                        <ExampleCombobox></ExampleCombobox>
+                        <Label htmlFor="sheet-demo-name">Quantity</Label>
+                        <Input id="sheet-demo-name" defaultValue="Pedro Duarte"/>
                     </div>
 
+                    {/*value: number | null*/}
+                    <div className="grid gap-3">
+                        <Label htmlFor="sheet-demo-name">Value</Label>
+                        <Input id="sheet-demo-name" defaultValue="Pedro Duarte"/>
+                    </div>
 
+                    {/*electricalUnit: ElectricalUnit | null*/}
+                    <div className="grid gap-3">
+                        <Label htmlFor="sheet-demo-username">ElectricalUnit</Label>
+                        <SearchableSelect
+                            placeholder={"ElectricalUnit"}
+                            elements={electricalUnits.map((it,index) => ({
+                                id: index,
+                                label: it.toString(),
+                            }))}
+                        ></SearchableSelect>
+                    </div>
 
+                    {/*footprint: Footprint | null*/}
+                    <div className="grid gap-3">
+                        <Label htmlFor="sheet-demo-username">Footprint</Label>
+                        <SearchableSelect
+                            placeholder={"Footprint"}
+                            elements={footprints.map(({id, metric}) => ({id: id, label: metric}))}>
+                        </SearchableSelect>
+                    </div>
+
+                    {/*partType: PartType*/}
+                    <div className="grid gap-3">
+                        <Label htmlFor="sheet-demo-username">PartType</Label>
+                        <SearchableSelect
+                            placeholder={"PartType"}
+                            elements={partTypes.map(({id, name}) => ({id: id, label: name}))}>
+                        </SearchableSelect>
+                    </div>
+
+                    {/*manufacturer: Manufacturer*/}
+                    <div className="grid gap-3">
+                        <Label htmlFor="sheet-demo-username">Manufacturer</Label>
+                        <SearchableSelect
+                            placeholder={"Manufacturer"}
+                            elements={manufacturers.map(({id, name}) => ({id: id, label: name}))}>
+                        </SearchableSelect>
+                    </div>
+
+                    {/*tray: Tray*/}
+                    <div className="grid gap-3">
+                        <Label htmlFor="sheet-demo-username">Tray</Label>
+                        <SearchableSelect
+                            placeholder={"Tray"}
+                            elements={shelfs.map(it => {
+                                return it.trays.map(({id, name}) => ({id: id, label: name}))
+                            }).flat()}>
+                        </SearchableSelect>
+                    </div>
                 </div>
-
-                {/*id: number*/}
-                {/*name: string*/}
-                {/*quantity: number*/}
-                {/*value: number | null*/}
-                {/*electricalUnit: ElectricalUnit | null*/}
-                {/*footprint: Footprint | null*/}
-                {/*partType: PartType*/}
-                {/*manufacturer: Manufacturer*/}
-                {/*tray: Tray*/}
 
                 <SheetFooter>
                     <Button onClick={() => cb(part)} type="submit">Save changes</Button>

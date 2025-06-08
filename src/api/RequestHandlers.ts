@@ -1,4 +1,9 @@
-import type {Footprint, Manufacturer, Part, PartType, Shelf} from "@/Models/Models.ts";
+import type {ElectricalUnit} from "@/Models/ElectricalUnit.ts";
+import type {Part} from "@/Models/Part.ts";
+import type {Footprint} from "@/Models/Footprint.ts";
+import type {Manufacturer} from "@/Models/Manufacturer.ts";
+import type {Shelf} from "@/Models/Shelf.ts";
+import type {PartType} from "@/Models/PartType.ts";
 
 const backEndUrl: string = "http://localhost:8080/api";
 
@@ -45,6 +50,17 @@ export async function deletePart(part: Part): Promise<boolean> {
 
 export async function getFootprints(): Promise<Footprint[]> {
     const response = await fetch(backEndUrl + '/footprints', {
+        method: 'GET',
+        headers: genHeader(),
+    });
+    if (!response.ok) {
+        throw new Error('Failed to fetch parts');
+    }
+    return await response.json();
+}
+
+export async function getElectricalUnits(): Promise<ElectricalUnit[]> {
+    const response = await fetch(backEndUrl + '/electricalUnits', {
         method: 'GET',
         headers: genHeader(),
     });
