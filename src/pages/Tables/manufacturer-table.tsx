@@ -20,7 +20,7 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/
 import {Button} from "@/components/ui/button.tsx";
 import React from "react";
 import {ChevronDown} from "lucide-react";
-import {type Manufacturer} from "@/Models.ts";
+import type {Manufacturer} from "@/Models/Manufacturer.ts";
 
 
 export function ManufacturersTable({data}: {

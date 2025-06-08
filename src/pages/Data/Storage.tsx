@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import type {Shelf} from "@/Models.ts";
-import {getShelfs} from "@/RequestHandlers.ts";
+import {getShelfs} from "@/api/RequestHandlers.ts";
 import {StorageTable} from "../Tables/storage-table";
+import type {Shelf} from "@/Models/Shelf.ts";
 
 export default function Storage() {
 

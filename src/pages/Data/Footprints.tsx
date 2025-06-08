@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {FootprintsTable} from "@/pages/Tables/footprint-table.tsx";
-import {getFootprints} from "@/RequestHandlers.ts";
-import type {Footprint} from "@/Models.ts";
+import {getFootprints} from "@/api/RequestHandlers.ts";
+import type {Footprint} from "@/Models/Footprint.ts";
 
 export default function Footprints() {
     const [footprints, setFootprints] = useState<Footprint[]>([]);

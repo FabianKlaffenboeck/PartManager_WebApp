@@ -1,11 +1,11 @@
 import {PartTable} from "@/pages/Tables/part-table.tsx";
 import {useEffect, useState} from "react";
 import {StockDrawer} from "@/pages/Dialogs/StockDrawer.tsx";
-import type {Part} from "@/Models.ts";
 import {toast} from "sonner";
-import {deletePart, getParts, updatePart} from "@/RequestHandlers.ts";
+import {deletePart, getParts, updatePart} from "@/api/RequestHandlers.ts";
 import {DeleteConfirm} from "@/pages/Dialogs/DeleteConfirm.tsx";
 import {CreateEditPart} from "@/pages/Dialogs/CreateEditPart.tsx";
+import type {Part} from "@/Models/Part.ts";
 
 export default function PartsAll() {
 

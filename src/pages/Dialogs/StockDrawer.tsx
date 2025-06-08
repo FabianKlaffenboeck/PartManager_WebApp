@@ -9,7 +9,7 @@ import {
     DrawerHeader,
     DrawerTitle,
 } from "@/components/ui/drawer.tsx"
-import type {Part} from "@/Models.ts";
+import type {Part} from "@/Models/Models.ts";
 import {useEffect, useState} from "react";
 
 export function StockDrawer({open, part, handleStockAdjSave}: {

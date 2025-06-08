@@ -20,7 +20,8 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/
 import {Button} from "@/components/ui/button.tsx";
 import React from "react";
 import {ChevronDown} from "lucide-react";
-import {type Shelf, type Tray} from "@/Models.ts";
+import type {Shelf} from "@/Models/Shelf.ts";
+import type {Tray} from "@/Models/Tray.ts";
 
 
 export function StorageTable({data}: {

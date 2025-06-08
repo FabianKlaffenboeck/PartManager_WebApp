@@ -1,4 +1,4 @@
-import type {Footprint, Manufacturer, Part, PartType, Shelf} from "@/Models.ts";
+import type {Footprint, Manufacturer, Part, PartType, Shelf} from "@/Models/Models.ts";
 
 const backEndUrl: string = "http://localhost:8080/api";
 

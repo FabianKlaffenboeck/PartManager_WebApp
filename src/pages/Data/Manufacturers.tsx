@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {ManufacturersTable} from "@/pages/Tables/manufacturer-table.tsx";
-import {getManufacturers} from "@/RequestHandlers.ts";
-import type {Manufacturer} from "@/Models.ts";
+import {getManufacturers} from "@/api/RequestHandlers.ts";
+import type {Manufacturer} from "@/Models/Manufacturer.ts";
 
 export default function Manufacturers() {
     const [manufacturers, setManufacturers] = useState<Manufacturer[]>([]);
