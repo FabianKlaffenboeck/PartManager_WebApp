@@ -1,6 +1,6 @@
 import {Minus, Plus} from "lucide-react"
 
-import {Button} from "@/components/ui/button"
+import {Button} from "@/components/ui/button.tsx"
 import {
     Drawer,
     DrawerContent,
@@ -8,7 +8,7 @@ import {
     DrawerFooter,
     DrawerHeader,
     DrawerTitle,
-} from "@/components/ui/drawer"
+} from "@/components/ui/drawer.tsx"
 import type {Part} from "@/Models.ts";
 import {useEffect, useState} from "react";
 

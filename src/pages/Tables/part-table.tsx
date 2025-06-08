@@ -30,10 +30,11 @@ function parsElectricalUnit(unit: ElectricalUnit): string {
     return unit.toString()
 }
 
-export function PartTable({data, editHandler, adjustStockHandler}: {
+export function PartTable({data, delete_cb, edit_cb, adjustStock_cb}: {
     data: Part[]
-    editHandler: (id: number) => void;
-    adjustStockHandler: (id: number) => void;
+    delete_cb: (id: number) => void;
+    edit_cb: (id: number) => void;
+    adjustStock_cb: (id: number) => void;
 }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -134,8 +135,9 @@ export function PartTable({data, editHandler, adjustStockHandler}: {
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator/>
-                        <DropdownMenuItem onClick={() => editHandler(row.original.id)}>Edit</DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => adjustStockHandler(row.original.id)}>Adjust
+                        <DropdownMenuItem onClick={() => edit_cb(row.original.id)}>Edit</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => delete_cb(row.original.id)}>Delete</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => adjustStock_cb(row.original.id)}>Adjust
                             Stock</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>)

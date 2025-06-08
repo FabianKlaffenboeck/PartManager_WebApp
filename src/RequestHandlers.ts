@@ -32,6 +32,17 @@ export async function updatePart(part: Part): Promise<Part[]> {
     return await response.json();
 }
 
+export async function deletePart(part: Part): Promise<boolean> {
+    const response = await fetch(backEndUrl + '/parts/' + part.id, {
+        method: 'DELETE',
+        headers: genHeader(),
+    });
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return true;
+}
+
 export async function getFootprints(): Promise<Footprint[]> {
     const response = await fetch(backEndUrl + '/footprints', {
         method: 'GET',
