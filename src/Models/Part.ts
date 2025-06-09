@@ -5,7 +5,7 @@ import type {PartType} from "@/Models/PartType.ts";
 import type {Tray} from "@/Models/Tray.ts";
 
 export type Part = {
-    id: number
+    id: number|null
     name: string
     quantity: number
     value: number | null

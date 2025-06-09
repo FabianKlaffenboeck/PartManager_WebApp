@@ -23,7 +23,7 @@ export default function PartsAll() {
     }, []);
 
     function editCM_cb(id: number) {
-        setSelectedPart(parts.find(it => it.id == id));
+        setSelectedPart(parts.find(it => it.id === id));
         setCreateEdit(true)
     }
 
@@ -38,9 +38,24 @@ export default function PartsAll() {
     }
 
     function createEdit_cb(part: Part | undefined) {
-        console.log(part);
         setCreateEdit(false)
         setSelectedPart(undefined)
+
+        if (part == undefined) {
+            return
+        }
+
+        updatePart(part)
+            .then(() => {
+                setParts(parts.map(it => it.id === part.id ? part : it))
+                toast("Part has been Updated!")
+                setSelectedPart(undefined)
+            })
+            .catch((error) => {
+                console.error('Error:', error)
+                toast("Could not update Part")
+                setSelectedPart(undefined)
+            });
     }
 
     function deleteConfirm_cb(ok: boolean) {
@@ -55,19 +70,19 @@ export default function PartsAll() {
             return;
         }
 
-
         deletePart(selectedPart).then(() => {
             toast(selectedPart.name + " has been Deleted!")
             setParts(parts.filter(it => it.id != selectedPart.id))
             setSelectedPart(undefined)
-        }).catch(() => {
+        }).catch((error) => {
+            console.error('Error:', error)
             toast("Error while deleting!!")
             setSelectedPart(undefined)
         })
 
     }
 
-    function handleStockAdjSave(amount: number, aboard: boolean) {
+    function handleStockAdj_cb(amount: number, aboard: boolean) {
         if (aboard) {
             setOpenStockAdj(false)
             setSelectedPart(undefined)
@@ -88,9 +103,9 @@ export default function PartsAll() {
             })
             .catch((error) => {
                 console.error('Error:', error)
+                toast("Could not update Stock")
                 setSelectedPart(undefined)
             });
-
 
         setOpenStockAdj(false)
         setSelectedPart(undefined)
@@ -101,7 +116,7 @@ export default function PartsAll() {
             <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
                 <PartTable data={parts} edit_cb={editCM_cb} delete_cb={deleteCM_cb} adjustStock_cb={adjustStockCM_cb}/>
             </div>
-            <StockDrawer open={openStockAdj} part={selectedPart} handleStockAdjSave={handleStockAdjSave}></StockDrawer>
+            <StockDrawer open={openStockAdj} part={selectedPart} cb={handleStockAdj_cb}></StockDrawer>
             <DeleteConfirm open={openDeleteConfirm} part={selectedPart} cb={deleteConfirm_cb}></DeleteConfirm>
             <CreateEditPart open={createEdit} part={selectedPart} cb={createEdit_cb}></CreateEditPart>
         </div>

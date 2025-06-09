@@ -15,7 +15,7 @@ export function SearchableSelect({placeholder, elements, value, setValue}: {
     placeholder: string
     elements: searchableSelectElement[]
     value?: number | undefined
-    setValue: (val: number|undefined) => void
+    setValue: (val: number | undefined) => void
 }) {
     const [open, setOpen] = useState(false)
     const [inputValue, setInputValue] = useState("")
@@ -29,7 +29,7 @@ export function SearchableSelect({placeholder, elements, value, setValue}: {
                     aria-expanded={open}
                     className="w-[200px] justify-between"
                 >
-                    {value ? elements.find((framework) => framework.id == value)?.label : ("select a " + placeholder)}
+                    {elements.find(it => it.id == value)?.label || ("select a " + placeholder)}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50"/>
                 </Button>
             </PopoverTrigger>

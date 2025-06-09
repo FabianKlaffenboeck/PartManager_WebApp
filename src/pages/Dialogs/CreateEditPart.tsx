@@ -33,18 +33,58 @@ export function CreateEditPart({open, part, cb}: {
     const [electricalUnits, setElectricalUnits] = useState<ElectricalUnit[]>([]);
 
 
-    const [name, setName] = useState("");
-    const [value, setValue] = useState("");
-    const [quantity, setQuantity] = useState("");
-    const [electricalUnit, setElectricalUnit] = useState<number | undefined>();
-    const [footprint, setFootprint] = useState<number | undefined>();
-    const [partType, setPartType] = useState<number | undefined>();
-    const [manufacturer, setManufacturer] = useState<number | undefined>();
-    const [tray, setTray] = useState<number | undefined>();
+    const [name, setName] = useState<string | undefined>();
+    const [value, setValue] = useState<number | undefined>();
+    const [quantity, setQuantity] = useState<number | undefined>();
+    const [electricalUnit_id, setElectricalUnit_id] = useState<number | undefined>();
+    const [footprint_id, setFootprint_id] = useState<number | undefined>();
+    const [partType_id, setPartType_id] = useState<number | undefined>();
+    const [manufacturer_id, setManufacturer_id] = useState<number | undefined>();
+    const [tray_id, setTray_id] = useState<number | undefined>();
 
-    function buildPart(): Part | undefined {
-        return part
+    function buildPart(): Part {
+        return {
+            id: part?.id || null,
+            name: name || "",
+            quantity: quantity || 0,
+            value: value || null,
+            electricalUnit: electricalUnit_id ? electricalUnits[electricalUnit_id] : null,
+            footprint: footprints.find(it => it.id == footprint_id) || null,
+            partType: partTypes.find(it => it.id == partType_id)!,
+            manufacturer: manufacturers.find(it => it.id == manufacturer_id)!,
+            tray: shelfs.map(it => it.trays).flat().find(it => it.id == tray_id)!,
+        };
     }
+
+    function isSavable(): boolean {
+        if (quantity == undefined) {
+            return false
+        }
+        if (footprint_id == undefined) {
+            return false
+        }
+        if (partType_id == undefined) {
+            return false
+        }
+        if (manufacturer_id == undefined) {
+            return false
+        }
+        if (tray_id == undefined) {
+            return false
+        }
+        return true
+    }
+
+    useEffect(() => {
+        setName(part?.name)
+        setValue(part?.value || undefined)
+        setQuantity(part?.quantity)
+        setElectricalUnit_id(electricalUnits.findIndex(it => it === part?.electricalUnit))
+        setFootprint_id(part?.footprint?.id)
+        setPartType_id(part?.partType.id)
+        setManufacturer_id(part?.manufacturer.id)
+        setTray_id(part?.tray.id)
+    }, [electricalUnits, part])
 
     useEffect(() => {
         getFootprints()
@@ -97,7 +137,6 @@ export function CreateEditPart({open, part, cb}: {
                             value={name}
                             onChange={e => setName(e.target.value)}
                             id="sheet-demo-name"
-                            defaultValue="Pedro Duarte"
                         />
                     </div>
 
@@ -107,9 +146,8 @@ export function CreateEditPart({open, part, cb}: {
                         <Input
                             type="number"
                             value={quantity}
-                            onChange={e => setQuantity(e.target.value)}
+                            onChange={e => setQuantity(Number(e.target.value))}
                             id="sheet-demo-name"
-                            defaultValue="Pedro Duarte"
                         />
                     </div>
 
@@ -119,9 +157,8 @@ export function CreateEditPart({open, part, cb}: {
                         <Input
                             type="number"
                             value={value}
-                            onChange={e => setValue(e.target.value)}
+                            onChange={e => setValue(Number(e.target.value))}
                             id="sheet-demo-name"
-                            defaultValue="Pedro Duarte"
                         />
                     </div>
 
@@ -134,8 +171,8 @@ export function CreateEditPart({open, part, cb}: {
                                 id: index,
                                 label: it.toString(),
                             }))}
-                            value={electricalUnit}
-                            setValue={setElectricalUnit}
+                            value={electricalUnit_id}
+                            setValue={setElectricalUnit_id}
                         ></SearchableSelect>
                     </div>
 
@@ -145,8 +182,8 @@ export function CreateEditPart({open, part, cb}: {
                         <SearchableSelect
                             placeholder={"Footprint"}
                             elements={footprints.map(({id, metric}) => ({id: id, label: metric}))}
-                            value={footprint}
-                            setValue={setFootprint}
+                            value={footprint_id}
+                            setValue={setFootprint_id}
                         ></SearchableSelect>
                     </div>
 
@@ -156,8 +193,8 @@ export function CreateEditPart({open, part, cb}: {
                         <SearchableSelect
                             placeholder={"PartType"}
                             elements={partTypes.map(({id, name}) => ({id: id, label: name}))}
-                            value={partType}
-                            setValue={setPartType}
+                            value={partType_id}
+                            setValue={setPartType_id}
                         ></SearchableSelect>
                     </div>
 
@@ -167,8 +204,8 @@ export function CreateEditPart({open, part, cb}: {
                         <SearchableSelect
                             placeholder={"Manufacturer"}
                             elements={manufacturers.map(({id, name}) => ({id: id, label: name}))}
-                            value={manufacturer}
-                            setValue={setManufacturer}
+                            value={manufacturer_id}
+                            setValue={setManufacturer_id}
                         ></SearchableSelect>
                     </div>
 
@@ -180,14 +217,14 @@ export function CreateEditPart({open, part, cb}: {
                             elements={shelfs.map(it => {
                                 return it.trays.map(({id, name}) => ({id: id, label: name}))
                             }).flat()}
-                            value={tray}
-                            setValue={setTray}
+                            value={tray_id}
+                            setValue={setTray_id}
                         ></SearchableSelect>
                     </div>
                 </div>
 
                 <SheetFooter>
-                    <Button onClick={() => cb(buildPart())} type="submit">Save changes</Button>
+                    <Button disabled={!isSavable()} onClick={() => cb(buildPart())}>Save changes</Button>
                     <SheetClose asChild>
                         <Button onClick={() => cb(undefined)} variant="outline">Close</Button>
                     </SheetClose>

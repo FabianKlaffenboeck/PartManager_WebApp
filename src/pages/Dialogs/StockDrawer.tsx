@@ -12,10 +12,10 @@ import {
 import type {Part} from "@/Models/Models.ts";
 import {useEffect, useState} from "react";
 
-export function StockDrawer({open, part, handleStockAdjSave}: {
+export function StockDrawer({open, part, cb}: {
     open: boolean
     part: Part | undefined,
-    handleStockAdjSave: (amount: number, aboard: boolean) => void;
+    cb: (amount: number, aboard: boolean) => void;
 }) {
     const [stock, setStock] = useState(0)
 
@@ -66,8 +66,8 @@ export function StockDrawer({open, part, handleStockAdjSave}: {
                         </div>
                     </div>
                     <DrawerFooter>
-                        <Button onClick={() => handleStockAdjSave(stock, false)}>Save</Button>
-                        <Button onClick={() => handleStockAdjSave(stock, true)} variant="outline">Cancel</Button>
+                        <Button onClick={() => cb(stock, false)}>Save</Button>
+                        <Button onClick={() => cb(stock, true)} variant="outline">Cancel</Button>
                     </DrawerFooter>
                 </div>
             </DrawerContent>
