@@ -1,7 +1,7 @@
-import type {Part} from "@/Models/Models.ts";
 import {Button} from "@/components/ui/button";
 import {Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog.tsx";
 import {DialogDescription} from "@radix-ui/react-dialog";
+import type {Part} from "@/Models/Part.ts";
 
 export function DeleteConfirm({open, part, cb}: {
     open: boolean

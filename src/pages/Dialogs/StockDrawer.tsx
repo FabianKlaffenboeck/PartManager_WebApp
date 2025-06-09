@@ -9,8 +9,8 @@ import {
     DrawerHeader,
     DrawerTitle,
 } from "@/components/ui/drawer.tsx"
-import type {Part} from "@/Models/Models.ts";
 import {useEffect, useState} from "react";
+import type {Part} from "@/Models/Part.ts";
 
 export function StockDrawer({open, part, cb}: {
     open: boolean

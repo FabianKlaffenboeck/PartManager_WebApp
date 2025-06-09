@@ -138,9 +138,9 @@ export function PartTable({data, delete_cb, edit_cb, adjustStock_cb}: {
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator/>
-                        <DropdownMenuItem onClick={() => edit_cb(row.original.id)}>Edit</DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => delete_cb(row.original.id)}>Delete</DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => adjustStock_cb(row.original.id)}>Adjust
+                        <DropdownMenuItem onClick={() => edit_cb(row.original.id!)}>Edit</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => delete_cb(row.original.id!)}>Delete</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => adjustStock_cb(row.original.id!)}>Adjust
                             Stock</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>)
