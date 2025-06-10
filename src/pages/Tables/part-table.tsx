@@ -26,15 +26,16 @@ import {ChevronDown, MoreHorizontal, Replace} from "lucide-react";
 import {getShelfs} from "@/api/RequestHandlers.ts";
 import type {Tray} from "@/Models/Tray.ts";
 import type {Shelf} from "@/Models/Shelf.ts";
-import type { Part } from "@/Models/Part";
+import type {Part} from "@/Models/Part";
 import type {ElectricalUnit} from "@/Models/ElectricalUnit.ts";
 
 function parsElectricalUnit(unit: ElectricalUnit): string {
     return unit.toString()
 }
 
-export function PartTable({data, delete_cb, edit_cb, adjustStock_cb}: {
+export function PartTable({data, newCm_cb, delete_cb, edit_cb, adjustStock_cb}: {
     data: Part[]
+    newCm_cb: () => void;
     delete_cb: (id: number) => void;
     edit_cb: (id: number) => void;
     adjustStock_cb: (id: number) => void;
@@ -223,6 +224,7 @@ export function PartTable({data, delete_cb, edit_cb, adjustStock_cb}: {
                 </Table>
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
+                <Button size="sm" onClick={newCm_cb}>New</Button>
                 <Button
                     variant="outline"
                     size="sm"

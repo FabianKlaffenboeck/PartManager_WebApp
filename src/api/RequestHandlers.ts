@@ -25,7 +25,7 @@ export async function getParts(): Promise<Part[]> {
     return await response.json();
 }
 
-export async function updatePart(part: Part): Promise<Part[]> {
+export async function updatePart(part: Part): Promise<Part> {
     const response = await fetch(backEndUrl + '/parts', {
         method: 'POST',
         headers: genHeader(),

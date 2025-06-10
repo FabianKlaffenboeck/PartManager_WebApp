@@ -22,6 +22,10 @@ export default function PartsAll() {
             .catch((error) => console.error('Error:', error));
     }, []);
 
+    function newCm_cb() {
+        setCreateEdit(true)
+    }
+
     function editCM_cb(id: number) {
         setSelectedPart(parts.find(it => it.id === id));
         setCreateEdit(true)
@@ -46,9 +50,15 @@ export default function PartsAll() {
         }
 
         updatePart(part)
-            .then(() => {
-                setParts(parts.map(it => it.id === part.id ? part : it))
-                toast("Part has been Updated!")
+            .then((newPart) => {
+                if (part.id == null) {
+                    toast("Part has been Created!")
+                    setParts(prev => [...prev, newPart])
+                } else {
+                    setParts(parts.map(it => it.id === part.id ? part : it))
+                    toast("Part has been Updated!")
+                }
+
                 setSelectedPart(undefined)
             })
             .catch((error) => {
@@ -114,7 +124,12 @@ export default function PartsAll() {
     return (
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
             <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
-                <PartTable data={parts} edit_cb={editCM_cb} delete_cb={deleteCM_cb} adjustStock_cb={adjustStockCM_cb}/>
+                <PartTable data={parts}
+                           newCm_cb={newCm_cb}
+                           edit_cb={editCM_cb}
+                           delete_cb={deleteCM_cb}
+                           adjustStock_cb={adjustStockCM_cb}
+                />
             </div>
             <StockDrawer open={openStockAdj} part={selectedPart} cb={handleStockAdj_cb}></StockDrawer>
             <DeleteConfirm open={openDeleteConfirm} part={selectedPart} cb={deleteConfirm_cb}></DeleteConfirm>
