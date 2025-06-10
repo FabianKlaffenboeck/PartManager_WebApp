@@ -1,5 +1,5 @@
 export type Footprint = {
-    id: number
+    id: number | null
     metric: string
     imperial: string
 }

@@ -1,4 +1,4 @@
 export type Manufacturer = {
-    id: number
+    id: number | null
     name: string
 }

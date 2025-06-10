@@ -22,11 +22,11 @@ import React from "react";
 import {ChevronDown} from "lucide-react";
 import type {PartType} from "@/Models/PartType.ts";
 
-interface DataTableProps {
-    data: PartType[]
-}
 
-export function PartTypesTable({data}: DataTableProps) {
+export function PartTypesTable({data, newCm_cb}: {
+    data: PartType[]
+    newCm_cb: () => void;
+}) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -112,6 +112,7 @@ export function PartTypesTable({data}: DataTableProps) {
                 </Table>
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
+                <Button size="sm" onClick={newCm_cb}>New</Button>
                 <Button
                     variant="outline"
                     size="sm"

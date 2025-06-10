@@ -23,8 +23,9 @@ import {ChevronDown} from "lucide-react";
 import type {Manufacturer} from "@/Models/Manufacturer.ts";
 
 
-export function ManufacturersTable({data}: {
+export function ManufacturersTable({data, newCm_cb}: {
     data: Manufacturer[]
+    newCm_cb: () => void;
 }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -111,6 +112,7 @@ export function ManufacturersTable({data}: {
                 </Table>
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
+                <Button size="sm" onClick={newCm_cb}>New</Button>
                 <Button
                     variant="outline"
                     size="sm"

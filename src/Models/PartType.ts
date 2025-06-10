@@ -1,4 +1,4 @@
 export type PartType = {
-    id: number
+    id: number | null
     name: string
 }

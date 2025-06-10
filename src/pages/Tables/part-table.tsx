@@ -23,11 +23,11 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/
 import {Button} from "@/components/ui/button.tsx";
 import React, {useEffect, useState} from "react";
 import {ChevronDown, MoreHorizontal, Replace} from "lucide-react";
-import {getShelfs} from "@/api/RequestHandlers.ts";
 import type {Tray} from "@/Models/Tray.ts";
 import type {Shelf} from "@/Models/Shelf.ts";
 import type {Part} from "@/Models/Part";
 import type {ElectricalUnit} from "@/Models/ElectricalUnit.ts";
+import { getShelfs } from "@/api/Shelf_API";
 
 function parsElectricalUnit(unit: ElectricalUnit): string {
     return unit.toString()

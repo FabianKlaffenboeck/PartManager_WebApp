@@ -8,9 +8,7 @@ import {
     SheetHeader,
     SheetTitle
 } from "@/components/ui/sheet";
-import {useEffect, useState} from "react";
 import type {Footprint} from "@/Models/Footprint.ts";
-import {getElectricalUnits, getFootprints, getManufacturers, getPartTypes, getShelfs} from "@/api/RequestHandlers.ts";
 import type {Manufacturer} from "@/Models/Manufacturer.ts";
 import type {PartType} from "@/Models/PartType.ts";
 import type {Shelf} from "@/Models/Shelf.ts";
@@ -19,6 +17,12 @@ import {Input} from "@/components/ui/input.tsx";
 import {Label} from "@/components/ui/label.tsx";
 import {SearchableSelect} from "@/components/searchableSelect.tsx";
 import type {ElectricalUnit} from "@/Models/ElectricalUnit.ts";
+import {getFootprints} from "@/api/Footprint_API.ts";
+import {getElectricalUnits} from "@/api/ElectricalUnit_API.ts";
+import {getManufacturers} from "@/api/Manufacturer_API.ts";
+import {getPartTypes} from "@/api/PartType_API";
+import {getShelfs} from "@/api/Shelf_API.ts";
+import {useEffect, useState} from "react";
 
 export function CreateEditPart({open, part, cb}: {
     open: boolean
@@ -80,9 +84,9 @@ export function CreateEditPart({open, part, cb}: {
         setValue(part?.value || undefined)
         setQuantity(part?.quantity)
         setElectricalUnit_id(electricalUnits.findIndex(it => it === part?.electricalUnit))
-        setFootprint_id(part?.footprint?.id)
-        setPartType_id(part?.partType.id)
-        setManufacturer_id(part?.manufacturer.id)
+        setFootprint_id(part?.footprint?.id || undefined)
+        setPartType_id(part?.partType.id || undefined)
+        setManufacturer_id(part?.manufacturer.id || undefined)
         setTray_id(part?.tray.id)
     }, [electricalUnits, part])
 
@@ -181,7 +185,7 @@ export function CreateEditPart({open, part, cb}: {
                         <Label htmlFor="sheet-demo-username">Footprint</Label>
                         <SearchableSelect
                             placeholder={"Footprint"}
-                            elements={footprints.map(({id, metric}) => ({id: id, label: metric}))}
+                            elements={footprints.map(({id, metric}) => ({id: id!, label: metric}))}
                             value={footprint_id}
                             setValue={setFootprint_id}
                         ></SearchableSelect>
@@ -192,7 +196,7 @@ export function CreateEditPart({open, part, cb}: {
                         <Label htmlFor="sheet-demo-username">PartType</Label>
                         <SearchableSelect
                             placeholder={"PartType"}
-                            elements={partTypes.map(({id, name}) => ({id: id, label: name}))}
+                            elements={partTypes.map(({id, name}) => ({id: id!, label: name}))}
                             value={partType_id}
                             setValue={setPartType_id}
                         ></SearchableSelect>
@@ -203,7 +207,7 @@ export function CreateEditPart({open, part, cb}: {
                         <Label htmlFor="sheet-demo-username">Manufacturer</Label>
                         <SearchableSelect
                             placeholder={"Manufacturer"}
-                            elements={manufacturers.map(({id, name}) => ({id: id, label: name}))}
+                            elements={manufacturers.map(({id, name}) => ({id: id!, label: name}))}
                             value={manufacturer_id}
                             setValue={setManufacturer_id}
                         ></SearchableSelect>

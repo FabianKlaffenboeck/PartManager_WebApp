@@ -2,10 +2,10 @@ import {PartTable} from "@/pages/Tables/part-table.tsx";
 import {useEffect, useState} from "react";
 import {StockDrawer} from "@/pages/Dialogs/StockDrawer.tsx";
 import {toast} from "sonner";
-import {deletePart, getParts, updatePart} from "@/api/RequestHandlers.ts";
 import {DeleteConfirm} from "@/pages/Dialogs/DeleteConfirm.tsx";
 import {CreateEditPart} from "@/pages/Dialogs/CreateEditPart.tsx";
 import type {Part} from "@/Models/Part.ts";
+import {deletePart, getParts, updatePart} from "@/api/Part_API.ts";
 
 export default function PartsAll() {
 
@@ -22,7 +22,7 @@ export default function PartsAll() {
             .catch((error) => console.error('Error:', error));
     }, []);
 
-    function newCm_cb() {
+    function newCM_cb() {
         setCreateEdit(true)
     }
 
@@ -125,7 +125,7 @@ export default function PartsAll() {
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
             <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
                 <PartTable data={parts}
-                           newCm_cb={newCm_cb}
+                           newCm_cb={newCM_cb}
                            edit_cb={editCM_cb}
                            delete_cb={deleteCM_cb}
                            adjustStock_cb={adjustStockCM_cb}
