@@ -11,3 +11,15 @@ export async function getFootprints(): Promise<Footprint[]> {
     }
     return await response.json();
 }
+
+export async function updateFootprint(footprint: Footprint): Promise<Footprint> {
+    const response = await fetch(backEndUrl + '/footprints', {
+        method: 'POST',
+        headers: genHeader(),
+        body: JSON.stringify(footprint)
+    });
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+}

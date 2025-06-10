@@ -2,7 +2,8 @@ import {useEffect, useState} from "react";
 import {FootprintsTable} from "@/pages/Tables/footprint-table.tsx";
 import type {Footprint} from "@/Models/Footprint.ts";
 import {CreateEditFootprint} from "@/pages/Dialogs/CreateEditFootprint.tsx";
-import {getFootprints} from "@/api/Footprint_API.ts";
+import {getFootprints, updateFootprint} from "@/api/Footprint_API.ts";
+import {toast} from "sonner";
 
 export default function Footprints() {
     const [footprints, setFootprints] = useState<Footprint[]>([]);
@@ -15,6 +16,29 @@ export default function Footprints() {
     function createEdit_cb(footprint: Footprint | undefined) {
         console.log(footprint);
         setCreateEdit(false)
+
+        if (footprint == undefined) {
+            return
+        }
+
+        updateFootprint(footprint)
+            .then((newFootprint) => {
+                if (footprint?.id == null) {
+                    toast("Footprint has been Created!")
+                    setFootprints(prev => [...prev, newFootprint])
+                } else {
+                    setFootprints(footprints.map(it => it.id === footprint.id ? footprint : it))
+                    toast("Part has been Footprint!")
+                }
+
+                // setSelectedPart(undefined)
+            })
+            .catch((error) => {
+                console.error('Error:', error)
+                toast("Could not update Footprint")
+                // setSelectedPart(undefined)
+            });
+
     }
 
     useEffect(() => {

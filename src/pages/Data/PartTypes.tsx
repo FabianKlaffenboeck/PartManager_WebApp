@@ -2,7 +2,8 @@ import {useEffect, useState} from "react";
 import {PartTypesTable} from "@/pages/Tables/partTypes-table.tsx";
 import type {PartType} from "@/Models/PartType.ts";
 import {CreateEditPartType} from "@/pages/Dialogs/CreateEditPartType.tsx";
-import {getPartTypes} from "@/api/PartType_API.ts";
+import {getPartTypes, updatePartType} from "@/api/PartType_API.ts";
+import {toast} from "sonner";
 
 export default function PartTypes() {
     const [partTypes, setPartTypes] = useState<PartType[]>([]);
@@ -15,6 +16,28 @@ export default function PartTypes() {
     function createEdit_cb(partType: PartType | undefined) {
         console.log(partType);
         setCreateEdit(false)
+
+        if (partType == undefined) {
+            return
+        }
+
+        updatePartType(partType)
+            .then((newFootprint) => {
+                if (partType?.id == null) {
+                    toast("PartType has been Created!")
+                    setPartTypes(prev => [...prev, newFootprint])
+                } else {
+                    setPartTypes(partTypes.map(it => it.id === partType.id ? partType : it))
+                    toast("PartType has been Footprint!")
+                }
+
+                // setSelectedPart(undefined)
+            })
+            .catch((error) => {
+                console.error('Error:', error)
+                toast("Could not update PartType")
+                // setSelectedPart(undefined)
+            });
     }
 
     useEffect(() => {

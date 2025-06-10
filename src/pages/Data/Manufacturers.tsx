@@ -3,6 +3,8 @@ import {ManufacturersTable} from "@/pages/Tables/manufacturer-table.tsx";
 import type {Manufacturer} from "@/Models/Manufacturer.ts";
 import {CreateEditManufacturer} from "@/pages/Dialogs/CreateEditManufacturer.tsx";
 import {getManufacturers} from "@/api/Manufacturer_API.ts";
+import {updatePartType} from "@/api/PartType_API.ts";
+import {toast} from "sonner";
 
 export default function Manufacturers() {
     const [manufacturers, setManufacturers] = useState<Manufacturer[]>([]);
@@ -15,6 +17,28 @@ export default function Manufacturers() {
     function createEdit_cb(manufacturer: Manufacturer | undefined) {
         console.log(manufacturer);
         setCreateEdit(false)
+
+        if (manufacturer == undefined) {
+            return
+        }
+
+        updatePartType(manufacturer)
+            .then((newFootprint) => {
+                if (manufacturer?.id == null) {
+                    toast("Manufacturer has been Created!")
+                    setManufacturers(prev => [...prev, newFootprint])
+                } else {
+                    setManufacturers(manufacturers.map(it => it.id === manufacturer.id ? manufacturer : it))
+                    toast("Manufacturer has been Footprint!")
+                }
+
+                // setSelectedPart(undefined)
+            })
+            .catch((error) => {
+                console.error('Error:', error)
+                toast("Could not update Manufacturer")
+                // setSelectedPart(undefined)
+            });
     }
 
     useEffect(() => {
