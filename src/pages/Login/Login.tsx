@@ -1,5 +1,5 @@
 import {LoginForm} from "@/components/login-form.tsx";
-import {loginReq} from "@/RequestHandlers.ts";
+import {loginReq} from "@/api/API.ts";
 import {toast} from "sonner";
 
 export default function Login({onLoginSuccess}: {

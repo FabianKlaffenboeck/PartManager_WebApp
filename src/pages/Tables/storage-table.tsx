@@ -20,11 +20,13 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/
 import {Button} from "@/components/ui/button.tsx";
 import React from "react";
 import {ChevronDown} from "lucide-react";
-import {type Shelf, type Tray} from "@/Models.ts";
+import type {Shelf} from "@/Models/Shelf.ts";
+import type {Tray} from "@/Models/Tray.ts";
 
 
-export function StorageTable({data}: {
+export function StorageTable({data,newCm_cb}: {
     data: Shelf[]
+    newCm_cb: () => void;
 }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -143,6 +145,7 @@ export function StorageTable({data}: {
                 </Table>
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
+                <Button size="sm" onClick={newCm_cb}>New</Button>
                 <Button
                     variant="outline"
                     size="sm"

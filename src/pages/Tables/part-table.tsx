@@ -23,17 +23,22 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/
 import {Button} from "@/components/ui/button.tsx";
 import React, {useEffect, useState} from "react";
 import {ChevronDown, MoreHorizontal, Replace} from "lucide-react";
-import {ElectricalUnit, type Part, type Shelf, type Tray} from "@/Models.ts";
-import {getShelfs} from "@/RequestHandlers.ts";
+import type {Tray} from "@/Models/Tray.ts";
+import type {Shelf} from "@/Models/Shelf.ts";
+import type {Part} from "@/Models/Part";
+import type {ElectricalUnit} from "@/Models/ElectricalUnit.ts";
+import { getShelfs } from "@/api/Shelf_API";
 
 function parsElectricalUnit(unit: ElectricalUnit): string {
     return unit.toString()
 }
 
-export function PartTable({data, editHandler, adjustStockHandler}: {
+export function PartTable({data, newCm_cb, delete_cb, edit_cb, adjustStock_cb}: {
     data: Part[]
-    editHandler: (id: number) => void;
-    adjustStockHandler: (id: number) => void;
+    newCm_cb: () => void;
+    delete_cb: (id: number) => void;
+    edit_cb: (id: number) => void;
+    adjustStock_cb: (id: number) => void;
 }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -134,8 +139,9 @@ export function PartTable({data, editHandler, adjustStockHandler}: {
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator/>
-                        <DropdownMenuItem onClick={() => editHandler(row.original.id)}>Edit</DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => adjustStockHandler(row.original.id)}>Adjust
+                        <DropdownMenuItem onClick={() => edit_cb(row.original.id!)}>Edit</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => delete_cb(row.original.id!)}>Delete</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => adjustStock_cb(row.original.id!)}>Adjust
                             Stock</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>)
@@ -218,6 +224,7 @@ export function PartTable({data, editHandler, adjustStockHandler}: {
                 </Table>
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
+                <Button size="sm" onClick={newCm_cb}>New</Button>
                 <Button
                     variant="outline"
                     size="sm"

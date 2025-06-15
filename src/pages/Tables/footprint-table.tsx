@@ -20,11 +20,12 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/
 import {Button} from "@/components/ui/button.tsx";
 import React from "react";
 import {ChevronDown} from "lucide-react";
-import {type Footprint} from "@/Models.ts";
+import type {Footprint} from "@/Models/Footprint.ts";
 
 
-export function FootprintsTable({data}: {
+export function FootprintsTable({data, newCm_cb}: {
     data: Footprint[]
+    newCm_cb: () => void;
 }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -113,6 +114,7 @@ export function FootprintsTable({data}: {
                 </Table>
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
+                <Button size="sm" onClick={newCm_cb}>New</Button>
                 <Button
                     variant="outline"
                     size="sm"
