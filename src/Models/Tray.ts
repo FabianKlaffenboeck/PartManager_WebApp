@@ -1,4 +1,4 @@
 export type Tray = {
-    id: number
+    id: number | null
     name: string
 }

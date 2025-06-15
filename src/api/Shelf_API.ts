@@ -11,3 +11,14 @@ export async function getShelfs(): Promise<Shelf[]> {
     }
     return await response.json();
 }
+export async function updateShelf(shelf: Shelf): Promise<Shelf> {
+    const response = await fetch(backEndUrl + '/shelfs', {
+        method: 'POST',
+        headers: genHeader(),
+        body: JSON.stringify(shelf)
+    });
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+}

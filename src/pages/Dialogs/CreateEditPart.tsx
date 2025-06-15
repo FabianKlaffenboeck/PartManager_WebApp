@@ -1,13 +1,5 @@
 import {Button} from "@/components/ui/button";
-import {
-    Sheet,
-    SheetClose,
-    SheetContent,
-    SheetDescription,
-    SheetFooter,
-    SheetHeader,
-    SheetTitle
-} from "@/components/ui/sheet";
+import {Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle} from "@/components/ui/sheet";
 import type {Footprint} from "@/Models/Footprint.ts";
 import type {Manufacturer} from "@/Models/Manufacturer.ts";
 import type {PartType} from "@/Models/PartType.ts";
@@ -87,7 +79,7 @@ export function CreateEditPart({open, part, cb}: {
         setFootprint_id(part?.footprint?.id || undefined)
         setPartType_id(part?.partType.id || undefined)
         setManufacturer_id(part?.manufacturer.id || undefined)
-        setTray_id(part?.tray.id)
+        setTray_id(part?.tray.id || undefined)
     }, [electricalUnits, part])
 
     useEffect(() => {
@@ -125,11 +117,7 @@ export function CreateEditPart({open, part, cb}: {
         <Sheet open={open}>
             <SheetContent>
                 <SheetHeader>
-                    <SheetTitle>Are you absolutely sure?</SheetTitle>
-                    <SheetDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
-                    </SheetDescription>
+                    <SheetTitle>{(part ? "Edit" : "New") + " Part"}</SheetTitle>
                 </SheetHeader>
 
                 <div className="grid flex-1 auto-rows-min gap-6 px-4">
@@ -219,7 +207,7 @@ export function CreateEditPart({open, part, cb}: {
                         <SearchableSelect
                             placeholder={"Tray"}
                             elements={shelfs.map(it => {
-                                return it.trays.map(({id, name}) => ({id: id, label: name}))
+                                return it.trays.map(({id, name}) => ({id: id!, label: name}))
                             }).flat()}
                             value={tray_id}
                             setValue={setTray_id}

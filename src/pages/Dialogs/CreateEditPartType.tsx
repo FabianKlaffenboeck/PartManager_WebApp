@@ -3,7 +3,6 @@ import {
     Sheet,
     SheetClose,
     SheetContent,
-    SheetDescription,
     SheetFooter,
     SheetHeader,
     SheetTitle
@@ -40,11 +39,7 @@ export function CreateEditPartType({open, partType, cb}: {
         <Sheet open={open}>
             <SheetContent>
                 <SheetHeader>
-                    <SheetTitle>Are you absolutely sure?</SheetTitle>
-                    <SheetDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
-                    </SheetDescription>
+                    <SheetTitle>{(partType ? "Edit" : "New") + " PartType"}</SheetTitle>
                 </SheetHeader>
 
                 <div className="grid flex-1 auto-rows-min gap-6 px-4">

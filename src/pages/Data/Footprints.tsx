@@ -14,7 +14,6 @@ export default function Footprints() {
     }
 
     function createEdit_cb(footprint: Footprint | undefined) {
-        console.log(footprint);
         setCreateEdit(false)
 
         if (footprint == undefined) {
