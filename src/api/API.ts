@@ -19,3 +19,15 @@ export async function loginReq(username: string, password: string): Promise<stri
     const data = await response.json();
     return data.token;
 }
+
+export async function signupReq(username: string, password: string): Promise<number> {
+    const response = await fetch(backEndUrl + '/register', {
+        method: 'POST',
+        headers: genHeader(),
+        body: JSON.stringify({username, password})
+    });
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.status;
+}

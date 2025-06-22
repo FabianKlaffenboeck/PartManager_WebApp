@@ -5,9 +5,9 @@ import {Input} from "@/components/ui/input"
 import {Label} from "@/components/ui/label"
 import {useState} from "react";
 
-export function LoginForm({loginHandler,switchToRegister}: {
-    loginHandler: (username: string, password: string) => void;
-    switchToRegister: () => void;
+export function RegisterForm({registerHandler, switchToLogin}: {
+    registerHandler: (username: string, password: string) => void;
+    switchToLogin: () => void;
 }) {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -19,14 +19,14 @@ export function LoginForm({loginHandler,switchToRegister}: {
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
-                            loginHandler(userName, password);
+                            registerHandler(userName, password);
                         }}
                         className="p-6 md:p-8">
                         <div className="flex flex-col gap-6">
                             <div className="flex flex-col items-center text-center">
-                                <h1 className="text-2xl font-bold">Welcome back</h1>
+                                <h1 className="text-2xl font-bold">Welcome</h1>
                                 <p className="text-muted-foreground text-balance">
-                                    Login to your eWolveLabs account
+                                    Create a new eWolveLabs account
                                 </p>
                             </div>
                             <div className="grid gap-3">
@@ -43,9 +43,6 @@ export function LoginForm({loginHandler,switchToRegister}: {
                             <div className="grid gap-3">
                                 <div className="flex items-center">
                                     <Label htmlFor="password">Password</Label>
-                                    <a className="ml-auto text-sm underline-offset-2 hover:underline">
-                                        Forgot your password?
-                                    </a>
                                 </div>
                                 <Input value={password}
                                        onChange={e => setPassword(e.target.value)}
@@ -56,7 +53,7 @@ export function LoginForm({loginHandler,switchToRegister}: {
                             </div>
                             <Button
                                 className="w-full">
-                                Login
+                                Sign up
                             </Button>
                             <div
                                 className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
@@ -94,11 +91,11 @@ export function LoginForm({loginHandler,switchToRegister}: {
                                 </Button>
                             </div>
                             <div className="text-center text-sm">
-                                Don&apos;t have an account?{" "}
+                                Already have an account?{" "}
                                 <a
-                                    onClick={switchToRegister}
+                                    onClick={switchToLogin}
                                     className="underline underline-offset-4">
-                                    Sign up
+                                    Login
                                 </a>
                             </div>
                         </div>
