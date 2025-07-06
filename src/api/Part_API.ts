@@ -1,8 +1,8 @@
 import type {Part} from "@/Models/Part.ts";
-import {backEndUrl, genHeader} from "@/api/API.ts";
+import {API_ENDPOINT, genHeader} from "@/api/API.ts";
 
 export async function getParts(): Promise<Part[]> {
-    const response = await fetch(backEndUrl + '/parts', {
+    const response = await fetch(API_ENDPOINT + '/parts', {
         method: 'GET',
         headers: genHeader()
     });
@@ -13,7 +13,7 @@ export async function getParts(): Promise<Part[]> {
 }
 
 export async function updatePart(part: Part): Promise<Part> {
-    const response = await fetch(backEndUrl + '/parts', {
+    const response = await fetch(API_ENDPOINT + '/parts', {
         method: 'POST',
         headers: genHeader(),
         body: JSON.stringify(part)
@@ -25,7 +25,7 @@ export async function updatePart(part: Part): Promise<Part> {
 }
 
 export async function deletePart(part: Part): Promise<boolean> {
-    const response = await fetch(backEndUrl + '/parts/' + part.id, {
+    const response = await fetch(API_ENDPOINT + '/parts/' + part.id, {
         method: 'DELETE',
         headers: genHeader(),
     });

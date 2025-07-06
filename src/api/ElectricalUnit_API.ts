@@ -1,8 +1,8 @@
 import type {ElectricalUnit} from "@/Models/ElectricalUnit.ts";
-import {backEndUrl, genHeader} from "@/api/API.ts";
+import {API_ENDPOINT, genHeader} from "@/api/API.ts";
 
 export async function getElectricalUnits(): Promise<ElectricalUnit[]> {
-    const response = await fetch(backEndUrl + '/electricalUnits', {
+    const response = await fetch(API_ENDPOINT + '/electricalUnits', {
         method: 'GET',
         headers: genHeader(),
     });

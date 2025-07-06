@@ -1,4 +1,4 @@
-export const backEndUrl: string = "http://localhost:8080/api";
+export const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT
 
 export function genHeader() {
     return {
@@ -8,7 +8,7 @@ export function genHeader() {
 }
 
 export async function loginReq(username: string, password: string): Promise<string> {
-    const response = await fetch(backEndUrl + '/login', {
+    const response = await fetch(API_ENDPOINT + '/login', {
         method: 'POST',
         headers: genHeader(),
         body: JSON.stringify({username, password})
@@ -21,7 +21,7 @@ export async function loginReq(username: string, password: string): Promise<stri
 }
 
 export async function signupReq(username: string, password: string): Promise<number> {
-    const response = await fetch(backEndUrl + '/register', {
+    const response = await fetch(API_ENDPOINT + '/register', {
         method: 'POST',
         headers: genHeader(),
         body: JSON.stringify({username, password})
