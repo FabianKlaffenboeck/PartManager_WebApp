@@ -2,6 +2,6 @@ variables:
   NODE_VERSION: "node:22.16.0-alpine"
 
 include:
-  project: 'FKLab/cicd_dry_templates'
+  project: 'sandbox/cicd_dry_templates'
   file: 'templates/react_pipeline.yml'
 
