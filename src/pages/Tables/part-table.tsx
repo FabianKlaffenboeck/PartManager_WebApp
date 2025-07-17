@@ -3,8 +3,7 @@ import {
     type ColumnFiltersState,
     flexRender,
     getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
+    getFilteredRowModel, getPaginationRowModel,
     getSortedRowModel,
     type SortingState,
     useReactTable,
@@ -27,7 +26,8 @@ import type {Tray} from "@/Models/Tray.ts";
 import type {Shelf} from "@/Models/Shelf.ts";
 import type {Part} from "@/Models/Part";
 import type {ElectricalUnit} from "@/Models/ElectricalUnit.ts";
-import { getShelfs } from "@/api/Shelf_API";
+import {getShelfs} from "@/api/Shelf_API";
+import {Input} from "@/components/ui/input.tsx";
 
 function parsElectricalUnit(unit: ElectricalUnit): string {
     return unit.toString()
@@ -167,12 +167,12 @@ export function PartTable({data, newCm_cb, delete_cb, edit_cb, adjustStock_cb}: 
     return (
         <div>
             <div className="flex items-center py-4">
-                {/*<Input*/}
-                {/*    placeholder="Filter emails..."*/}
-                {/*    value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}*/}
-                {/*    onChange={(event) => table.getColumn("email")?.setFilterValue(event.target.value)}*/}
-                {/*    className="max-w-sm"*/}
-                {/*/>*/}
+                <Input
+                    placeholder="Filter by Name..."
+                    value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+                    onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
+                    className="max-w-sm"
+                />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="ml-auto">
@@ -208,6 +208,7 @@ export function PartTable({data, newCm_cb, delete_cb, edit_cb, adjustStock_cb}: 
                         </TableRow>))}
                     </TableHeader>
                     <TableBody>
+
                         {table.getRowModel().rows?.length ? (table.getRowModel().rows.map((row) => (<TableRow
                             key={row.id}
                             data-state={row.getIsSelected() && "selected"}
