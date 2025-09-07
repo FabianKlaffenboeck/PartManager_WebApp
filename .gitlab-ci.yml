@@ -5,3 +5,9 @@ include:
   project: 'sandbox/cicd_dry_templates'
   file: 'templates/react_pipeline.yml'
 
+run-image:
+  stage: run
+  only:
+    - tags
+  trigger:
+    project: sandbox/dockercompose/partmanager
