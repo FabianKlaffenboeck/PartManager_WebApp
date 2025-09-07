@@ -120,7 +120,7 @@ export function PartTable({data, newCm_cb, delete_cb, edit_cb, adjustStock_cb}: 
             header: "Tray",
             cell: ({row}) => {
                 function generateShelfTrayName(tray: Tray): string {
-                    const shelf = shelfs.find(shelf => shelf.trays.filter(it => it.id == tray.id))
+                    const shelf = shelfs.find(shelf => shelf.trays.find(it => it.id == tray.id))
                     return shelf?.name + "-" + tray.name;
                 }
 
