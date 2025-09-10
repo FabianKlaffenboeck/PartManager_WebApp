@@ -1,5 +1,5 @@
 variables:
-  NODE_VERSION: "node:22.16.0-alpine"
+  NODE_VERSION: "node:22.19.0-alpine"
 
 include:
   project: 'sandbox/cicd_dry_templates'
