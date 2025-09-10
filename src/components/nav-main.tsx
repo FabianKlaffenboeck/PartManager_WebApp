@@ -30,7 +30,8 @@ export function NavMain({
     }[]
 }) {
     return (
-        <SidebarGroup>
+        // FIXME Patting for app
+        <SidebarGroup className="pt-10">
             <SidebarGroupLabel>Platform</SidebarGroupLabel>
             <SidebarMenu>
                 {items.map((item) => (
